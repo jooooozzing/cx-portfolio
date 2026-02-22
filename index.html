@@ -13,7 +13,7 @@
     --bg-card: #edecea;
     --bg-card-light: #e4e2df;
     --fg: #1a1a1a;
-    --fg-muted: #3d3d3d;
+    --fg-muted: #2a2a2a;
     --gray-100: #f0eeec;
     --gray-200: #dddbd8;
     --gray-300: #b8b5b2;
@@ -101,6 +101,10 @@
   .nav-links a:hover {
     color: var(--fg);
   }
+  .nav-links a.active {
+    color: var(--fg);
+    font-weight: 500;
+  }
   .container {
     max-width: 900px;
     margin: 0 auto;
@@ -155,7 +159,7 @@
     color: var(--gray-500);
     margin-bottom: 32px;
     font-size: 15px;
-    line-height: 2;
+    line-height: 1.85;
   }
   .framework-intro strong {
     color: var(--fg);
@@ -300,10 +304,14 @@
     line-height: 1.5;
     color: var(--gray-500);
     transition: all 0.3s;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
   }
   .case-tag:hover {
     border-color: var(--gray-300);
     background: var(--bg-card);
+    transform: translateY(-2px);
   }
   .case-tag strong {
     display: block;
@@ -318,6 +326,8 @@
     padding-left: 32px;
     position: relative;
     scroll-margin-top: 80px;
+    border-top: 1px solid var(--gray-200);
+    padding-top: 80px;
   }
   .case-section::before {
     content: '';
@@ -349,7 +359,7 @@
     letter-spacing: 0.15em;
   }
   .case-title {
-    font-family: var(--display);
+    font-family: var(--sans);
     font-size: 28px;
     font-weight: 900;
     color: var(--fg);
@@ -374,7 +384,7 @@
   }
   .phase p {
     margin-bottom: 12px;
-    line-height: 2;
+    line-height: 1.8;
   }
   .phase p strong {
     color: var(--fg);
@@ -1201,6 +1211,51 @@
   .contact-card-close:hover {
     color: #5c5a58;
   }
+  /* ── Collapsible expand sections ── */
+  .expand-toggle {
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    padding: 0;
+    margin: 0;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--fg);
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--gray-200);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: color 0.3s;
+  }
+  .expand-toggle:hover {
+    color: var(--gray-500);
+  }
+  .expand-toggle::after {
+    content: '▾';
+    font-size: 12px;
+    color: var(--gray-400);
+    transition: transform 0.3s;
+  }
+  .expand-toggle.collapsed::after {
+    transform: rotate(-90deg);
+  }
+  .expand-content {
+    max-height: 2000px;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.4s ease;
+    opacity: 1;
+  }
+  .expand-content.collapsed {
+    max-height: 0;
+    opacity: 0;
+  }
   @media (max-width: 640px) {
     .portfolio-header h1 { font-size: 40px; letter-spacing: -1px; }
     .case-title { font-size: 22px; }
@@ -1293,9 +1348,9 @@
       </div>
     </div>
     <div class="cases-row">
-      <div class="case-tag"><strong>Case 1</strong>제품 불량 기준 수립과<br>VOC-제품팀 공유 체계</div>
-      <div class="case-tag"><strong>Case 2</strong>선출고 프로세스 설계</div>
-      <div class="case-tag"><strong>Case 3</strong>AI 향 추천 서비스</div>
+      <a href="#case01" class="case-tag"><strong>Case 1</strong>제품 불량 기준 수립과<br>VOC-제품팀 공유 체계</a>
+      <a href="#case02" class="case-tag"><strong>Case 2</strong>선출고 프로세스 설계</a>
+      <a href="#case03" class="case-tag"><strong>Case 3</strong>AI 향 추천 서비스</a>
     </div>
   </div>
   <!-- ════════════ CASE 1 ════════════ -->
@@ -1670,7 +1725,8 @@
       </div>
     </div>
     <div class="phase">
-      <div class="phase-label">확장 — 전 채널 적용 기획</div>
+      <button class="expand-toggle" onclick="this.classList.toggle('collapsed'); this.nextElementSibling.classList.toggle('collapsed')">확장 — 전 채널 적용 기획</button>
+      <div class="expand-content">
       <p>파일럿에서 검증된 선출고 프로세스를 전 채널로 확장하기 위해<br>
       이커머스팀·개발팀과 협의를 진행했습니다.<br>
       확인 결과, 세 가지 조건이 드러났습니다.</p>
@@ -1703,6 +1759,7 @@
         <strong>시스템 구조가 허용하는 채널부터 단계적으로 확장</strong>하는 방향으로 기획 중입니다.<br>
         파일럿에서 검증된 효과(75% 단축, Loss 0%)가 확장의 근거입니다.
       </p>
+      </div>
     </div>
   </section>
   <!-- ════════════ CASE 3 ════════════ -->
@@ -1792,13 +1849,7 @@
           <li>추천 중단 조건 정의: 건강/안전 관련, 모순 조건 반복 → 즉시 상담 전환 프로토콜</li>
           <li>금칙어·약점 표현 가이드: 평가가 아닌 구조 설명으로 전환 ("지속력이 약합니다" ✕ → "초반의 상쾌함에 초점을 둔 타입입니다" ○)</li>
           <li>최대 2회 제안 후 상담 전환 — Slot 데이터·A/B 반응·제외 조건을 상담사에게 핸드오프하는 데이터 포맷 정의</li>
-        </ul>
-      </div>
-      <div class="exec-block">
-        <span class="exec-step-num">05</span>
-        <div class="exec-block-title">PM 없이 프로젝트 리드</div>
-        <ul class="exec-list">
-          <li>기획안을 기반으로 AI 전담팀에 미팅 후 프로젝트 시작</li>
+          <li>기획안을 기반으로 AI 전담팀에 미팅 후 프로젝트 시작 — PM 없이 프로젝트 리드</li>
           <li>데이터 구조·시나리오·가드레일·성공 기준은 CX에서 주관, 기술적 구현은 AI팀 담당</li>
           <li>Beta v2 내부 테스트 완료, v3 진행 중</li>
         </ul>
@@ -1886,7 +1937,8 @@
       </div>
     </div>
     <div class="phase">
-      <div class="phase-label">확장 — Beta v3 진행 중</div>
+      <button class="expand-toggle" onclick="this.classList.toggle('collapsed'); this.nextElementSibling.classList.toggle('collapsed')">확장 — Beta v3 진행 중</button>
+      <div class="expand-content">
       <p>Beta v2 내부 테스트를 완료하고, 현재 v3를 진행 중입니다.</p>
       <div style="margin:24px 0; display:grid; gap:16px;">
         <div class="expand-block">
@@ -1910,6 +1962,7 @@
           </div>
           <p>→ AI가 탐색하고 인간이 좁히는 구조. 2회 제안 후 상담 전환은 "AI의 한계"가 아니라 "역할 분담의 설계"</p>
         </div>
+      </div>
       </div>
     </div>
   </section>
@@ -1935,5 +1988,26 @@
     </div>
   </div>
 </div>
+<script>
+// IntersectionObserver for nav active state
+(function() {
+  const sections = document.querySelectorAll('.case-section, .layer-diagram');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(function(link) {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + id) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+  }, { rootMargin: '-80px 0px -50% 0px', threshold: 0 });
+  sections.forEach(function(section) { observer.observe(section); });
+})();
+</script>
 </body>
 </html>
