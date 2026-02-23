@@ -1211,6 +1211,88 @@
   .contact-card-close:hover {
     color: #5c5a58;
   }
+  /* ── Taxonomy Tree ── */
+  .taxonomy-block {
+    background: var(--bg);
+    border: 1px solid var(--gray-200);
+    border-radius: 12px;
+    padding: 36px 40px;
+    margin: 36px 0 0;
+  }
+  .taxonomy-summary {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--gray-400);
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .taxonomy-summary strong {
+    color: var(--fg);
+    font-weight: 700;
+  }
+  .taxonomy-tree {
+    margin-bottom: 28px;
+  }
+  .taxonomy-root {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--fg);
+    margin-bottom: 12px;
+    letter-spacing: -0.3px;
+  }
+  .taxonomy-branch {
+    padding-left: 20px;
+    border-left: 2px solid var(--gray-200);
+    margin-left: 8px;
+  }
+  .taxonomy-mid {
+    position: relative;
+    padding: 10px 0 10px 20px;
+  }
+  .taxonomy-mid::before {
+    content: '';
+    position: absolute;
+    left: -2px;
+    top: 22px;
+    width: 16px;
+    height: 0;
+    border-top: 2px solid var(--gray-200);
+  }
+  .taxonomy-mid-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--fg-muted);
+    margin-bottom: 4px;
+  }
+  .taxonomy-mid.accent .taxonomy-mid-name {
+    color: var(--accent);
+  }
+  .taxonomy-leaves {
+    font-size: 13px;
+    color: var(--gray-400);
+    line-height: 1.7;
+    padding-left: 2px;
+  }
+  .taxonomy-leaves .more {
+    font-style: italic;
+    color: var(--gray-400);
+  }
+  .taxonomy-others {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--gray-400);
+    letter-spacing: 0.03em;
+    line-height: 1.8;
+    padding-top: 20px;
+    border-top: 1px solid var(--gray-200);
+  }
+  @media (max-width: 640px) {
+    .taxonomy-block { padding: 24px 20px; }
+    .taxonomy-branch { padding-left: 14px; margin-left: 4px; }
+    .taxonomy-mid { padding-left: 14px; }
+  }
   /* ── Collapsible expand sections ── */
   .expand-toggle {
     width: 100%;
@@ -1490,6 +1572,32 @@
           "이 데이터를 받는 사람이 행동할 수 있는가?"라는 질문을 던졌을 때 비로소 보였습니다.</p>
           <p style="margin-top:12px; opacity: 0.5;">개인의 발견 → 팀 프로젝트 → 조직의 구조로 전환된 과정입니다.</p>
         </div>
+      </div>
+      <!-- ── Taxonomy Tree Block ── -->
+      <div class="taxonomy-block">
+        <div class="taxonomy-summary">설계 결과: <strong>7</strong>개 대분류 · <strong>27</strong>개 중분류 · <strong>98</strong>개 소분류</div>
+        <div class="taxonomy-tree">
+          <div class="taxonomy-root">PRODUCT</div>
+          <div class="taxonomy-branch">
+            <div class="taxonomy-mid">
+              <div class="taxonomy-mid-name">제품 정보</div>
+              <div class="taxonomy-leaves">성분/사양 문의, 사용 방법 문의, 사이즈/옵션 문의</div>
+            </div>
+            <div class="taxonomy-mid">
+              <div class="taxonomy-mid-name">판매 정보</div>
+              <div class="taxonomy-leaves">재입고 문의, 단종 여부 문의, 판매 채널 문의</div>
+            </div>
+            <div class="taxonomy-mid">
+              <div class="taxonomy-mid-name">추천 문의</div>
+              <div class="taxonomy-leaves">선물 추천, 향 추천, 제형 추천</div>
+            </div>
+            <div class="taxonomy-mid accent">
+              <div class="taxonomy-mid-name">제품 이상/불량</div>
+              <div class="taxonomy-leaves">펌프 토출 불량, 용기 깨짐/파손, 내용물 이물, 향 이상/향 없음 <span class="more">… 외 23개 유형</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="taxonomy-others">ORDER &amp; PAYMENT · SHIPPING &amp; DELIVERY · EXCHANGE &amp; RETURN · PROMOTION &amp; BENEFIT · MEMBERSHIP &amp; ACCOUNT · OTHER</div>
       </div>
     </div>
     <div class="phase">
