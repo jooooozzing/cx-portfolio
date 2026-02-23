@@ -312,6 +312,7 @@
     border-color: var(--gray-300);
     background: var(--bg-card);
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
   }
   .case-tag strong {
     display: block;
@@ -326,8 +327,11 @@
     padding-left: 32px;
     position: relative;
     scroll-margin-top: 80px;
-    border-top: 1px solid var(--gray-200);
+  }
+  .case-section + .case-section {
+    margin-top: 120px;
     padding-top: 80px;
+    border-top: 1px solid var(--gray-200);
   }
   .case-section::before {
     content: '';
@@ -369,22 +373,32 @@
   }
   /* ── Phase blocks ── */
   .phase {
-    margin-bottom: 56px;
+    margin-bottom: 72px;
   }
   .phase-label {
     font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.12em;
     color: var(--fg);
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--gray-200);
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--fg);
   }
   .phase p {
-    margin-bottom: 12px;
+    margin-bottom: 8px;
     line-height: 1.8;
+  }
+  .phase p + .voice-block,
+  .phase p + .hidden-block,
+  .phase p + .flow-block {
+    margin-top: 32px;
+  }
+  .voice-block + p,
+  .hidden-block + p,
+  .flow-block + p {
+    margin-top: 32px;
   }
   .phase p strong {
     color: var(--fg);
@@ -400,7 +414,7 @@
     border: 1px solid var(--accent-border);
     border-radius: 10px;
     font-size: 14px;
-    line-height: 1.9;
+    line-height: 1.8;
     color: var(--fg-muted);
     transition: all 0.3s;
   }
@@ -821,11 +835,11 @@
   /* ── Custom styled blocks ── */
   .voice-block {
     background: var(--bg);
-    border-left: 3px solid var(--gray-200);
+    border-left: 3px solid var(--gray-300);
     padding: 20px 24px;
-    margin: 20px 0;
+    margin: 24px 0;
     font-size: 14px;
-    line-height: 1.9;
+    line-height: 1.8;
     border-radius: 0 8px 8px 0;
     transition: all 0.3s;
   }
@@ -845,9 +859,9 @@
     background: var(--fg);
     color: #fff;
     padding: 24px 28px;
-    margin: 20px 0;
+    margin: 28px 0;
     font-size: 14px;
-    line-height: 1.9;
+    line-height: 1.8;
     border-radius: 10px;
   }
   .hidden-block .hidden-label {
@@ -1294,49 +1308,31 @@
     .taxonomy-mid { padding-left: 14px; }
   }
   /* ── Collapsible expand sections ── */
-  .expand-toggle {
-    width: 100%;
-    background: none;
-    border: none;
+  .phase-expandable {
+    margin-bottom: 72px;
+  }
+  .phase-expandable summary.phase-label {
     cursor: pointer;
-    text-align: left;
-    padding: 0;
-    margin: 0;
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--fg);
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--gray-200);
-    margin-bottom: 20px;
+    user-select: none;
+    list-style: none;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    transition: color 0.3s;
   }
-  .expand-toggle:hover {
-    color: var(--gray-500);
+  .phase-expandable summary.phase-label::-webkit-details-marker {
+    display: none;
   }
-  .expand-toggle::after {
-    content: '▾';
-    font-size: 12px;
+  .phase-expandable summary.phase-label::after {
+    content: '펼치기 ↓';
+    font-size: 11px;
+    font-weight: 400;
     color: var(--gray-400);
-    transition: transform 0.3s;
+    margin-left: 12px;
+    letter-spacing: 0;
+    text-transform: none;
   }
-  .expand-toggle.collapsed::after {
-    transform: rotate(-90deg);
-  }
-  .expand-content {
-    max-height: 2000px;
-    overflow: hidden;
-    transition: max-height 0.5s ease, opacity 0.4s ease;
-    opacity: 1;
-  }
-  .expand-content.collapsed {
-    max-height: 0;
-    opacity: 0;
+  .phase-expandable[open] summary.phase-label::after {
+    content: '접기 ↑';
   }
   @media (max-width: 640px) {
     .portfolio-header h1 { font-size: 40px; letter-spacing: -1px; }
@@ -1689,7 +1685,7 @@
     </div>
   </section>
   <!-- ════════════ CASE 2 ════════════ -->
-  <section class="case-section" id="case02" style="margin-top: 120px;">
+  <section class="case-section" id="case02">
     <div class="case-divider">
       <div class="case-number">Case 02</div>
     </div>
@@ -1832,9 +1828,8 @@
         <p style="margin-top:12px; opacity:0.5;">속도를 높인 것이 아니라, 순서를 바꿨습니다.</p>
       </div>
     </div>
-    <div class="phase">
-      <button class="expand-toggle collapsed" onclick="this.classList.toggle('collapsed'); this.nextElementSibling.classList.toggle('collapsed')">확장 — 전 채널 적용 기획</button>
-      <div class="expand-content collapsed">
+    <details class="phase phase-expandable">
+      <summary class="phase-label">확장 — 전 채널 적용 기획</summary>
       <p>파일럿에서 검증된 선출고 프로세스를 전 채널로 확장하기 위해<br>
       이커머스팀·개발팀과 협의를 진행했습니다.<br>
       확인 결과, 세 가지 조건이 드러났습니다.</p>
@@ -1867,11 +1862,10 @@
         <strong>시스템 구조가 허용하는 채널부터 단계적으로 확장</strong>하는 방향으로 기획 중입니다.<br>
         파일럿에서 검증된 효과(75% 단축, Loss 0%)가 확장의 근거입니다.
       </p>
-      </div>
-    </div>
+    </details>
   </section>
   <!-- ════════════ CASE 3 ════════════ -->
-  <section class="case-section" id="case03" style="margin-top: 120px;">
+  <section class="case-section" id="case03">
     <div class="case-divider">
       <div class="case-number">Case 03</div>
     </div>
@@ -2044,9 +2038,8 @@
         </p>
       </div>
     </div>
-    <div class="phase">
-      <button class="expand-toggle collapsed" onclick="this.classList.toggle('collapsed'); this.nextElementSibling.classList.toggle('collapsed')">확장 — Beta v3 진행 중</button>
-      <div class="expand-content collapsed">
+    <details class="phase phase-expandable">
+      <summary class="phase-label">확장 — Beta v3 진행 중</summary>
       <p>Beta v2 내부 테스트를 완료하고, 현재 v3를 진행 중입니다.</p>
       <div style="margin:24px 0; display:grid; gap:16px;">
         <div class="expand-block">
@@ -2071,8 +2064,7 @@
           <p>→ AI가 탐색하고 인간이 좁히는 구조. 2회 제안 후 상담 전환은 "AI의 한계"가 아니라 "역할 분담의 설계"</p>
         </div>
       </div>
-      </div>
-    </div>
+    </details>
   </section>
 </div>
 <!-- ── Footer ── -->
@@ -2099,21 +2091,17 @@
 <script>
 // IntersectionObserver for nav active state
 (function() {
-  const sections = document.querySelectorAll('.case-section, .layer-diagram');
+  const sections = document.querySelectorAll('#framework, #case01, #case02, #case03');
   const navLinks = document.querySelectorAll('.nav-links a');
   const observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
-        const id = entry.target.id;
-        navLinks.forEach(function(link) {
-          link.classList.remove('active');
-          if (link.getAttribute('href') === '#' + id) {
-            link.classList.add('active');
-          }
-        });
+        navLinks.forEach(function(link) { link.classList.remove('active'); });
+        var activeLink = document.querySelector('.nav-links a[href="#' + entry.target.id + '"]');
+        if (activeLink) activeLink.classList.add('active');
       }
     });
-  }, { rootMargin: '-80px 0px -50% 0px', threshold: 0 });
+  }, { rootMargin: '-20% 0px -60% 0px' });
   sections.forEach(function(section) { observer.observe(section); });
 })();
 </script>
