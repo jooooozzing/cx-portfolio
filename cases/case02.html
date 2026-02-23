@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case 02 — 교환 선출고 프로세스 설계 | 김문주 CX Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..48,100..700,0..1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f3f0; --bg-deep: #faf9f7; --bg-card: #edecea; --bg-card-light: #e4e2df;
+    --fg: #1a1a1a; --fg-muted: #2a2a2a;
+    --gray-100: #f0eeec; --gray-200: #dddbd8; --gray-300: #b8b5b2; --gray-400: #8a8785; --gray-500: #5c5a58;
+    --accent: #c43e39; --accent-dim: rgba(196, 62, 57, 0.05); --accent-border: rgba(196, 62, 57, 0.12); --red: #c43e39;
+    --mono: 'JetBrains Mono', monospace; --sans: 'Noto Sans KR', sans-serif; --display: 'Inter', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--sans); background: var(--bg-deep); color: var(--fg-muted); line-height: 1.8; font-size: 15px; -webkit-font-smoothing: antialiased; }
+  body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; opacity: 0.02; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); }
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--bg-deep); }
+  ::-webkit-scrollbar-thumb { background: var(--gray-200); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--gray-400); }
+  ::selection { background: rgba(196,62,57,0.12); color: var(--fg); }
+  .top-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(250, 249, 247, 0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--gray-200); padding: 0 24px; }
+  .nav-inner { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .nav-logo { font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--fg); letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; }
+  .nav-links { display: flex; gap: 36px; }
+  .nav-links a { font-family: var(--mono); font-size: 11px; color: var(--gray-400); text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.3s; }
+  .nav-links a:hover { color: var(--fg); }
+  .nav-links a.active { color: var(--fg); font-weight: 500; }
+  .container { max-width: 900px; margin: 0 auto; padding: 100px 24px 120px; }
+  .summary-card { background: var(--bg); border: 1px solid var(--gray-200); border-radius: 14px; padding: 32px 36px; margin-bottom: 60px; }
+  .summary-card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .summary-field-label { font-family: var(--mono); font-size: 10px; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+  .summary-field-value { font-size: 14px; color: var(--fg-muted); line-height: 1.7; }
+  .summary-field-value strong { color: var(--fg); }
+  .case-header { margin-bottom: 60px; padding-top: 24px; }
+  .case-eyebrow { font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+  .case-eyebrow::before { content: ''; width: 40px; height: 1px; background: var(--accent); }
+  .case-title { font-family: var(--sans); font-size: 32px; font-weight: 900; color: var(--fg); letter-spacing: -0.5px; line-height: 1.4; }
+  .phase { margin-bottom: 72px; }
+  .phase-label { font-family: var(--mono); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--fg); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid var(--fg); }
+  .phase p { margin-bottom: 8px; line-height: 1.8; }
+  .phase p + .voice-block, .phase p + .hidden-block, .phase p + .flow-block { margin-top: 32px; }
+  .voice-block + p, .hidden-block + p, .flow-block + p { margin-top: 32px; }
+  .phase p strong { color: var(--fg); }
+  .phase p.insight { margin-top: 24px; padding: 20px 24px; background: var(--accent-dim); border: 1px solid var(--accent-border); border-radius: 10px; font-size: 14px; line-height: 1.8; color: var(--fg-muted); transition: all 0.3s; }
+  .phase p.insight:hover { border-color: var(--gray-300); }
+  .phase p.insight strong { color: var(--fg); }
+  .voice-block { background: var(--bg); border-left: 3px solid var(--gray-300); padding: 20px 24px; margin: 24px 0; font-size: 14px; line-height: 1.8; border-radius: 0 8px 8px 0; transition: all 0.3s; }
+  .voice-block:hover { border-left-color: var(--fg); }
+  .voice-block .voice-label { font-family: var(--mono); font-size: 11px; color: var(--gray-400); margin-bottom: 10px; }
+  .voice-block p strong { color: var(--fg); }
+  .hidden-block { background: var(--fg); color: #fff; padding: 24px 28px; margin: 28px 0; font-size: 14px; line-height: 1.8; border-radius: 10px; }
+  .hidden-block .hidden-label { font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+  .hidden-block p strong { color: #fff; }
+  .hidden-block p span { color: rgba(255,255,255,0.7); }
+  .flow-block { margin: 24px 0; padding: 20px 24px; background: var(--bg-card); border: 1px solid var(--gray-200); border-radius: 10px; font-family: var(--mono); font-size: 12px; line-height: 2.4; color: var(--gray-500); transition: all 0.3s; }
+  .flow-block:hover { border-color: var(--gray-300); }
+  .flow-block pre { margin: 0; white-space: pre; font-family: var(--mono); }
+  .exec-block { margin-bottom: 8px; display: grid; grid-template-columns: 56px 1fr; gap: 0 12px; padding: 20px 24px; border-radius: 8px; background: var(--bg-deep); border: 1px solid transparent; transition: all 0.3s; }
+  .exec-block:hover { background: var(--bg); border-color: var(--gray-200); }
+  .exec-block-title { font-size: 14px; font-weight: 700; color: var(--fg); margin-bottom: 8px; grid-column: 2; }
+  .exec-step-num { font-family: var(--mono); font-size: 32px; font-weight: 700; color: var(--gray-200); grid-column: 1; grid-row: 1 / 3; line-height: 1; transition: color 0.3s; }
+  .exec-block:hover .exec-step-num { color: var(--fg); }
+  .exec-list { list-style: none; padding-left: 0; grid-column: 2; }
+  .exec-list li { padding-left: 20px; position: relative; margin-bottom: 6px; font-size: 14px; line-height: 1.8; color: var(--gray-500); }
+  .exec-list li::before { content: "—"; position: absolute; left: 0; color: var(--gray-300); }
+  .ba-diagram { background: var(--bg-deep); border: 1px solid var(--gray-200); border-radius: 16px; padding: 36px; margin: 36px 0; }
+  .ba-diagram-title { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--fg); margin-bottom: 28px; }
+  .ba-grid { display: grid; grid-template-columns: 1fr 40px 1fr; gap: 0; align-items: stretch; }
+  .ba-box { background: var(--bg); border: 1px solid var(--gray-200); border-radius: 12px; padding: 24px; transition: all 0.3s; display: flex; flex-direction: column; }
+  .ba-box:hover { border-color: var(--gray-300); }
+  .ba-box h4 { font-size: 16px; font-weight: 900; color: var(--fg); margin-bottom: 4px; }
+  .ba-box .ba-tag { font-family: var(--mono); font-size: 11px; color: var(--gray-400); margin-bottom: 16px; display: block; }
+  .ba-tree { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 8px; flex: 1; justify-content: center; }
+  .ba-node { font-size: 12px; font-weight: 500; padding: 8px 14px; border-radius: 6px; text-align: center; color: var(--fg-muted); }
+  .ba-node.parent { background: var(--bg-card); border: 1.5px solid var(--gray-200); }
+  .ba-arrow-col { display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--gray-300); }
+  .ba-result { font-size: 12px; color: var(--gray-400); margin-top: auto; padding-top: 16px; line-height: 1.6; }
+  .ba-box-dark { background: var(--fg); color: #fff; border: none; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; }
+  .ba-box-dark h4 { color: #fff; }
+  .ba-box-dark .ba-tag { font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,0.5); margin-bottom: 16px; display: block; }
+  .ba-box-dark .ba-node { background: rgba(255,255,255,0.15); color: #fff; border: none; font-weight: 700; }
+  .ba-box-dark .ba-node-ghost { background: transparent; border: 1px dashed rgba(255,255,255,0.3); color: rgba(255,255,255,0.6); font-size: 11px; padding: 6px 10px; border-radius: 6px; text-align: center; }
+  .ba-box-dark .ba-result { color: #fff; font-weight: 500; }
+  .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+  .result-box { padding: 24px; border-radius: 12px; position: relative; overflow: hidden; transition: transform 0.3s ease; }
+  .result-box:hover { transform: translateY(-2px); }
+  .result-box::after { content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 2px; background: var(--fg); transition: all 0.4s ease; }
+  .result-box:hover::after { width: 100%; left: 0; }
+  .result-box.quant { background: var(--bg-card); border: 1px solid var(--gray-200); }
+  .result-box.qual { background: var(--fg); color: #fff; }
+  .result-box h4 { font-family: var(--mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; opacity: 0.5; }
+  .result-box p, .result-box li { font-size: 13px; line-height: 1.8; }
+  .result-box.qual h4 { color: #fff; opacity: 0.5; }
+  .result-box.qual p { color: #fff; opacity: 0.9; }
+  .result-box.qual strong { color: #fff; }
+  .stat-big { font-family: var(--display); font-size: 44px; font-weight: 900; letter-spacing: -1px; margin-bottom: 4px; color: var(--fg); }
+  .stat-label { font-size: 12px; color: var(--gray-400); }
+  /* Expand */
+  .phase-expandable { margin-bottom: 72px; }
+  .phase-expandable summary.phase-label { cursor: pointer; user-select: none; list-style: none; display: flex; align-items: center; justify-content: space-between; }
+  .phase-expandable summary.phase-label::-webkit-details-marker { display: none; }
+  .phase-expandable summary.phase-label::after { content: '펼치기 ↓'; font-size: 11px; font-weight: 400; color: var(--gray-400); margin-left: 12px; letter-spacing: 0; text-transform: none; }
+  .phase-expandable[open] summary.phase-label::after { content: '접기 ↑'; }
+  .expand-block { background: var(--bg-card); border: 1px solid var(--gray-200); border-radius: 10px; padding: 20px 24px; font-size: 14px; line-height: 1.9; transition: all 0.3s; }
+  .expand-block:hover { border-color: var(--gray-300); }
+  .expand-block .expand-num { font-family: var(--mono); font-size: 11px; color: var(--fg); }
+  .expand-block strong { color: var(--fg); }
+  .expand-block p { color: var(--gray-500); font-size: 13px; padding-left: 24px; }
+  .expand-block-dark { background: var(--accent-dim); border: 1px solid var(--accent-border); border-radius: 10px; padding: 20px 24px; font-size: 14px; line-height: 1.9; transition: all 0.3s; }
+  .expand-block-dark:hover { border-color: var(--gray-300); }
+  .expand-block-dark .expand-num { font-family: var(--mono); font-size: 11px; color: var(--fg); }
+  .expand-block-dark strong { color: var(--fg); }
+  .expand-block-dark p { color: var(--gray-500); font-size: 13px; padding-left: 24px; }
+  .case-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--gray-200); }
+  .case-nav a { font-family: var(--mono); font-size: 12px; color: var(--gray-400); text-decoration: none; letter-spacing: 0.05em; transition: color 0.3s; display: flex; align-items: center; gap: 8px; }
+  .case-nav a:hover { color: var(--fg); }
+  .case-nav .next { margin-left: auto; }
+  .site-footer { border-top: 1px solid var(--gray-200); padding: 48px 24px; margin-top: 60px; }
+  .footer-inner { max-width: 900px; margin: 0 auto; display: flex; justify-content: center; align-items: center; }
+  .footer-contact-btn { font-family: var(--mono); font-size: 11px; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; background: none; border: 1px solid var(--gray-200); padding: 8px 20px; border-radius: 6px; transition: all 0.3s; }
+  .footer-contact-btn:hover { color: var(--fg); border-color: var(--gray-300); }
+  .contact-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.3); z-index: 200; display: none; align-items: center; justify-content: center; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+  .contact-overlay.active { display: flex; }
+  .contact-card { background: #fff; border-radius: 14px; padding: 36px 40px; min-width: 320px; box-shadow: 0 20px 60px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.04); position: relative; text-align: center; }
+  .contact-card-name { font-family: var(--sans); font-size: 20px; font-weight: 700; color: #1a1a1a; margin-bottom: 20px; }
+  .contact-card-item { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 12px; font-size: 14px; color: #5c5a58; }
+  .contact-card-item span.material-symbols-outlined { font-size: 18px; color: #8a8785; }
+  .contact-card-close { position: absolute; top: 14px; right: 16px; background: none; border: none; cursor: pointer; font-size: 18px; color: #b8b5b2; transition: color 0.2s; line-height: 1; }
+  .contact-card-close:hover { color: #5c5a58; }
+  @media (max-width: 768px) {
+    .case-title { font-size: 24px; }
+    .summary-card-grid { grid-template-columns: 1fr; }
+    .ba-grid { grid-template-columns: 1fr; gap: 16px; }
+    .ba-arrow-col { transform: rotate(90deg); padding: 8px 0; }
+    .result-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .top-nav { padding: 0 16px; }
+    .stat-big { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+<nav class="top-nav">
+  <div class="nav-inner">
+    <a href="/cx-portfolio/" class="nav-logo">Portfolio</a>
+    <div class="nav-links">
+      <a href="/cx-portfolio/">Home</a>
+      <a href="/cx-portfolio/cases/case01.html">Case 01</a>
+      <a href="/cx-portfolio/cases/case02.html" class="active">Case 02</a>
+      <a href="/cx-portfolio/cases/case03.html">Case 03</a>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <div class="case-header">
+    <div class="case-eyebrow">Case 02</div>
+    <h1 class="case-title">교환 선출고(Pre-dispatch) 프로세스 설계</h1>
+  </div>
+  <div class="summary-card">
+    <div class="summary-card-grid">
+      <div>
+        <div class="summary-field-label">Problem</div>
+        <div class="summary-field-value">교환 리드타임 9.2일, <strong>상담사가 '언제요?'에 답할 수 없는 구조</strong></div>
+      </div>
+      <div>
+        <div class="summary-field-label">Insight</div>
+        <div class="summary-field-value">"속도를 높인다"가 아니라, <strong>"기다림 자체를 없앤다"</strong></div>
+      </div>
+      <div>
+        <div class="summary-field-label">Structure</div>
+        <div class="summary-field-value">반품 전 선출고로 순서 전환 + 리스크 관리 체계 + 파일럿 검증</div>
+      </div>
+      <div>
+        <div class="summary-field-label">Impact</div>
+        <div class="summary-field-value"><strong>2.3일</strong> 평균 교환 리드타임 (75%↓), <strong>Loss 0%</strong></div>
+      </div>
+      <div>
+        <div class="summary-field-label">Role</div>
+        <div class="summary-field-value">CX Manager — 프로세스 설계, 리스크 관리, 파일럿 운영, 효과 검증</div>
+      </div>
+      <div>
+        <div class="summary-field-label">Stakeholders</div>
+        <div class="summary-field-value">이커머스팀 · 개발팀 · 물류팀</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-label">읽기</div>
+    <p>교환 관련 VOC에서 같은 표현이 반복되고 있었습니다.</p>
+    <div class="voice-block">
+      <div class="voice-label">고객이 말한 것</div>
+      <p>"<strong>언제 받을 수 있나요?</strong>"</p>
+      <p>"<strong>맞교환 되나요?</strong>"</p>
+    </div>
+    <p>표면적으로는 속도에 대한 불만이었습니다.<br>
+    그러나 이 말 뒤에는 두 가지가 숨어 있었습니다.</p>
+    <div class="hidden-block">
+      <div class="hidden-label">말하지 않은 것</div>
+      <p><strong>① 불량 제품에 대한 보상 심리</strong><br>
+      <span>— 내가 잘못한 게 아닌데, 왜 내가 기다려야 하나</span></p>
+      <p style="margin-top:10px;"><strong>② 끝이 보이지 않는 불확실성</strong><br>
+      <span>— 기다림의 길이가 아니라, 기다림의 끝을 모르는 것</span></p>
+    </div>
+    <p>그리고 이 불만을 증폭시키는 <strong>구조적 문제</strong>가 있었습니다.</p>
+    <p>기존 교환은 <strong>회수 후 출고</strong> — 반품이 도착해야 새 제품이 나가는 순서였습니다.<br>
+    수거 일정도, 출고 일정도 확답할 수 없었기 때문에<br>
+    상담사는 고객의 "언제요?"에 <strong>답할 수 없는 구조</strong>였습니다.</p>
+    <div class="flow-block">
+<pre>고객 ─── "언제 받을 수 있나요?"
+            │
+상담사 ── 수거 일정 확답 불가 · 출고 일정 확답 불가
+            │
+고객 ─── 답을 받지 못함 → 불만 증폭 → 재문의</pre>
+    </div>
+    <p>답을 줄 수 없으니, 불만은 커질 수밖에 없었습니다.</p>
+    <p class="insight">
+      문제를 재정의했습니다.<br>
+      "속도를 높인다"가 아니라, <strong>"기다림 자체를 없앤다."</strong><br>
+      상담사가 답할 수 없는 구조를 → <strong>답이 필요 없는 구조</strong>로 바꾸는 것.
+    </p>
+  </div>
+
+  <div class="phase">
+    <div class="phase-label">실행</div>
+    <div class="exec-block">
+      <span class="exec-step-num">01</span>
+      <div class="exec-block-title">VOC 패턴 분석 — 불만의 본질 도출</div>
+      <ul class="exec-list">
+        <li>교환 지연 관련 VOC를 분석한 결과, 불만의 핵심이 처리 속도 자체가 아닌 "체감 리드타임"과 "불확실성"에 있음을 확인</li>
+        <li>"교환을 빠르게"가 아니라 "순서를 바꾼다"로 접근 방향 전환</li>
+      </ul>
+    </div>
+    <div class="exec-block">
+      <span class="exec-step-num">02</span>
+      <div class="exec-block-title">선출고(Pre-dispatch) 프로세스 설계</div>
+      <ul class="exec-list">
+        <li>반품 도착 전에 새 제품을 먼저 출고하는 구조 설계</li>
+        <li>자사몰 한정으로 운영 범위를 제한하고, 대상 고객군·상품 카테고리를 통제하여 파일럿 리스크 최소화</li>
+      </ul>
+    </div>
+    <div class="exec-block">
+      <span class="exec-step-num">03</span>
+      <div class="exec-block-title">리스크 관리 체계 수립</div>
+      <ul class="exec-list">
+        <li>미반품 대응 가이드라인 수립, 예외 케이스별 판단 기준 정의</li>
+        <li>Loss율 0%를 목표로 설계</li>
+      </ul>
+    </div>
+    <div class="exec-block">
+      <span class="exec-step-num">04</span>
+      <div class="exec-block-title">파일럿 운영 및 효과 검증</div>
+      <ul class="exec-list">
+        <li>자사몰 대상 파일럿 운영</li>
+        <li>선출고 채널과 기존(회수 후 출고) 채널 간 리드타임·편차·체감을 비교하여 프로세스 효과 검증</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="ba-diagram">
+    <div class="ba-diagram-title">교환 구조: Before → After</div>
+    <div class="ba-grid">
+      <div class="ba-box">
+        <h4>Before</h4>
+        <span class="ba-tag">회수 후 출고</span>
+        <div class="ba-tree">
+          <div class="ba-node parent">교환 요청</div>
+          <div style="font-size:11px; color:var(--gray-300);">↓</div>
+          <div class="ba-node parent" style="border-color:var(--red); color:var(--red);">반품 수거 (일정 불확실)</div>
+          <div style="font-size:11px; color:var(--gray-300);">↓</div>
+          <div class="ba-node parent">반품 도착 확인</div>
+          <div style="font-size:11px; color:var(--gray-300);">↓</div>
+          <div class="ba-node parent">새 제품 출고</div>
+          <div style="font-size:11px; color:var(--gray-300);">↓</div>
+          <div class="ba-node parent">고객 수령</div>
+        </div>
+        <div class="ba-result" style="color:var(--red); margin-top:20px;">
+          ✕ 상담사가 "언제"에 답할 수 없음
+        </div>
+      </div>
+      <div class="ba-arrow-col">→</div>
+      <div class="ba-box-dark">
+        <h4>After</h4>
+        <span class="ba-tag">선출고</span>
+        <div class="ba-tree">
+          <div class="ba-node" style="background:rgba(255,255,255,0.15); color:#fff; border:none; font-weight:700;">교환 요청</div>
+          <div style="font-size:11px; color:rgba(255,255,255,0.3);">↓</div>
+          <div class="ba-node" style="background:rgba(255,255,255,0.25); color:#fff; border:none; font-weight:900;">새 제품 즉시 출고 ← 순서 전환</div>
+          <div style="font-size:11px; color:rgba(255,255,255,0.3);">↓</div>
+          <div class="ba-node" style="background:rgba(255,255,255,0.15); color:#fff; border:none; font-weight:700;">고객 수령</div>
+          <div style="font-size:11px; color:rgba(255,255,255,0.3);">↓</div>
+          <div class="ba-node-ghost">반품 수거 (별도 진행)</div>
+        </div>
+        <div class="ba-result" style="color:#fff; margin-top:20px; font-weight:500;">
+          ○ "언제"라는 질문 자체가 사라짐
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-label">결과</div>
+    <div class="result-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 24px;">
+      <div class="result-box quant">
+        <div class="stat-big">2.3일</div>
+        <div class="stat-label">평균 교환 리드타임</div>
+        <div style="font-size:12px; color:var(--gray-400); margin-top:4px;">기존 9.2일 대비 약 75% 단축</div>
+      </div>
+      <div class="result-box quant">
+        <div class="stat-big">0%</div>
+        <div class="stat-label">Loss율</div>
+        <div style="font-size:12px; color:var(--gray-400); margin-top:4px;">파일럿 전 기간 미반품 0건</div>
+      </div>
+      <div class="result-box quant">
+        <div class="stat-big">↓</div>
+        <div class="stat-label">리드타임 편차·대기 체감</div>
+        <div style="font-size:12px; color:var(--gray-400); margin-top:4px;">기존 채널 대비 안정화</div>
+      </div>
+    </div>
+    <div class="result-box qual">
+      <h4>정성</h4>
+      <p>고객이 말한 <strong>"언제 받을 수 있나요?"</strong> 안에 있는<br>
+      <strong>"불량인데 왜 내가 기다려야 하나"</strong>를 읽고,<br>
+      기다림 자체를 제거하는 구조를 설계한 것입니다.</p>
+      <p style="margin-top:12px; opacity:0.5;">속도를 높인 것이 아니라, 순서를 바꿨습니다.</p>
+    </div>
+  </div>
+
+  <details class="phase phase-expandable">
+    <summary class="phase-label">확장 — 전 채널 적용 기획</summary>
+    <p>파일럿에서 검증된 선출고 프로세스를 전 채널로 확장하기 위해<br>
+    이커머스팀·개발팀과 협의를 진행했습니다.<br>
+    확인 결과, 세 가지 조건이 드러났습니다.</p>
+    <div style="margin:24px 0; display:grid; gap:16px;">
+      <div class="expand-block">
+        <div style="display:flex; align-items:baseline; gap:8px; margin-bottom:6px;">
+          <span class="expand-num">01</span>
+          <strong>물류 시스템 구조가 동일한 채널</strong>
+        </div>
+        <p>→ 현재 프로세스 그대로 즉시 적용 가능</p>
+      </div>
+      <div class="expand-block">
+        <div style="display:flex; align-items:baseline; gap:8px; margin-bottom:6px;">
+          <span class="expand-num">02</span>
+          <strong>수동 처리 중인 선출고 → 자동화 가능</strong>
+        </div>
+        <p>→ 이커머스팀·개발팀 확인 결과, 현재 수동으로 처리하는 선출고 로직은 시스템에 자동 반영 가능</p>
+      </div>
+      <div class="expand-block-dark">
+        <div style="display:flex; align-items:baseline; gap:8px; margin-bottom:6px;">
+          <span class="expand-num">03</span>
+          <strong>기본 교환 시스템의 구조적 한계</strong>
+        </div>
+        <p>→ 기본 교환 플로우 자체에 선출고를 적용하려면 물류 시스템 로직 리뉴얼이 필요.<br>
+        　현재 물류/IT 구조상 전면 적용은 불가.</p>
+      </div>
+    </div>
+    <p class="insight">
+      전 채널 일괄 적용이 아닌,<br>
+      <strong>시스템 구조가 허용하는 채널부터 단계적으로 확장</strong>하는 방향으로 기획 중입니다.<br>
+      파일럿에서 검증된 효과(75% 단축, Loss 0%)가 확장의 근거입니다.
+    </p>
+  </details>
+
+  <div class="case-nav">
+    <a href="/cx-portfolio/cases/case01.html" class="prev">← Case 01 — VOC 분류 체계</a>
+    <a href="/cx-portfolio/cases/case03.html" class="next">Case 03 — AI 향 추천 →</a>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <button class="footer-contact-btn" onclick="document.getElementById('contactOverlay').classList.add('active')">Contact</button>
+  </div>
+</footer>
+<div class="contact-overlay" id="contactOverlay" onclick="if(event.target===this)this.classList.remove('active')">
+  <div class="contact-card">
+    <button class="contact-card-close" onclick="document.getElementById('contactOverlay').classList.remove('active')">✕</button>
+    <div class="contact-card-name">김문주</div>
+    <div class="contact-card-item"><span class="material-symbols-outlined">call</span>+82 10 9961 1899</div>
+    <div class="contact-card-item"><span class="material-symbols-outlined">mail</span>moonjukim2023@gmail.com</div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case 03 — AI 향 추천 서비스 기획 | 김문주 CX Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..48,100..700,0..1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f3f0; --bg-deep: #faf9f7; --bg-card: #edecea; --bg-card-light: #e4e2df;
+    --fg: #1a1a1a; --fg-muted: #2a2a2a;
+    --gray-100: #f0eeec; --gray-200: #dddbd8; --gray-300: #b8b5b2; --gray-400: #8a8785; --gray-500: #5c5a58;
+    --accent: #c43e39; --accent-dim: rgba(196, 62, 57, 0.05); --accent-border: rgba(196, 62, 57, 0.12); --red: #c43e39;
+    --mono: 'JetBrains Mono', monospace; --sans: 'Noto Sans KR', sans-serif; --display: 'Inter', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--sans); background: var(--bg-deep); color: var(--fg-muted); line-height: 1.8; font-size: 15px; -webkit-font-smoothing: antialiased; }
+  body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; opacity: 0.02; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); }
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--bg-deep); }
+  ::-webkit-scrollbar-thumb { background: var(--gray-200); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--gray-400); }
+  ::selection { background: rgba(196,62,57,0.12); color: var(--fg); }
+  .top-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(250,249,247,0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--gray-200); padding: 0 24px; }
+  .nav-inner { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .nav-logo { font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--fg); letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; }
+  .nav-links { display: flex; gap: 36px; }
+  .nav-links a { font-family: var(--mono); font-size: 11px; color: var(--gray-400); text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.3s; }
+  .nav-links a:hover { color: var(--fg); }
+  .nav-links a.active { color: var(--fg); font-weight: 500; }
+  .container { max-width: 900px; margin: 0 auto; padding: 100px 24px 120px; }
+  .summary-card { background: var(--bg); border: 1px solid var(--gray-200); border-radius: 14px; padding: 32px 36px; margin-bottom: 60px; }
+  .summary-card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .summary-field-label { font-family: var(--mono); font-size: 10px; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+  .summary-field-value { font-size: 14px; color: var(--fg-muted); line-height: 1.7; }
+  .summary-field-value strong { color: var(--fg); }
+  .case-header { margin-bottom: 60px; padding-top: 24px; }
+  .case-eyebrow { font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+  .case-eyebrow::before { content: ''; width: 40px; height: 1px; background: var(--accent); }
+  .case-title { font-family: var(--sans); font-size: 32px; font-weight: 900; color: var(--fg); letter-spacing: -0.5px; line-height: 1.4; }
+  .phase { margin-bottom: 72px; }
+  .phase-label { font-family: var(--mono); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--fg); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid var(--fg); }
+  .phase p { margin-bottom: 8px; line-height: 1.8; }
+  .phase p + .voice-block, .phase p + .hidden-block, .phase p + .flow-block { margin-top: 32px; }
+  .voice-block + p, .hidden-block + p, .flow-block + p { margin-top: 32px; }
+  .phase p strong { color: var(--fg); }
+  .phase p.insight { margin-top: 24px; padding: 20px 24px; background: var(--accent-dim); border: 1px solid var(--accent-border); border-radius: 10px; font-size: 14px; line-height: 1.8; color: var(--fg-muted); transition: all 0.3s; }
+  .phase p.insight:hover { border-color: var(--gray-300); }
+  .phase p.insight strong { color: var(--fg); }
+  .voice-block { background: var(--bg); border-left: 3px solid var(--gray-300); padding: 20px 24px; margin: 24px 0; font-size: 14px; line-height: 1.8; border-radius: 0 8px 8px 0; transition: all 0.3s; }
+  .voice-block:hover { border-left-color: var(--fg); }
+  .voice-block .voice-label { font-family: var(--mono); font-size: 11px; color: var(--gray-400); margin-bottom: 10px; }
+  .voice-block p strong { color: var(--fg); }
+  .hidden-block { background: var(--fg); color: #fff; padding: 24px 28px; margin: 28px 0; font-size: 14px; line-height: 1.8; border-radius: 10px; }
+  .hidden-block .hidden-label { font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+  .hidden-block p strong { color: #fff; }
+  .hidden-block p span { color: rgba(255,255,255,0.7); }
+  .dual-grid { margin: 20px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .dual-grid-item { background: var(--bg-card); border: 1px solid var(--gray-200); border-radius: 10px; padding: 16px 20px; font-size: 13px; line-height: 1.8; transition: all 0.3s; }
+  .dual-grid-item:hover { border-color: var(--gray-300); transform: translateY(-1px); }
+  .dual-grid-item strong { font-size: 14px; color: var(--fg); }
+  .dual-grid-item span { color: var(--gray-500); }
+  .exec-block { margin-bottom: 8px; display: grid; grid-template-columns: 56px 1fr; gap: 0 12px; padding: 20px 24px; border-radius: 8px; background: var(--bg-deep); border: 1px solid transparent; transition: all 0.3s; }
+  .exec-block:hover { background: var(--bg); border-color: var(--gray-200); }
+  .exec-block-title { font-size: 14px; font-weight: 700; color: var(--fg); margin-bottom: 8px; grid-column: 2; }
+  .exec-step-num { font-family: var(--mono); font-size: 32px; font-weight: 700; color: var(--gray-200); grid-column: 1; grid-row: 1 / 3; line-height: 1; transition: color 0.3s; }
+  .exec-block:hover .exec-step-num { color: var(--fg); }
+  .exec-list { list-style: none; padding-left: 0; grid-column: 2; }
+  .exec-list li { padding-left: 20px; position: relative; margin-bottom: 6px; font-size: 14px; line-height: 1.8; color: var(--gray-500); }
+  .exec-list li::before { content: "—"; position: absolute; left: 0; color: var(--gray-300); }
+  /* ER Diagram */
+  .er-diagram { background: var(--bg-deep); border: 1px solid var(--gray-200); border-radius: 16px; padding: 36px; margin: 36px 0; }
+  .er-diagram-title { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--fg); margin-bottom: 4px; }
+  .er-diagram-sub { font-size: 12px; color: var(--gray-400); margin-bottom: 28px; }
+  .er-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .er-table { background: var(--bg); border: 1.5px solid var(--gray-200); border-radius: 10px; padding: 14px; text-align: center; transition: all 0.3s; }
+  .er-table:hover { border-color: var(--accent-border); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
+  .er-table.primary { border-color: var(--accent); background: var(--accent-dim); }
+  .er-table-name { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--fg); margin-bottom: 4px; letter-spacing: 0.02em; }
+  .er-table-desc { font-size: 11px; color: var(--gray-400); line-height: 1.5; }
+  .er-table-count { font-family: var(--mono); font-size: 10px; color: var(--gray-300); margin-top: 6px; }
+  .er-relations { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--gray-200); }
+  .er-rel-row { font-family: var(--mono); font-size: 11px; color: var(--gray-400); line-height: 2; display: flex; align-items: center; gap: 8px; }
+  .er-rel-arrow { color: var(--accent); font-weight: 700; }
+  /* Data Architecture */
+  .ba-diagram { background: var(--bg-deep); border: 1px solid var(--gray-200); border-radius: 16px; padding: 36px; margin: 36px 0; }
+  .ba-diagram-title { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--fg); margin-bottom: 28px; }
+  .arch-flow { display: flex; flex-direction: column; gap: 12px; max-width: 600px; margin: 0 auto; }
+  .arch-input { background: var(--bg); border: 1.5px solid var(--gray-200); border-radius: 10px; padding: 16px 20px; text-align: center; transition: all 0.3s; }
+  .arch-input:hover { border-color: var(--gray-300); }
+  .arch-input .arch-label { font-family: var(--mono); font-size: 10px; color: var(--gray-400); margin-bottom: 4px; }
+  .arch-input .arch-main { font-size: 13px; font-weight: 700; color: var(--fg); }
+  .arch-input .arch-sub { font-size: 11px; color: var(--gray-400); margin-top: 4px; }
+  .arch-arrow { text-align: center; font-size: 11px; color: var(--gray-300); }
+  .arch-slots { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .arch-slot { background: var(--bg-card); border: 1px solid var(--gray-200); border-radius: 8px; padding: 12px; text-align: center; font-size: 12px; transition: all 0.3s; }
+  .arch-slot:hover { border-color: var(--gray-300); }
+  .arch-slot .arch-label { font-family: var(--mono); font-size: 10px; color: var(--gray-400); margin-bottom: 4px; }
+  .arch-slot strong { color: var(--fg); }
+  .arch-slot span { color: var(--gray-400); }
+  .arch-options { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .arch-option { background: var(--fg); color: #fff; border-radius: 8px; padding: 14px; text-align: center; font-size: 12px; transition: all 0.3s; }
+  .arch-option:hover { background: #2a2a2a; }
+  .arch-option .arch-label { font-family: var(--mono); font-size: 10px; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
+  .arch-option strong { color: #fff; }
+  .arch-option span { opacity: 0.6; color: #fff; }
+  .arch-handoff { background: var(--bg); border: 1px dashed var(--gray-300); border-radius: 10px; padding: 14px 20px; text-align: center; font-size: 12px; color: var(--gray-400); transition: all 0.3s; }
+  .arch-handoff:hover { border-color: var(--gray-300); }
+  .arch-handoff strong { color: var(--fg); }
+  /* Result */
+  .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+  .result-box { padding: 24px; border-radius: 12px; position: relative; overflow: hidden; transition: transform 0.3s ease; }
+  .result-box:hover { transform: translateY(-2px); }
+  .result-box::after { content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 2px; background: var(--fg); transition: all 0.4s ease; }
+  .result-box:hover::after { width: 100%; left: 0; }
+  .result-box.quant { background: var(--bg-card); border: 1px solid var(--gray-200); }
+  .result-box.qual { background: var(--fg); color: #fff; }
+  .result-box h4 { font-family: var(--mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; opacity: 0.5; }
+  .result-box p, .result-box li { font-size: 13px; line-height: 1.8; }
+  .result-box.qual h4 { color: #fff; opacity: 0.5; }
+  .result-box.qual p { color: #fff; opacity: 0.9; }
+  .result-box.qual strong { color: #fff; }
+  .stat-big { font-family: var(--display); font-size: 44px; font-weight: 900; letter-spacing: -1px; margin-bottom: 4px; color: var(--fg); }
+  .stat-label { font-size: 12px; color: var(--gray-400); }
+  /* Expand */
+  .phase-expandable { margin-bottom: 72px; }
+  .phase-expandable summary.phase-label { cursor: pointer; user-select: none; list-style: none; display: flex; align-items: center; justify-content: space-between; }
+  .phase-expandable summary.phase-label::-webkit-details-marker { display: none; }
+  .phase-expandable summary.phase-label::after { content: '펼치기 ↓'; font-size: 11px; font-weight: 400; color: var(--gray-400); margin-left: 12px; letter-spacing: 0; text-transform: none; }
+  .phase-expandable[open] summary.phase-label::after { content: '접기 ↑'; }
+  .expand-block { background: var(--bg-card); border: 1px solid var(--gray-200); border-radius: 10px; padding: 20px 24px; font-size: 14px; line-height: 1.9; transition: all 0.3s; }
+  .expand-block:hover { border-color: var(--gray-300); }
+  .expand-block .expand-num { font-family: var(--mono); font-size: 11px; color: var(--fg); }
+  .expand-block strong { color: var(--fg); }
+  .expand-block p { color: var(--gray-500); font-size: 13px; padding-left: 24px; }
+  .case-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--gray-200); }
+  .case-nav a { font-family: var(--mono); font-size: 12px; color: var(--gray-400); text-decoration: none; letter-spacing: 0.05em; transition: color 0.3s; display: flex; align-items: center; gap: 8px; }
+  .case-nav a:hover { color: var(--fg); }
+  .case-nav .next { margin-left: auto; }
+  .site-footer { border-top: 1px solid var(--gray-200); padding: 48px 24px; margin-top: 60px; }
+  .footer-inner { max-width: 900px; margin: 0 auto; display: flex; justify-content: center; align-items: center; }
+  .footer-contact-btn { font-family: var(--mono); font-size: 11px; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; background: none; border: 1px solid var(--gray-200); padding: 8px 20px; border-radius: 6px; transition: all 0.3s; }
+  .footer-contact-btn:hover { color: var(--fg); border-color: var(--gray-300); }
+  .contact-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.3); z-index: 200; display: none; align-items: center; justify-content: center; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+  .contact-overlay.active { display: flex; }
+  .contact-card { background: #fff; border-radius: 14px; padding: 36px 40px; min-width: 320px; box-shadow: 0 20px 60px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.04); position: relative; text-align: center; }
+  .contact-card-name { font-family: var(--sans); font-size: 20px; font-weight: 700; color: #1a1a1a; margin-bottom: 20px; }
+  .contact-card-item { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 12px; font-size: 14px; color: #5c5a58; }
+  .contact-card-item span.material-symbols-outlined { font-size: 18px; color: #8a8785; }
+  .contact-card-close { position: absolute; top: 14px; right: 16px; background: none; border: none; cursor: pointer; font-size: 18px; color: #b8b5b2; transition: color 0.2s; line-height: 1; }
+  .contact-card-close:hover { color: #5c5a58; }
+  @media (max-width: 768px) {
+    .case-title { font-size: 24px; }
+    .summary-card-grid { grid-template-columns: 1fr; }
+    .dual-grid { grid-template-columns: 1fr; }
+    .er-grid { grid-template-columns: 1fr 1fr; }
+    .arch-slots { grid-template-columns: 1fr; }
+    .arch-options { grid-template-columns: 1fr; }
+    .result-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .top-nav { padding: 0 16px; }
+    .stat-big { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+<nav class="top-nav">
+  <div class="nav-inner">
+    <a href="/cx-portfolio/" class="nav-logo">Portfolio</a>
+    <div class="nav-links">
+      <a href="/cx-portfolio/">Home</a>
+      <a href="/cx-portfolio/cases/case01.html">Case 01</a>
+      <a href="/cx-portfolio/cases/case02.html">Case 02</a>
+      <a href="/cx-portfolio/cases/case03.html" class="active">Case 03</a>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <div class="case-header">
+    <div class="case-eyebrow">Case 03</div>
+    <h1 class="case-title">AI 향 추천 서비스 기획 — 고객 언어 기반 데이터셋 설계</h1>
+  </div>
+  <div class="summary-card">
+    <div class="summary-card-grid">
+      <div>
+        <div class="summary-field-label">Problem</div>
+        <div class="summary-field-value">'비슷한 향 없나요?' — <strong>추천할 구조도, 연결할 데이터도 없었다</strong></div>
+      </div>
+      <div>
+        <div class="summary-field-label">Insight</div>
+        <div class="summary-field-value"><strong>고객의 언어를 향의 좌표로 번역하는 구조</strong>를 설계하는 것</div>
+      </div>
+      <div>
+        <div class="summary-field-label">Structure</div>
+        <div class="summary-field-value">8개 테이블 관계형 데이터셋 + AI 발화 설계 + 가드레일</div>
+      </div>
+      <div>
+        <div class="summary-field-label">Impact</div>
+        <div class="summary-field-value"><strong>8</strong> tables · <strong>242</strong> mappings · <strong>422</strong> survey</div>
+      </div>
+      <div>
+        <div class="summary-field-label">Role</div>
+        <div class="summary-field-value">CX Manager — 데이터셋 설계, AI 발화 설계, 가드레일, 프로젝트 리드 (PM 없이)</div>
+      </div>
+      <div>
+        <div class="summary-field-label">Stakeholders</div>
+        <div class="summary-field-value">AI 전담팀 · 오프라인 매장 직원 · 제품팀</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-label">읽기</div>
+    <p>단종 제품 문의가 반복되고 있었습니다.<br>
+    고객은 같은 질문을 했고, 상담사는 매번 같은 한계에 부딪혔습니다.</p>
+    <div class="voice-block">
+      <div class="voice-label">고객이 말한 것</div>
+      <p>"<strong>이 향 단종인가요?</strong>"</p>
+      <p>"<strong>비슷한 향 없나요?</strong>"</p>
+      <p>"<strong>가벼운 향이요</strong>"</p>
+    </div>
+    <p>표면적으로는 대체 제품을 찾는 문의였습니다.<br>
+    그러나 이 말 뒤에는 두 가지가 숨어 있었습니다.</p>
+    <div class="hidden-block">
+      <div class="hidden-label">말하지 않은 것</div>
+      <p><strong>① 자신이 원하는 향을 정확히 표현할 언어가 없다</strong><br>
+      <span>— "비슷한"이 무엇과 비슷한 건지, "가벼운"이 어떤 가벼움인지 고객 자신도 모른다</span></p>
+      <p style="margin-top:10px;"><strong>② 추천의 근거를 알고 싶은 것이 아니라, "이해받았다"는 감각을 원한다</strong><br>
+      <span>— 정확한 매칭보다, 내 말을 제대로 읽었다는 느낌</span></p>
+    </div>
+    <p>그리고 이것을 증폭시키는 <strong>구조적 문제</strong>가 있었습니다.</p>
+    <p>"비슷한 향"으로 연결해줄 구조 자체가 없었습니다.<br>
+    고객이 좋아하는 향과 <strong>유사한 다른 제품도, 같은 취향의 다른 제형도 연결되지 않는 상태.</strong><br>
+    단종 문의에 대체 향을 안내하려 해도, 근거가 될 데이터도 로직도 없었습니다.</p>
+    <p>오프라인 매장의 숙련된 직원은 이것을 감각적으로 읽어냅니다.<br>
+    문제는 이 감각이 <strong>그 직원 한 사람에게 갇혀 있다</strong>는 것이었습니다.</p>
+    <p>여기서 두 가지를 설계해야 했습니다.</p>
+    <div class="dual-grid">
+      <div class="dual-grid-item">
+        <strong>① "비슷한"을 어떻게 추출할 것인가</strong><br>
+        <span>고객의 모호한 언어에서 향의 좌표를 뽑아내는 구조</span>
+      </div>
+      <div class="dual-grid-item">
+        <strong>② 고객이 어떤 언어를 뱉게 할 것인가</strong><br>
+        <span>AI가 발화하는 방식을 설계하여 고객의 취향 언어를 이끌어내는 구조</span>
+      </div>
+    </div>
+    <p>당시 사내에 AI 도입 사례는 전무했습니다.<br>
+    기획안을 가지고 AI 전담팀에 미팅을 잡았습니다.</p>
+    <p class="insight">
+      이 프로젝트의 출발점은 기술이 아니었습니다.<br>
+      <strong>"고객의 언어를 향의 좌표로 번역하는 구조"</strong>를 설계하는 것.<br>
+      AI는 그 구조 위에 얹히는 도구였습니다.
+    </p>
+  </div>
+
+  <div class="phase">
+    <div class="phase-label">실행</div>
+    <div class="exec-block">
+      <span class="exec-step-num">01</span>
+      <div class="exec-block-title">직원 감각 데이터 확보 — 설문 설계·수집 (422건)</div>
+      <ul class="exec-list">
+        <li>오프라인 매장 직원 대상 설문 설계: 제품별 고객 실제 표현, 호/불호 이유, 비교 언급, 체감 강도, 직원 해석, 킬링 멘트 7개 항목</li>
+        <li>"고객이 이렇게 말했을 때, 실제로는 이런 뜻이다"를 직원의 언어로 기록</li>
+        <li>직원 개인에게 갇혀 있던 감각을 데이터로 추출하는 첫 단계</li>
+      </ul>
+    </div>
+    <div class="exec-block">
+      <span class="exec-step-num">02</span>
+      <div class="exec-block-title">고객 언어 → 향 좌표 매핑 데이터셋 설계 (8개 테이블, 242건)</div>
+      <ul class="exec-list">
+        <li>관계형 데이터 구조 설계: 향 계열(Family) → 어코드(Accord) → 향료(Note) → 제품(Product)의 4계층 분류 체계</li>
+        <li>핵심 테이블 TERM_MAPPING: 고객 실제 표현 → 향료·제품 매핑, 카테고리(logic/texture), 가중치(signature/standard/sub), 감정 분석</li>
+        <li>"묵직한", "포근한", "시원한" 같은 감각어를 향료 좌표로 전환 — 고객의 모호한 언어에서 추천 근거를 추출하는 구조</li>
+      </ul>
+    </div>
+    <div class="exec-block">
+      <span class="exec-step-num">03</span>
+      <div class="exec-block-title">AI 발화 설계 — 고객의 취향 언어를 이끌어내는 구조</div>
+      <ul class="exec-list">
+        <li>"비슷한 향 없나요?"에서 멈추지 않고, 고객이 자신의 취향을 더 구체적으로 말할 수 있게 AI의 발화 자체를 설계</li>
+        <li>3-Slot 좌표 설정: 자유 발화 유도 → 예시 기반 가이드 → 향 계열·어코드·탐색축을 순차 추출</li>
+        <li>Harmony(동조) vs Contrast(변주) A/B 제안: 2개 선택지로 고객 반응 데이터를 수집하는 탐색형 구조</li>
+      </ul>
+    </div>
+    <div class="exec-block">
+      <span class="exec-step-num">04</span>
+      <div class="exec-block-title">가드레일 및 운영 기준 설계</div>
+      <ul class="exec-list">
+        <li>화법 3원칙: Fine(감각을 흐리지 않는 정확한 묘사) · Bold(리스크를 먼저 말하는 태도) · Kind(정보보다 감정을 먼저 인정)</li>
+        <li>추천 중단 조건 정의: 건강/안전 관련, 모순 조건 반복 → 즉시 상담 전환 프로토콜</li>
+        <li>금칙어·약점 표현 가이드: 평가가 아닌 구조 설명으로 전환 ("지속력이 약합니다" ✕ → "초반의 상쾌함에 초점을 둔 타입입니다" ○)</li>
+        <li>최대 2회 제안 후 상담 전환 — Slot 데이터·A/B 반응·제외 조건을 상담사에게 핸드오프하는 데이터 포맷 정의</li>
+        <li>기획안을 기반으로 AI 전담팀에 미팅 후 프로젝트 시작 — PM 없이 프로젝트 리드</li>
+        <li>데이터 구조·시나리오·가드레일·성공 기준은 CX에서 주관, 기술적 구현은 AI팀 담당</li>
+        <li>Beta v2 내부 테스트 완료, v3 진행 중</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ER Diagram -->
+  <div class="er-diagram">
+    <div class="er-diagram-title">관계형 데이터셋 구조 — 8 Tables</div>
+    <div class="er-diagram-sub">고객 언어 → 향 좌표 → 제품 매핑을 위한 관계형 데이터 모델</div>
+    <div class="er-grid">
+      <div class="er-table">
+        <div class="er-table-name">FAMILY</div>
+        <div class="er-table-desc">향 계열<br>대분류</div>
+      </div>
+      <div class="er-table">
+        <div class="er-table-name">ACCORD</div>
+        <div class="er-table-desc">어코드<br>중분류</div>
+      </div>
+      <div class="er-table">
+        <div class="er-table-name">NOTE</div>
+        <div class="er-table-desc">향료<br>소분류</div>
+      </div>
+      <div class="er-table">
+        <div class="er-table-name">PRODUCT</div>
+        <div class="er-table-desc">제품<br>마스터</div>
+      </div>
+      <div class="er-table primary">
+        <div class="er-table-name">TERM_MAPPING</div>
+        <div class="er-table-desc">고객 표현 →<br>향료·제품 매핑</div>
+        <div class="er-table-count">242건</div>
+      </div>
+      <div class="er-table">
+        <div class="er-table-name">SURVEY</div>
+        <div class="er-table-desc">직원 설문<br>감각 데이터</div>
+        <div class="er-table-count">422건</div>
+      </div>
+      <div class="er-table">
+        <div class="er-table-name">GUARDRAIL</div>
+        <div class="er-table-desc">금칙어·중단<br>조건 정의</div>
+      </div>
+      <div class="er-table">
+        <div class="er-table-name">HANDOFF</div>
+        <div class="er-table-desc">상담 전환<br>데이터 포맷</div>
+      </div>
+    </div>
+    <div class="er-relations">
+      <div class="er-rel-row">FAMILY <span class="er-rel-arrow">→</span> ACCORD <span class="er-rel-arrow">→</span> NOTE <span class="er-rel-arrow">→</span> PRODUCT (4계층 분류)</div>
+      <div class="er-rel-row">TERM_MAPPING <span class="er-rel-arrow">↔</span> NOTE, PRODUCT (고객 언어 ↔ 향 좌표)</div>
+      <div class="er-rel-row">SURVEY <span class="er-rel-arrow">→</span> TERM_MAPPING (직원 감각 → 매핑 근거)</div>
+      <div class="er-rel-row">GUARDRAIL <span class="er-rel-arrow">→</span> HANDOFF (중단 조건 → 상담 전환)</div>
+    </div>
+  </div>
+
+  <!-- Data Architecture -->
+  <div class="ba-diagram">
+    <div class="ba-diagram-title">데이터 아키텍처: 고객 언어 → 향 좌표 → 추천</div>
+    <div class="arch-flow">
+      <div class="arch-input">
+        <div class="arch-label">INPUT</div>
+        <div class="arch-main">"비슷한 향 없나요?" · "가벼운 향이요" · "묵직한 느낌"</div>
+        <div class="arch-sub">고객의 언어 — 모호하고, 감각적이고, 불완전한</div>
+      </div>
+      <div class="arch-arrow">↓ AI 발화로 취향 언어 유도</div>
+      <div class="arch-slots">
+        <div class="arch-slot">
+          <div class="arch-label">Slot 1</div>
+          <strong>Family</strong><br>
+          <span>향 계열</span>
+        </div>
+        <div class="arch-slot">
+          <div class="arch-label">Slot 2</div>
+          <strong>Accord</strong><br>
+          <span>어코드</span>
+        </div>
+        <div class="arch-slot">
+          <div class="arch-label">Slot 3</div>
+          <strong>Note/Texture</strong><br>
+          <span>탐색축</span>
+        </div>
+      </div>
+      <div class="arch-arrow">↓ TERM_MAPPING (242건)</div>
+      <div class="arch-options">
+        <div class="arch-option">
+          <div class="arch-label">Option A · Harmony</div>
+          <strong>동조</strong><br>
+          <span>조건 전부 충족하는 안전한 선택</span>
+        </div>
+        <div class="arch-option">
+          <div class="arch-label">Option B · Contrast</div>
+          <strong>변주</strong><br>
+          <span>큰 틀 유지 + 탐색축에서 의외의 제안</span>
+        </div>
+      </div>
+      <div class="arch-arrow">↓ 2회 제안 후</div>
+      <div class="arch-handoff">
+        <strong>상담 전환</strong> — 미세한 차이를 좁히는 건 상담사의 영역<br>
+        Slot 데이터 + A/B 반응 + 제외 조건을 핸드오프
+      </div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-label">결과</div>
+    <div class="result-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 24px;">
+      <div class="result-box quant">
+        <div class="stat-big">8</div>
+        <div class="stat-label">데이터셋 테이블</div>
+        <div style="font-size:12px; color:var(--gray-400); margin-top:4px;">관계형 구조 설계·구축</div>
+      </div>
+      <div class="result-box quant">
+        <div class="stat-big">242</div>
+        <div class="stat-label">고객 언어 매핑</div>
+        <div style="font-size:12px; color:var(--gray-400); margin-top:4px;">표현 → 향료·제품 연결</div>
+      </div>
+      <div class="result-box quant">
+        <div class="stat-big">422</div>
+        <div class="stat-label">직원 설문 데이터</div>
+        <div style="font-size:12px; color:var(--gray-400); margin-top:4px;">감각의 언어화·데이터화</div>
+      </div>
+    </div>
+    <div class="result-box qual">
+      <h4>정성</h4>
+      <p>이 프로젝트의 성공 기준은 <strong>"추천을 맞혔는가"가 아닙니다.</strong></p>
+      <p style="margin-top:12px;">
+        <strong>"고객이 자신의 취향을 더 정확하게 말할 수 있게 되었는가"</strong>입니다.<br>
+        AI가 정답을 내리는 것이 아니라,<br>
+        고객의 모호한 언어에서 좌표를 추출하고,<br>
+        AI의 발화로 고객이 더 정확한 언어를 뱉게 만드는 구조.
+      </p>
+      <p style="margin-top:12px; opacity:0.5;">
+        직원 한 명의 감각을 데이터로 전환하여,<br>
+        조직 누구나 같은 깊이로 고객의 말을 읽을 수 있는 기반을 만들었습니다.
+      </p>
+    </div>
+  </div>
+
+  <details class="phase phase-expandable">
+    <summary class="phase-label">확장 — Beta v3 진행 중</summary>
+    <p>Beta v2 내부 테스트를 완료하고, 현재 v3를 진행 중입니다.</p>
+    <div style="margin:24px 0; display:grid; gap:16px;">
+      <div class="expand-block">
+        <div style="display:flex; align-items:baseline; gap:8px; margin-bottom:6px;">
+          <span class="expand-num">01</span>
+          <strong>CX → Product 파이프라인</strong>
+        </div>
+        <p>→ 고객 피드백이 추천 로직이라는 제품 기능에 직접 반영되는 구조</p>
+      </div>
+      <div class="expand-block">
+        <div style="display:flex; align-items:baseline; gap:8px; margin-bottom:6px;">
+          <span class="expand-num">02</span>
+          <strong>고객 언어 데이터의 재사용</strong>
+        </div>
+        <p>→ 매핑 데이터셋은 AI 추천뿐 아니라, CS 응대 가이드·마케팅 카피·상품 기획의 공통 언어 자원으로 확장 가능</p>
+      </div>
+      <div class="expand-block">
+        <div style="display:flex; align-items:baseline; gap:8px; margin-bottom:6px;">
+          <span class="expand-num">03</span>
+          <strong>AI-Human 협업 모델의 프로토타입</strong>
+        </div>
+        <p>→ AI가 탐색하고 인간이 좁히는 구조. 2회 제안 후 상담 전환은 "AI의 한계"가 아니라 "역할 분담의 설계"</p>
+      </div>
+    </div>
+  </details>
+
+  <div class="case-nav">
+    <a href="/cx-portfolio/cases/case02.html" class="prev">← Case 02 — 교환 선출고</a>
+    <a href="/cx-portfolio/" class="next">Home →</a>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <button class="footer-contact-btn" onclick="document.getElementById('contactOverlay').classList.add('active')">Contact</button>
+  </div>
+</footer>
+<div class="contact-overlay" id="contactOverlay" onclick="if(event.target===this)this.classList.remove('active')">
+  <div class="contact-card">
+    <button class="contact-card-close" onclick="document.getElementById('contactOverlay').classList.remove('active')">✕</button>
+    <div class="contact-card-name">김문주</div>
+    <div class="contact-card-item"><span class="material-symbols-outlined">call</span>+82 10 9961 1899</div>
+    <div class="contact-card-item"><span class="material-symbols-outlined">mail</span>moonjukim2023@gmail.com</div>
+  </div>
+</div>
+</body>
+</html>
