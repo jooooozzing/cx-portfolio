@@ -8,24 +8,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..48,100..700,0..1&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f5f3f0;
-    --bg-deep: #faf9f7;
-    --bg-card: #edecea;
-    --bg-card-light: #e4e2df;
-    --fg: #1a1a1a;
-    --fg-muted: #2a2a2a;
-    --gray-100: #f0eeec;
-    --gray-200: #dddbd8;
-    --gray-300: #b8b5b2;
-    --gray-400: #8a8785;
-    --gray-500: #5c5a58;
-    --accent: #c43e39;
-    --accent-dim: rgba(196, 62, 57, 0.05);
-    --accent-border: rgba(196, 62, 57, 0.12);
-    --red: #c43e39;
-    --mono: 'JetBrains Mono', monospace;
-    --sans: 'Noto Sans KR', sans-serif;
-    --display: 'Inter', sans-serif;
+    --bg: #f5f3f0; --bg-deep: #faf9f7; --bg-card: #edecea; --bg-card-light: #e4e2df;
+    --fg: #1a1a1a; --fg-muted: #2a2a2a;
+    --gray-100: #f0eeec; --gray-200: #dddbd8; --gray-300: #b8b5b2; --gray-400: #8a8785; --gray-500: #5c5a58;
+    --accent: #c43e39; --accent-dim: rgba(196, 62, 57, 0.05); --accent-border: rgba(196, 62, 57, 0.12); --red: #c43e39;
+    --mono: 'JetBrains Mono', monospace; --sans: 'Noto Sans KR', sans-serif; --display: 'Inter', sans-serif;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: var(--sans); background: var(--bg-deep); color: var(--fg-muted); line-height: 1.8; font-size: 15px; -webkit-font-smoothing: antialiased; }
@@ -35,7 +22,7 @@
   ::-webkit-scrollbar-thumb { background: var(--gray-200); border-radius: 4px; }
   ::-webkit-scrollbar-thumb:hover { background: var(--gray-400); }
   ::selection { background: rgba(196,62,57,0.12); color: var(--fg); }
-  .top-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(250, 249, 247, 0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--gray-200); padding: 0 24px; }
+  .top-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(250,249,247,0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--gray-200); padding: 0 24px; }
   .nav-inner { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
   .nav-logo { font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--fg); letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; }
   .nav-links { display: flex; gap: 36px; }
@@ -43,17 +30,26 @@
   .nav-links a:hover { color: var(--fg); }
   .nav-links a.active { color: var(--fg); font-weight: 500; }
   .container { max-width: 900px; margin: 0 auto; padding: 100px 24px 120px; }
-  /* Summary Card */
-  .summary-card { background: var(--bg); border: 1px solid var(--gray-200); border-radius: 14px; padding: 32px 36px; margin-bottom: 60px; }
-  .summary-card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .summary-field-label { font-family: var(--mono); font-size: 10px; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
-  .summary-field-value { font-size: 14px; color: var(--fg-muted); line-height: 1.7; }
-  .summary-field-value strong { color: var(--fg); }
   /* Case Header */
   .case-header { margin-bottom: 60px; padding-top: 24px; }
   .case-eyebrow { font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
   .case-eyebrow::before { content: ''; width: 40px; height: 1px; background: var(--accent); }
   .case-title { font-family: var(--sans); font-size: 32px; font-weight: 900; color: var(--fg); letter-spacing: -0.5px; line-height: 1.4; }
+  /* Summary Card — NEW spec */
+  .summary-card { background: var(--bg-card); border-radius: 16px; padding: 48px; margin-bottom: 64px; }
+  .summary-main { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-bottom: 32px; }
+  .summary-field {}
+  .summary-field-label { font-family: var(--mono); font-size: 11px; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+  .summary-field-value { font-size: 15px; color: var(--fg); line-height: 1.7; }
+  .summary-field-value strong { color: var(--fg); font-weight: 700; }
+  .summary-impact { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 32px; }
+  .impact-tile { background: var(--bg-deep); border-radius: 10px; padding: 20px 24px; }
+  .impact-num { font-family: var(--display); font-size: 28px; font-weight: 900; color: var(--fg); letter-spacing: -0.5px; }
+  .impact-label { font-size: 12px; color: var(--gray-400); margin-top: 2px; }
+  .summary-meta { display: flex; gap: 40px; padding-top: 24px; border-top: 1px solid var(--gray-200); }
+  .meta-item {}
+  .meta-label { font-family: var(--mono); font-size: 10px; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+  .meta-value { font-size: 13px; color: var(--gray-500); line-height: 1.6; }
   /* Phase blocks */
   .phase { margin-bottom: 72px; }
   .phase-label { font-family: var(--mono); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--fg); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid var(--fg); }
@@ -74,6 +70,28 @@
   .exec-list { list-style: none; padding-left: 0; grid-column: 2; }
   .exec-list li { padding-left: 20px; position: relative; margin-bottom: 6px; font-size: 14px; line-height: 1.8; color: var(--gray-500); }
   .exec-list li::before { content: "—"; position: absolute; left: 0; color: var(--gray-300); }
+  /* Artifact: 7-category grid */
+  .artifact-block { background: var(--bg-card); border-radius: 12px; padding: 32px 40px; margin: 36px 0 0; }
+  .artifact-title { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--fg); margin-bottom: 4px; letter-spacing: -0.3px; }
+  .artifact-sub { font-size: 12px; color: var(--gray-400); margin-bottom: 24px; }
+  .category-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 24px; }
+  .category-card { background: var(--bg-deep); border: 1px solid var(--gray-200); border-radius: 8px; padding: 14px 12px; text-align: center; transition: all 0.3s; }
+  .category-card:hover { border-color: var(--gray-300); transform: translateY(-1px); }
+  .category-card.accent { border-color: var(--accent); background: var(--accent-dim); }
+  .category-card .cat-name { font-size: 13px; font-weight: 700; color: var(--fg); margin-bottom: 2px; }
+  .category-card.accent .cat-name { color: var(--accent); }
+  .category-card .cat-count { font-family: var(--mono); font-size: 10px; color: var(--gray-400); }
+  /* PRODUCT tree */
+  .tree-example { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--gray-200); }
+  .tree-example-title { font-family: var(--mono); font-size: 11px; color: var(--gray-400); margin-bottom: 16px; letter-spacing: 0.05em; }
+  .taxonomy-root { font-size: 15px; font-weight: 700; color: var(--fg); margin-bottom: 12px; letter-spacing: -0.3px; }
+  .taxonomy-branch { padding-left: 20px; border-left: 2px solid var(--gray-200); margin-left: 8px; }
+  .taxonomy-mid { position: relative; padding: 10px 0 10px 20px; }
+  .taxonomy-mid::before { content: ''; position: absolute; left: -2px; top: 22px; width: 16px; height: 0; border-top: 2px solid var(--gray-200); }
+  .taxonomy-mid-name { font-size: 14px; font-weight: 500; color: var(--fg-muted); margin-bottom: 4px; }
+  .taxonomy-mid.accent .taxonomy-mid-name { color: var(--accent); }
+  .taxonomy-leaves { font-size: 13px; color: var(--gray-400); line-height: 1.7; padding-left: 2px; }
+  .taxonomy-leaves .more { font-style: italic; color: var(--gray-400); }
   /* BA Diagram */
   .ba-diagram { background: var(--bg-deep); border: 1px solid var(--gray-200); border-radius: 16px; padding: 36px; margin: 36px 0; position: relative; }
   .ba-diagram-title { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--fg); margin-bottom: 28px; letter-spacing: -0.3px; }
@@ -121,12 +139,12 @@
   .hub-note { font-size: 12px; color: var(--gray-500); margin-top: 20px; line-height: 1.7; padding: 12px 16px; border-left: 2px solid var(--fg); }
   /* Result */
   .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
-  .result-box { padding: 24px; border-radius: 12px; position: relative; overflow: hidden; transition: transform 0.3s ease; }
+  .result-box { border-radius: 12px; position: relative; overflow: hidden; transition: transform 0.3s ease; }
   .result-box:hover { transform: translateY(-2px); }
   .result-box::after { content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 2px; background: var(--fg); transition: all 0.4s ease; }
   .result-box:hover::after { width: 100%; left: 0; }
-  .result-box.quant { background: var(--bg-card); border: 1px solid var(--gray-200); }
-  .result-box.qual { background: var(--fg); color: #fff; }
+  .result-box.quant { background: var(--bg-card); border: 1px solid var(--gray-200); padding: 20px 24px; }
+  .result-box.qual { background: var(--fg); color: #fff; padding: 24px; }
   .result-box h4 { font-family: var(--mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; opacity: 0.5; }
   .result-box p, .result-box li { font-size: 13px; line-height: 1.8; }
   .result-box ul { list-style: none; padding: 0; }
@@ -137,20 +155,6 @@
   .result-box.qual strong { color: #fff; }
   .stat-big { font-family: var(--display); font-size: 44px; font-weight: 900; letter-spacing: -1px; margin-bottom: 4px; color: var(--fg); }
   .stat-label { font-size: 12px; color: var(--gray-400); }
-  /* Taxonomy */
-  .taxonomy-block { background: var(--bg); border: 1px solid var(--gray-200); border-radius: 12px; padding: 36px 40px; margin: 36px 0 0; }
-  .taxonomy-summary { font-family: var(--mono); font-size: 13px; letter-spacing: 0.04em; color: var(--gray-400); margin-bottom: 28px; padding-bottom: 16px; border-bottom: 1px solid var(--gray-200); }
-  .taxonomy-summary strong { color: var(--fg); font-weight: 700; }
-  .taxonomy-tree { margin-bottom: 28px; }
-  .taxonomy-root { font-size: 15px; font-weight: 700; color: var(--fg); margin-bottom: 12px; letter-spacing: -0.3px; }
-  .taxonomy-branch { padding-left: 20px; border-left: 2px solid var(--gray-200); margin-left: 8px; }
-  .taxonomy-mid { position: relative; padding: 10px 0 10px 20px; }
-  .taxonomy-mid::before { content: ''; position: absolute; left: -2px; top: 22px; width: 16px; height: 0; border-top: 2px solid var(--gray-200); }
-  .taxonomy-mid-name { font-size: 14px; font-weight: 500; color: var(--fg-muted); margin-bottom: 4px; }
-  .taxonomy-mid.accent .taxonomy-mid-name { color: var(--accent); }
-  .taxonomy-leaves { font-size: 13px; color: var(--gray-400); line-height: 1.7; padding-left: 2px; }
-  .taxonomy-leaves .more { font-style: italic; color: var(--gray-400); }
-  .taxonomy-others { font-family: var(--mono); font-size: 12px; color: var(--gray-400); letter-spacing: 0.03em; line-height: 1.8; padding-top: 20px; border-top: 1px solid var(--gray-200); }
   /* Case Nav */
   .case-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--gray-200); }
   .case-nav a { font-family: var(--mono); font-size: 12px; color: var(--gray-400); text-decoration: none; letter-spacing: 0.05em; transition: color 0.3s; display: flex; align-items: center; gap: 8px; }
@@ -159,7 +163,7 @@
   /* Footer */
   .site-footer { border-top: 1px solid var(--gray-200); padding: 48px 24px; margin-top: 60px; }
   .footer-inner { max-width: 900px; margin: 0 auto; display: flex; justify-content: center; align-items: center; }
-  .footer-contact-btn { font-family: var(--mono); font-size: 11px; color: var(--gray-400); text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; background: none; border: 1px solid var(--gray-200); padding: 8px 20px; border-radius: 6px; transition: all 0.3s; }
+  .footer-contact-btn { font-family: var(--mono); font-size: 11px; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; background: none; border: 1px solid var(--gray-200); padding: 8px 20px; border-radius: 6px; transition: all 0.3s; }
   .footer-contact-btn:hover { color: var(--fg); border-color: var(--gray-300); }
   .contact-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.3); z-index: 200; display: none; align-items: center; justify-content: center; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
   .contact-overlay.active { display: flex; }
@@ -171,7 +175,11 @@
   .contact-card-close:hover { color: #5c5a58; }
   @media (max-width: 768px) {
     .case-title { font-size: 24px; }
-    .summary-card-grid { grid-template-columns: 1fr; }
+    .summary-main { grid-template-columns: 1fr; }
+    .summary-impact { grid-template-columns: 1fr; }
+    .summary-meta { flex-direction: column; gap: 16px; }
+    .summary-card { padding: 32px 24px; }
+    .category-grid { grid-template-columns: 1fr 1fr; }
     .ba-grid { grid-template-columns: 1fr; gap: 16px; }
     .ba-arrow-col { transform: rotate(90deg); padding: 8px 0; }
     .hub-layout { grid-template-columns: 1fr; grid-template-rows: auto; }
@@ -182,7 +190,7 @@
     .nav-links { display: none; }
     .top-nav { padding: 0 16px; }
     .stat-big { font-size: 36px; }
-    .taxonomy-block { padding: 24px 20px; }
+    .artifact-block { padding: 24px 20px; }
     .taxonomy-branch { padding-left: 14px; margin-left: 4px; }
     .taxonomy-mid { padding-left: 14px; }
   }
@@ -191,9 +199,8 @@
 <body>
 <nav class="top-nav">
   <div class="nav-inner">
-    <a href="/cx-portfolio/" class="nav-logo">Portfolio</a>
+    <a href="/cx-portfolio/" class="nav-logo">Portfolio — Kim Moonju</a>
     <div class="nav-links">
-      <a href="/cx-portfolio/">Home</a>
       <a href="/cx-portfolio/cases/case01.html" class="active">Case 01</a>
       <a href="/cx-portfolio/cases/case02.html">Case 02</a>
       <a href="/cx-portfolio/cases/case03.html">Case 03</a>
@@ -205,35 +212,46 @@
     <div class="case-eyebrow">Case 01</div>
     <h1 class="case-title">제품 불량 기준 수립과 VOC-제품팀 공유 체계 구축</h1>
   </div>
+
+  <!-- Summary Card -->
   <div class="summary-card">
-    <div class="summary-card-grid">
-      <div>
+    <div class="summary-main">
+      <div class="summary-field">
         <div class="summary-field-label">Problem</div>
-        <div class="summary-field-value">제품 불량 VOC 50%인데 <strong>판단 기준도, 분류 체계도 없었다</strong></div>
+        <div class="summary-field-value">제품 불량 VOC가 전체의 50%인데, 판단 기준도 분류 체계도 없었다</div>
       </div>
-      <div>
+      <div class="summary-field">
         <div class="summary-field-label">Insight</div>
         <div class="summary-field-value">데이터가 흐르지 않는 이유는, <strong>수신자가 행동할 수 있는 언어가 아니었기 때문</strong></div>
       </div>
-      <div>
+      <div class="summary-field" style="grid-column: 1 / -1;">
         <div class="summary-field-label">Structure</div>
-        <div class="summary-field-value">7대분류·27중분류·98소분류 원인 기반 분류 체계 + 긴급/위클리 2-track 공유 체계</div>
+        <div class="summary-field-value">VOC 티켓 필드 전체 재설계 — 증상·원인 혼재 → 원인 기반 분류 전환(7·27·98), Defect 우선순위화, 제품팀 2-track 공유 파이프라인</div>
       </div>
-      <div>
-        <div class="summary-field-label">Impact</div>
-        <div class="summary-field-value"><strong>85%↓</strong> 펌프 불량 VOC (일 20건 → 2~3건)</div>
+    </div>
+    <div class="summary-impact">
+      <div class="impact-tile">
+        <div class="impact-num">85%↓</div>
+        <div class="impact-label">펌프 불량 VOC (일 20건 → 2~3건)</div>
       </div>
-      <div>
-        <div class="summary-field-label">Role</div>
-        <div class="summary-field-value">CX Manager — 불량 기준 선제 정리, 분류 체계 설계, 공유 파이프라인 구축</div>
+      <div class="impact-tile">
+        <div class="impact-num">0건</div>
+        <div class="impact-label">동일 불량 재발 (1월 3주차~)</div>
       </div>
-      <div>
-        <div class="summary-field-label">Stakeholders</div>
-        <div class="summary-field-value">QA팀 · MD팀 · 소싱팀 · 물류팀 · 글로벌 법인</div>
+    </div>
+    <div class="summary-meta">
+      <div class="meta-item">
+        <div class="meta-label">Role</div>
+        <div class="meta-value">CX Manager (2인 팀, 실무 담당) — 기준 제안 → 팀 검토·합의 → 운영 확정</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Stakeholders</div>
+        <div class="meta-value">제품팀 · QA팀 · 소싱팀 · 로지스틱스팀</div>
       </div>
     </div>
   </div>
 
+  <!-- 읽기 -->
   <div class="phase">
     <div class="phase-label">읽기</div>
     <p>제품 불량 문의는 전체 VOC의 50% 이상을 차지하고 있었습니다.<br>
@@ -257,6 +275,7 @@
     <strong>수신자가 행동할 수 있는 언어가 아니었기 때문</strong>이었습니다.</p>
   </div>
 
+  <!-- 실행 -->
   <div class="phase">
     <div class="phase-label">실행</div>
     <div class="exec-block">
@@ -299,6 +318,64 @@
         <li>긴급 건별: 이상 신호 감지 시 즉시 공유 (lot 번호·수치 포함)</li>
         <li>정기 이슈: 위클리 데이터로 반복 Defect 우선순위화</li>
       </ul>
+    </div>
+  </div>
+
+  <!-- Artifact: 7-category grid -->
+  <div class="artifact-block">
+    <div class="artifact-title">VOC 분류 체계 — 7대분류 · 27중분류 · 98소분류</div>
+    <div class="artifact-sub">전체 VOC의 50% 이상을 차지하는 제품 문의에 MECE 원인 기반 분류 적용</div>
+    <div class="category-grid">
+      <div class="category-card accent">
+        <div class="cat-name">PRODUCT</div>
+        <div class="cat-count">제품 정보·불량·추천</div>
+      </div>
+      <div class="category-card">
+        <div class="cat-name">ORDER</div>
+        <div class="cat-count">주문·결제</div>
+      </div>
+      <div class="category-card">
+        <div class="cat-name">SHIPPING</div>
+        <div class="cat-count">배송·수거</div>
+      </div>
+      <div class="category-card">
+        <div class="cat-name">EXCHANGE</div>
+        <div class="cat-count">교환·반품</div>
+      </div>
+      <div class="category-card">
+        <div class="cat-name">PROMOTION</div>
+        <div class="cat-count">프로모션·혜택</div>
+      </div>
+      <div class="category-card">
+        <div class="cat-name">MEMBERSHIP</div>
+        <div class="cat-count">계정·멤버십</div>
+      </div>
+      <div class="category-card">
+        <div class="cat-name">OTHER</div>
+        <div class="cat-count">기타 문의</div>
+      </div>
+    </div>
+    <div class="tree-example">
+      <div class="tree-example-title">예시: PRODUCT 하위 구조</div>
+      <div class="taxonomy-root">PRODUCT</div>
+      <div class="taxonomy-branch">
+        <div class="taxonomy-mid">
+          <div class="taxonomy-mid-name">제품 정보</div>
+          <div class="taxonomy-leaves">성분/사양 문의, 사용 방법 문의, 사이즈/옵션 문의</div>
+        </div>
+        <div class="taxonomy-mid">
+          <div class="taxonomy-mid-name">판매 정보</div>
+          <div class="taxonomy-leaves">재입고 문의, 단종 여부 문의, 판매 채널 문의</div>
+        </div>
+        <div class="taxonomy-mid">
+          <div class="taxonomy-mid-name">추천 문의</div>
+          <div class="taxonomy-leaves">선물 추천, 향 추천, 제형 추천</div>
+        </div>
+        <div class="taxonomy-mid accent">
+          <div class="taxonomy-mid-name">제품 이상/불량</div>
+          <div class="taxonomy-leaves">펌프 토출 불량, 용기 깨짐/파손, 내용물 이물, 향 이상/향 없음 <span class="more">… 외 23개 유형</span></div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -347,6 +424,7 @@
     </div>
   </div>
 
+  <!-- 결과 -->
   <div class="phase">
     <div class="phase-label">결과</div>
     <div class="result-grid">
@@ -369,34 +447,9 @@
         <p style="margin-top:12px; opacity: 0.5;">개인의 발견 → 팀 프로젝트 → 조직의 구조로 전환된 과정입니다.</p>
       </div>
     </div>
-    <!-- Taxonomy -->
-    <div class="taxonomy-block">
-      <div class="taxonomy-summary">설계 결과: <strong>7</strong>개 대분류 · <strong>27</strong>개 중분류 · <strong>98</strong>개 소분류</div>
-      <div class="taxonomy-tree">
-        <div class="taxonomy-root">PRODUCT</div>
-        <div class="taxonomy-branch">
-          <div class="taxonomy-mid">
-            <div class="taxonomy-mid-name">제품 정보</div>
-            <div class="taxonomy-leaves">성분/사양 문의, 사용 방법 문의, 사이즈/옵션 문의</div>
-          </div>
-          <div class="taxonomy-mid">
-            <div class="taxonomy-mid-name">판매 정보</div>
-            <div class="taxonomy-leaves">재입고 문의, 단종 여부 문의, 판매 채널 문의</div>
-          </div>
-          <div class="taxonomy-mid">
-            <div class="taxonomy-mid-name">추천 문의</div>
-            <div class="taxonomy-leaves">선물 추천, 향 추천, 제형 추천</div>
-          </div>
-          <div class="taxonomy-mid accent">
-            <div class="taxonomy-mid-name">제품 이상/불량</div>
-            <div class="taxonomy-leaves">펌프 토출 불량, 용기 깨짐/파손, 내용물 이물, 향 이상/향 없음 <span class="more">… 외 23개 유형</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="taxonomy-others">ORDER &amp; PAYMENT · SHIPPING &amp; DELIVERY · EXCHANGE &amp; RETURN · PROMOTION &amp; BENEFIT · MEMBERSHIP &amp; ACCOUNT · OTHER</div>
-    </div>
   </div>
 
+  <!-- 확장 -->
   <div class="phase">
     <div class="phase-label">확장 — 이 구조가 실전에서 작동한 순간</div>
     <p>재정의된 분류 체계 위에서 VOC 이상 신호를 조기 포착하고,<br>

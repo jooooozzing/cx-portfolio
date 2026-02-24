@@ -8,539 +8,97 @@
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..48,100..700,0..1&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f5f3f0;
-    --bg-deep: #faf9f7;
-    --bg-card: #edecea;
-    --bg-card-light: #e4e2df;
-    --fg: #1a1a1a;
-    --fg-muted: #2a2a2a;
-    --gray-100: #f0eeec;
-    --gray-200: #dddbd8;
-    --gray-300: #b8b5b2;
-    --gray-400: #8a8785;
-    --gray-500: #5c5a58;
-    --accent: #c43e39;
-    --accent-dim: rgba(196, 62, 57, 0.05);
-    --accent-border: rgba(196, 62, 57, 0.12);
-    --red: #c43e39;
-    --mono: 'JetBrains Mono', monospace;
-    --sans: 'Noto Sans KR', sans-serif;
-    --display: 'Inter', sans-serif;
+    --bg: #f5f3f0; --bg-deep: #faf9f7; --bg-card: #edecea; --bg-card-light: #e4e2df;
+    --fg: #1a1a1a; --fg-muted: #2a2a2a;
+    --gray-100: #f0eeec; --gray-200: #dddbd8; --gray-300: #b8b5b2; --gray-400: #8a8785; --gray-500: #5c5a58;
+    --accent: #c43e39; --accent-dim: rgba(196, 62, 57, 0.05); --accent-border: rgba(196, 62, 57, 0.12); --red: #c43e39;
+    --mono: 'JetBrains Mono', monospace; --sans: 'Noto Sans KR', sans-serif; --display: 'Inter', sans-serif;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: var(--sans);
-    background: var(--bg-deep);
-    color: var(--fg-muted);
-    line-height: 1.8;
-    font-size: 15px;
-    -webkit-font-smoothing: antialiased;
-  }
-  body::after {
-    content: '';
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 50;
-    opacity: 0.02;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  }
+  body { font-family: var(--sans); background: var(--bg-deep); color: var(--fg-muted); line-height: 1.8; font-size: 15px; -webkit-font-smoothing: antialiased; }
+  body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; opacity: 0.02; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); }
   ::-webkit-scrollbar { width: 8px; }
   ::-webkit-scrollbar-track { background: var(--bg-deep); }
   ::-webkit-scrollbar-thumb { background: var(--gray-200); border-radius: 4px; }
   ::-webkit-scrollbar-thumb:hover { background: var(--gray-400); }
   ::selection { background: rgba(196,62,57,0.12); color: var(--fg); }
-
-  /* ── Navigation ── */
-  .top-nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    background: rgba(250, 249, 247, 0.88);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--gray-200);
-    padding: 0 24px;
-  }
-  .nav-inner {
-    max-width: 1000px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 60px;
-  }
-  .nav-logo {
-    font-family: var(--mono);
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--fg);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    text-decoration: none;
-  }
-  .nav-links {
-    display: flex;
-    gap: 36px;
-  }
-  .nav-links a {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--gray-400);
-    text-decoration: none;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    transition: color 0.3s;
-  }
+  /* Nav */
+  .top-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(250,249,247,0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--gray-200); padding: 0 24px; }
+  .nav-inner { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .nav-logo { font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--fg); letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; }
+  .nav-links { display: flex; gap: 36px; }
+  .nav-links a { font-family: var(--mono); font-size: 11px; color: var(--gray-400); text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.3s; }
   .nav-links a:hover { color: var(--fg); }
   .nav-links a.active { color: var(--fg); font-weight: 500; }
-
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 100px 24px 120px;
-  }
-
-  /* ── Header ── */
-  .portfolio-header {
-    margin-bottom: 100px;
-    padding-top: 48px;
-  }
-  .header-eyebrow {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--gray-400);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    margin-bottom: 24px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .header-eyebrow::before {
-    content: '';
-    width: 40px;
-    height: 1px;
-    background: var(--gray-300);
-  }
-  .portfolio-header h1 {
-    font-family: var(--sans);
-    font-size: 72px;
-    font-weight: 900;
-    color: var(--fg);
-    letter-spacing: -2px;
-    margin-bottom: 20px;
-    line-height: 1.05;
-  }
-  .portfolio-header .subtitle {
-    font-size: 16px;
-    color: var(--gray-400);
-    margin-bottom: 56px;
-    font-weight: 300;
-    letter-spacing: 0.05em;
-  }
-
-  /* ── Proof Chips ── */
-  .proof-chips {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 80px;
-    flex-wrap: wrap;
-  }
-  .proof-chip {
-    background: var(--bg);
-    border: 1px solid var(--gray-200);
-    border-radius: 10px;
-    padding: 16px 20px;
-    min-width: 140px;
-    transition: all 0.3s;
-  }
-  .proof-chip:hover {
-    border-color: var(--gray-300);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-  }
-  .proof-chip .chip-value {
-    font-family: var(--display);
-    font-size: 24px;
-    font-weight: 900;
-    color: var(--fg);
-    letter-spacing: -0.5px;
-    margin-bottom: 2px;
-  }
-  .proof-chip .chip-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--gray-400);
-    letter-spacing: 0.05em;
-  }
-
-  /* ── Framework Intro ── */
-  .framework-title {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--fg);
-    margin-bottom: 24px;
-    letter-spacing: -0.3px;
-  }
-  .framework-intro {
-    color: var(--gray-500);
-    margin-bottom: 32px;
-    font-size: 15px;
-    line-height: 1.85;
-  }
-  .framework-intro strong {
-    color: var(--fg);
-    font-weight: 500;
-  }
-
-  /* ── Layer Diagram ── */
-  .layer-diagram {
-    background: var(--bg-deep);
-    border: 1px solid var(--gray-200);
-    border-radius: 16px;
-    padding: 44px 36px;
-    margin-bottom: 100px;
-    position: relative;
-    overflow: hidden;
-  }
-  .layer-diagram::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--gray-300), transparent);
-  }
-  .layer-diagram-title {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--fg);
-    margin-bottom: 8px;
-    letter-spacing: -0.3px;
-  }
-  .layer-diagram-sub {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--gray-400);
-    margin-bottom: 32px;
-  }
-  .layer-stack {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-  .layer-item {
-    display: grid;
-    grid-template-columns: 80px 1fr 1fr;
-    gap: 16px;
-    padding: 16px 20px;
-    background: var(--bg);
-    border-radius: 8px;
-    align-items: center;
-    border: 1px solid transparent;
-    transition: all 0.3s;
-  }
-  .layer-item:hover {
-    border-color: var(--gray-200);
-    background: var(--bg-card);
-  }
-  .layer-item.active {
-    background: var(--fg);
-    color: #fff;
-    border-color: var(--fg);
-  }
-  .layer-item.active .layer-label,
-  .layer-item.active .layer-name,
-  .layer-item.active .layer-desc { color: #fff; }
-  .layer-label {
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--gray-400);
-  }
-  .layer-name {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--fg);
-  }
-  .layer-desc {
-    font-size: 12px;
-    color: var(--gray-400);
-  }
+  .container { max-width: 900px; margin: 0 auto; padding: 100px 24px 120px; }
+  /* Hero */
+  .portfolio-header { margin-bottom: 64px; padding-top: 48px; }
+  .header-eyebrow { font-family: var(--mono); font-size: 11px; color: var(--gray-400); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+  .header-eyebrow::before { content: ''; width: 40px; height: 1px; background: var(--gray-300); }
+  .portfolio-header h1 { font-family: var(--sans); font-size: 72px; font-weight: 900; color: var(--fg); letter-spacing: -2px; margin-bottom: 20px; line-height: 1.05; }
+  .portfolio-header .subtitle { font-size: 18px; color: var(--gray-500); font-weight: 400; }
+  /* Case Cards */
+  .case-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 100px; }
+  .case-card { background: var(--bg-card); border-radius: 12px; padding: 32px; display: flex; flex-direction: column; transition: all 0.3s; cursor: pointer; text-decoration: none; color: inherit; }
+  .case-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+  .case-card-eyebrow { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--gray-400); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+  .case-card-title { font-family: var(--sans); font-size: 16px; font-weight: 900; color: var(--fg); line-height: 1.5; margin-bottom: 20px; letter-spacing: -0.3px; }
+  .case-card-field { margin-bottom: 12px; }
+  .case-card-field-label { font-family: var(--mono); font-size: 10px; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 2px; }
+  .case-card-field-value { font-size: 13px; color: var(--gray-500); line-height: 1.7; }
+  .case-card-impact { font-family: var(--display); font-size: 28px; font-weight: 900; color: var(--fg); letter-spacing: -0.5px; margin: 4px 0 20px; }
+  .case-card-link { margin-top: auto; font-family: var(--mono); font-size: 12px; color: var(--fg); text-decoration: none; font-weight: 500; letter-spacing: 0.05em; transition: color 0.3s; display: inline-flex; align-items: center; gap: 6px; }
+  .case-card-link:hover { color: var(--accent); }
+  .case-card-link::after { content: '→'; transition: transform 0.3s; }
+  .case-card-link:hover::after { transform: translateX(4px); }
+  /* Framework */
+  .framework-intro { color: var(--gray-500); margin-bottom: 32px; font-size: 15px; line-height: 1.85; }
+  .framework-intro strong { color: var(--fg); font-weight: 500; }
+  /* Layer Diagram */
+  .layer-diagram { background: var(--bg-deep); border: 1px solid var(--gray-200); border-radius: 16px; padding: 44px 36px; margin-bottom: 100px; position: relative; overflow: hidden; }
+  .layer-diagram::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gray-300), transparent); }
+  .layer-diagram-title { font-size: 16px; font-weight: 700; color: var(--fg); margin-bottom: 8px; letter-spacing: -0.3px; }
+  .layer-diagram-sub { font-family: var(--mono); font-size: 12px; color: var(--gray-400); margin-bottom: 32px; }
+  .layer-stack { display: flex; flex-direction: column; gap: 2px; }
+  .layer-item { display: grid; grid-template-columns: 80px 1fr 1fr; gap: 16px; padding: 16px 20px; background: var(--bg); border-radius: 8px; align-items: center; border: 1px solid transparent; transition: all 0.3s; }
+  .layer-item:hover { border-color: var(--gray-200); background: var(--bg-card); }
+  .layer-item.active { background: var(--fg); color: #fff; border-color: var(--fg); }
+  .layer-item.active .layer-label, .layer-item.active .layer-name, .layer-item.active .layer-desc { color: #fff; }
+  .layer-label { font-family: var(--mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gray-400); }
+  .layer-name { font-size: 14px; font-weight: 700; color: var(--fg); }
+  .layer-desc { font-size: 12px; color: var(--gray-400); }
   .layer-item.active .layer-desc { opacity: 0.7; }
-  .layer-arrow {
-    text-align: center;
-    color: var(--gray-300);
-    font-size: 18px;
-    padding: 4px 0;
-  }
-  .layer-note {
-    font-size: 12px;
-    color: var(--gray-400);
-    text-align: right;
-    margin-top: 4px;
-  }
-  .layer-note.portfolio-start {
-    color: var(--fg);
-    font-weight: 500;
-  }
-  .layer4-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2px;
-  }
-  .layer4-item {
-    display: grid;
-    grid-template-columns: 80px 1fr;
-    gap: 16px;
-    padding: 16px 20px;
-    background: var(--bg);
-    border-radius: 8px;
-    align-items: center;
-    border: 1px solid transparent;
-    transition: all 0.3s;
-  }
-  .layer4-item:hover {
-    background: var(--bg-card);
-    border-color: var(--gray-300);
-  }
+  .layer-arrow { text-align: center; color: var(--gray-300); font-size: 18px; padding: 4px 0; }
+  .layer-note { font-size: 12px; color: var(--gray-400); text-align: right; margin-top: 4px; }
+  .layer-note.portfolio-start { color: var(--fg); font-weight: 500; }
+  .layer4-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .layer4-item { display: grid; grid-template-columns: 80px 1fr; gap: 16px; padding: 16px 20px; background: var(--bg); border-radius: 8px; align-items: center; border: 1px solid transparent; transition: all 0.3s; }
+  .layer4-item:hover { background: var(--bg-card); border-color: var(--gray-300); }
   .layer4-item .layer-name { color: var(--fg); }
-  .cases-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 8px;
-    margin-top: 20px;
-  }
-  .case-tag {
-    font-family: var(--mono);
-    font-size: 11px;
-    text-align: center;
-    padding: 12px 8px;
-    background: var(--bg);
-    border: 1px solid var(--accent-border);
-    border-radius: 8px;
-    line-height: 1.5;
-    color: var(--gray-500);
-    transition: all 0.3s;
-    cursor: pointer;
-    text-decoration: none;
-    display: block;
-  }
-  .case-tag:hover {
-    border-color: var(--gray-300);
-    background: var(--bg-card);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-  }
-  .case-tag strong {
-    display: block;
-    font-weight: 700;
-    color: var(--fg);
-    margin-bottom: 2px;
-  }
-
-  /* ── Case Cards ── */
-  .case-cards {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 20px;
-  }
-  .case-card {
-    background: var(--bg);
-    border: 1px solid var(--gray-200);
-    border-radius: 14px;
-    padding: 28px 24px;
-    display: flex;
-    flex-direction: column;
-    transition: all 0.3s;
-  }
-  .case-card:hover {
-    border-color: var(--gray-300);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-  }
-  .case-card-eyebrow {
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-  .case-card-title {
-    font-size: 16px;
-    font-weight: 900;
-    color: var(--fg);
-    line-height: 1.5;
-    margin-bottom: 20px;
-    letter-spacing: -0.3px;
-  }
-  .case-card-field {
-    margin-bottom: 14px;
-  }
-  .case-card-field-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--gray-400);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 4px;
-  }
-  .case-card-field-value {
-    font-size: 13px;
-    color: var(--gray-500);
-    line-height: 1.7;
-  }
-  .case-card-impact {
-    font-family: var(--display);
-    font-size: 18px;
-    font-weight: 900;
-    color: var(--fg);
-    letter-spacing: -0.5px;
-    margin: 4px 0 16px;
-  }
-  .case-card-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 20px;
-  }
-  .case-card-tag {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--gray-400);
-    background: var(--bg-card);
-    padding: 4px 10px;
-    border-radius: 4px;
-    letter-spacing: 0.02em;
-  }
-  .case-card-link {
-    margin-top: auto;
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--fg);
-    text-decoration: none;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    transition: color 0.3s;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .case-card-link:hover {
-    color: var(--accent);
-  }
-  .case-card-link::after {
-    content: '→';
-    transition: transform 0.3s;
-  }
-  .case-card-link:hover::after {
-    transform: translateX(4px);
-  }
-
-  /* ── Footer ── */
-  .site-footer {
-    border-top: 1px solid var(--gray-200);
-    padding: 48px 24px;
-    margin-top: 60px;
-  }
-  .footer-inner {
-    max-width: 900px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .footer-contact-btn {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--gray-400);
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    cursor: pointer;
-    background: none;
-    border: 1px solid var(--gray-200);
-    padding: 8px 20px;
-    border-radius: 6px;
-    transition: all 0.3s;
-  }
-  .footer-contact-btn:hover {
-    color: var(--fg);
-    border-color: var(--gray-300);
-  }
-
-  /* ── Contact Popup ── */
-  .contact-overlay {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0, 0, 0, 0.3);
-    z-index: 200;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-  }
+  .cases-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 20px; }
+  .case-tag { font-family: var(--mono); font-size: 11px; text-align: center; padding: 12px 8px; background: var(--bg); border: 1px solid var(--accent-border); border-radius: 8px; line-height: 1.5; color: var(--gray-500); transition: all 0.3s; cursor: pointer; text-decoration: none; display: block; }
+  .case-tag:hover { border-color: var(--gray-300); background: var(--bg-card); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+  .case-tag strong { display: block; font-weight: 700; color: var(--fg); margin-bottom: 2px; }
+  /* Footer */
+  .site-footer { border-top: 1px solid var(--gray-200); padding: 48px 24px; margin-top: 60px; }
+  .footer-inner { max-width: 900px; margin: 0 auto; display: flex; justify-content: center; align-items: center; }
+  .footer-contact-btn { font-family: var(--mono); font-size: 11px; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; background: none; border: 1px solid var(--gray-200); padding: 8px 20px; border-radius: 6px; transition: all 0.3s; }
+  .footer-contact-btn:hover { color: var(--fg); border-color: var(--gray-300); }
+  .contact-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.3); z-index: 200; display: none; align-items: center; justify-content: center; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
   .contact-overlay.active { display: flex; }
-  .contact-card {
-    background: #fff;
-    border-radius: 14px;
-    padding: 36px 40px;
-    min-width: 320px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.04);
-    position: relative;
-    text-align: center;
-  }
-  .contact-card-name {
-    font-family: var(--sans);
-    font-size: 20px;
-    font-weight: 700;
-    color: #1a1a1a;
-    margin-bottom: 20px;
-    letter-spacing: -0.3px;
-  }
-  .contact-card-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 12px;
-    font-size: 14px;
-    color: #5c5a58;
-  }
-  .contact-card-item span.material-symbols-outlined {
-    font-size: 18px;
-    color: #8a8785;
-  }
-  .contact-card-close {
-    position: absolute;
-    top: 14px; right: 16px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-    color: #b8b5b2;
-    transition: color 0.2s;
-    line-height: 1;
-  }
+  .contact-card { background: #fff; border-radius: 14px; padding: 36px 40px; min-width: 320px; box-shadow: 0 20px 60px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.04); position: relative; text-align: center; }
+  .contact-card-name { font-family: var(--sans); font-size: 20px; font-weight: 700; color: #1a1a1a; margin-bottom: 20px; letter-spacing: -0.3px; }
+  .contact-card-item { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 12px; font-size: 14px; color: #5c5a58; }
+  .contact-card-item span.material-symbols-outlined { font-size: 18px; color: #8a8785; }
+  .contact-card-close { position: absolute; top: 14px; right: 16px; background: none; border: none; cursor: pointer; font-size: 18px; color: #b8b5b2; transition: color 0.2s; line-height: 1; }
   .contact-card-close:hover { color: #5c5a58; }
-
-  /* ── Responsive ── */
   @media (max-width: 768px) {
     .portfolio-header h1 { font-size: 40px; letter-spacing: -1px; }
-    .proof-chips { gap: 10px; }
-    .proof-chip { min-width: 0; flex: 1; padding: 12px 14px; }
-    .proof-chip .chip-value { font-size: 18px; }
+    .case-cards { grid-template-columns: 1fr; }
     .layer-item { grid-template-columns: 60px 1fr; }
     .layer-desc { display: none; }
     .layer4-row { grid-template-columns: 1fr; }
     .cases-row { grid-template-columns: 1fr; }
-    .case-cards { grid-template-columns: 1fr; }
     .nav-links { display: none; }
     .top-nav { padding: 0 16px; }
     .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
@@ -549,57 +107,87 @@
 </style>
 </head>
 <body>
-<!-- ── Navigation ── -->
 <nav class="top-nav">
   <div class="nav-inner">
-    <a href="/cx-portfolio/" class="nav-logo">Portfolio</a>
+    <a href="/cx-portfolio/" class="nav-logo">Portfolio — Kim Moonju</a>
     <div class="nav-links">
-      <a href="/cx-portfolio/" class="active">Home</a>
       <a href="/cx-portfolio/cases/case01.html">Case 01</a>
       <a href="/cx-portfolio/cases/case02.html">Case 02</a>
       <a href="/cx-portfolio/cases/case03.html">Case 03</a>
     </div>
   </div>
 </nav>
-
 <div class="container">
-  <!-- ════════════ HEADER ════════════ -->
+  <!-- ════════════ HERO ════════════ -->
   <header class="portfolio-header">
     <div class="header-eyebrow">CX Manager</div>
     <h1>김문주</h1>
     <div class="subtitle">보이지 않는 것에 진짜가 있다</div>
   </header>
 
-  <!-- ════════════ PROOF CHIPS ════════════ -->
-  <div class="proof-chips">
-    <div class="proof-chip">
-      <div class="chip-value">85%↓</div>
-      <div class="chip-label">VOC 펌프 불량</div>
-    </div>
-    <div class="proof-chip">
-      <div class="chip-value">9.2d → 2.3d</div>
-      <div class="chip-label">교환 리드타임</div>
-    </div>
-    <div class="proof-chip">
-      <div class="chip-value">Loss 0%</div>
-      <div class="chip-label">선출고</div>
-    </div>
-    <div class="proof-chip">
-      <div class="chip-value">8t · 242m</div>
-      <div class="chip-label">향 데이터셋</div>
-    </div>
+  <!-- ════════════ CASE CARDS ════════════ -->
+  <div class="case-cards">
+    <a href="/cx-portfolio/cases/case01.html" class="case-card">
+      <div class="case-card-eyebrow">Case 01</div>
+      <div class="case-card-title">제품 불량 기준 수립과 VOC-제품팀 공유 체계 구축</div>
+      <div class="case-card-field">
+        <div class="case-card-field-label">Problem</div>
+        <div class="case-card-field-value">제품 불량 VOC 50%인데 판단 기준도, 분류 체계도 없었다</div>
+      </div>
+      <div class="case-card-field">
+        <div class="case-card-field-label">Solution</div>
+        <div class="case-card-field-value">VOC 티켓 필드 전체 재설계 — 원인 기반 분류 체계(7·27·98) + 제품팀 공유 파이프라인</div>
+      </div>
+      <div class="case-card-field">
+        <div class="case-card-field-label">Impact</div>
+        <div class="case-card-impact">85%↓ 펌프 불량 VOC</div>
+      </div>
+      <span class="case-card-link">Read Case</span>
+    </a>
+    <a href="/cx-portfolio/cases/case02.html" class="case-card">
+      <div class="case-card-eyebrow">Case 02</div>
+      <div class="case-card-title">교환 선출고(Pre-dispatch) 프로세스 설계</div>
+      <div class="case-card-field">
+        <div class="case-card-field-label">Problem</div>
+        <div class="case-card-field-value">교환 리드타임 9.2일, 상담사가 "언제요?"에 답할 수 없는 구조</div>
+      </div>
+      <div class="case-card-field">
+        <div class="case-card-field-label">Solution</div>
+        <div class="case-card-field-value">반품 전 선출고로 순서 전환, 기다림 자체를 제거</div>
+      </div>
+      <div class="case-card-field">
+        <div class="case-card-field-label">Impact</div>
+        <div class="case-card-impact">2.3일 (75%↓), Loss 0%</div>
+      </div>
+      <span class="case-card-link">Read Case</span>
+    </a>
+    <a href="/cx-portfolio/cases/case03.html" class="case-card">
+      <div class="case-card-eyebrow">Case 03</div>
+      <div class="case-card-title">AI 향 추천 서비스 기획 — 고객 언어 기반 데이터셋 설계</div>
+      <div class="case-card-field">
+        <div class="case-card-field-label">Problem</div>
+        <div class="case-card-field-value">"비슷한 향 없나요?" — 추천할 구조도, 연결할 데이터도 없었다</div>
+      </div>
+      <div class="case-card-field">
+        <div class="case-card-field-label">Solution</div>
+        <div class="case-card-field-value">8개 테이블 관계형 데이터셋 + 대화 시나리오 설계 + 가드레일</div>
+      </div>
+      <div class="case-card-field">
+        <div class="case-card-field-label">Impact</div>
+        <div class="case-card-impact">8 tables 242 mappings 422 survey</div>
+      </div>
+      <span class="case-card-link">Read Case</span>
+    </a>
   </div>
 
-  <!-- ════════════ FRAMEWORK ════════════ -->
-  <div class="framework-title">프레임워크: 보이지 않는 것에 진짜가 있다</div>
+  <!-- ════════════ FRAMEWORK INTRO ════════════ -->
   <div class="framework-intro">
     CX에서 대부분의 업무는 <strong>Layer 1</strong>에서 끝납니다.<br>
     고객이 말한 것을 분류하고, 처리하고, 종결합니다.<br><br>
-    이 포트폴리오는 <strong>Layer 2</strong>에서 시작합니다.<br>
+    위 세 개의 케이스는 <strong>Layer 2</strong>에서 시작합니다.<br>
     고객이 말한 것 뒤에 말하지 않은 것이 있고,<br>
     그것을 읽어낸 뒤 조직이 같은 이해로 같은 리액션을 할 수 있는 구조로 전환하고,<br>
-    정량과 정성 모두로 검증하는 과정을<br>
-    세 개의 케이스로 보여줍니다.
+    정량과 정성 모두로 검증하는 과정을 보여줍니다.
   </div>
 
   <!-- ════════════ LAYER DIAGRAM ════════════ -->
@@ -644,100 +232,19 @@
       <a href="/cx-portfolio/cases/case03.html" class="case-tag"><strong>Case 3</strong>AI 향 추천 서비스</a>
     </div>
   </div>
-
-  <!-- ════════════ CASE CARDS ════════════ -->
-  <div class="case-cards">
-    <!-- Card 01 -->
-    <div class="case-card">
-      <div class="case-card-eyebrow">Case 01</div>
-      <div class="case-card-title">제품 불량 기준 수립과 VOC-제품팀 공유 체계 구축</div>
-      <div class="case-card-field">
-        <div class="case-card-field-label">Problem</div>
-        <div class="case-card-field-value">제품 불량 VOC 50%인데 판단 기준도, 분류 체계도 없었다</div>
-      </div>
-      <div class="case-card-field">
-        <div class="case-card-field-label">Solution</div>
-        <div class="case-card-field-value">7대분류·27중분류·98소분류 원인 기반 분류 체계 설계 + 제품팀 공유 파이프라인</div>
-      </div>
-      <div class="case-card-field">
-        <div class="case-card-field-label">Impact</div>
-        <div class="case-card-impact">85%↓ 펌프 불량 VOC</div>
-      </div>
-      <div class="case-card-tags">
-        <span class="case-card-tag">taxonomy</span>
-        <span class="case-card-tag">defect</span>
-        <span class="case-card-tag">cross-team</span>
-      </div>
-      <a href="/cx-portfolio/cases/case01.html" class="case-card-link">Read Case</a>
-    </div>
-    <!-- Card 02 -->
-    <div class="case-card">
-      <div class="case-card-eyebrow">Case 02</div>
-      <div class="case-card-title">교환 선출고(Pre-dispatch) 프로세스 설계</div>
-      <div class="case-card-field">
-        <div class="case-card-field-label">Problem</div>
-        <div class="case-card-field-value">교환 리드타임 9.2일, 상담사가 '언제요?'에 답할 수 없는 구조</div>
-      </div>
-      <div class="case-card-field">
-        <div class="case-card-field-label">Solution</div>
-        <div class="case-card-field-value">반품 전 선출고로 순서 전환, 기다림 자체를 제거</div>
-      </div>
-      <div class="case-card-field">
-        <div class="case-card-field-label">Impact</div>
-        <div class="case-card-impact">2.3일 (75%↓), Loss 0%</div>
-      </div>
-      <div class="case-card-tags">
-        <span class="case-card-tag">process</span>
-        <span class="case-card-tag">logistics</span>
-        <span class="case-card-tag">pilot</span>
-      </div>
-      <a href="/cx-portfolio/cases/case02.html" class="case-card-link">Read Case</a>
-    </div>
-    <!-- Card 03 -->
-    <div class="case-card">
-      <div class="case-card-eyebrow">Case 03</div>
-      <div class="case-card-title">AI 향 추천 서비스 기획 — 고객 언어 기반 데이터셋 설계</div>
-      <div class="case-card-field">
-        <div class="case-card-field-label">Problem</div>
-        <div class="case-card-field-value">'비슷한 향 없나요?' — 추천할 구조도, 연결할 데이터도 없었다</div>
-      </div>
-      <div class="case-card-field">
-        <div class="case-card-field-label">Solution</div>
-        <div class="case-card-field-value">8개 테이블 관계형 데이터셋 + AI 발화 설계 + 가드레일</div>
-      </div>
-      <div class="case-card-field">
-        <div class="case-card-field-label">Impact</div>
-        <div class="case-card-impact">8 tables · 242 mappings · 422 survey</div>
-      </div>
-      <div class="case-card-tags">
-        <span class="case-card-tag">dataset</span>
-        <span class="case-card-tag">AI</span>
-        <span class="case-card-tag">CX→Product</span>
-      </div>
-      <a href="/cx-portfolio/cases/case03.html" class="case-card-link">Read Case</a>
-    </div>
-  </div>
 </div>
 
-<!-- ── Footer ── -->
 <footer class="site-footer">
   <div class="footer-inner">
     <button class="footer-contact-btn" onclick="document.getElementById('contactOverlay').classList.add('active')">Contact</button>
   </div>
 </footer>
-<!-- ── Contact Popup ── -->
 <div class="contact-overlay" id="contactOverlay" onclick="if(event.target===this)this.classList.remove('active')">
   <div class="contact-card">
     <button class="contact-card-close" onclick="document.getElementById('contactOverlay').classList.remove('active')">✕</button>
     <div class="contact-card-name">김문주</div>
-    <div class="contact-card-item">
-      <span class="material-symbols-outlined">call</span>
-      +82 10 9961 1899
-    </div>
-    <div class="contact-card-item">
-      <span class="material-symbols-outlined">mail</span>
-      moonjukim2023@gmail.com
-    </div>
+    <div class="contact-card-item"><span class="material-symbols-outlined">call</span>+82 10 9961 1899</div>
+    <div class="contact-card-item"><span class="material-symbols-outlined">mail</span>moonjukim2023@gmail.com</div>
   </div>
 </div>
 </body>

@@ -22,7 +22,7 @@
   ::-webkit-scrollbar-thumb { background: var(--gray-200); border-radius: 4px; }
   ::-webkit-scrollbar-thumb:hover { background: var(--gray-400); }
   ::selection { background: rgba(196,62,57,0.12); color: var(--fg); }
-  .top-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(250, 249, 247, 0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--gray-200); padding: 0 24px; }
+  .top-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(250,249,247,0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--gray-200); padding: 0 24px; }
   .nav-inner { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
   .nav-logo { font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--fg); letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; }
   .nav-links { display: flex; gap: 36px; }
@@ -30,15 +30,25 @@
   .nav-links a:hover { color: var(--fg); }
   .nav-links a.active { color: var(--fg); font-weight: 500; }
   .container { max-width: 900px; margin: 0 auto; padding: 100px 24px 120px; }
-  .summary-card { background: var(--bg); border: 1px solid var(--gray-200); border-radius: 14px; padding: 32px 36px; margin-bottom: 60px; }
-  .summary-card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .summary-field-label { font-family: var(--mono); font-size: 10px; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
-  .summary-field-value { font-size: 14px; color: var(--fg-muted); line-height: 1.7; }
-  .summary-field-value strong { color: var(--fg); }
+  /* Case Header */
   .case-header { margin-bottom: 60px; padding-top: 24px; }
   .case-eyebrow { font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
   .case-eyebrow::before { content: ''; width: 40px; height: 1px; background: var(--accent); }
   .case-title { font-family: var(--sans); font-size: 32px; font-weight: 900; color: var(--fg); letter-spacing: -0.5px; line-height: 1.4; }
+  /* Summary Card */
+  .summary-card { background: var(--bg-card); border-radius: 16px; padding: 48px; margin-bottom: 64px; }
+  .summary-main { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-bottom: 32px; }
+  .summary-field-label { font-family: var(--mono); font-size: 11px; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+  .summary-field-value { font-size: 15px; color: var(--fg); line-height: 1.7; }
+  .summary-field-value strong { color: var(--fg); font-weight: 700; }
+  .summary-impact { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 32px; }
+  .impact-tile { background: var(--bg-deep); border-radius: 10px; padding: 20px 24px; }
+  .impact-num { font-family: var(--display); font-size: 28px; font-weight: 900; color: var(--fg); letter-spacing: -0.5px; }
+  .impact-label { font-size: 12px; color: var(--gray-400); margin-top: 2px; }
+  .summary-meta { display: flex; gap: 40px; padding-top: 24px; border-top: 1px solid var(--gray-200); }
+  .meta-label { font-family: var(--mono); font-size: 10px; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+  .meta-value { font-size: 13px; color: var(--gray-500); line-height: 1.6; }
+  /* Phase */
   .phase { margin-bottom: 72px; }
   .phase-label { font-family: var(--mono); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--fg); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid var(--fg); }
   .phase p { margin-bottom: 8px; line-height: 1.8; }
@@ -59,6 +69,7 @@
   .flow-block { margin: 24px 0; padding: 20px 24px; background: var(--bg-card); border: 1px solid var(--gray-200); border-radius: 10px; font-family: var(--mono); font-size: 12px; line-height: 2.4; color: var(--gray-500); transition: all 0.3s; }
   .flow-block:hover { border-color: var(--gray-300); }
   .flow-block pre { margin: 0; white-space: pre; font-family: var(--mono); }
+  /* Exec */
   .exec-block { margin-bottom: 8px; display: grid; grid-template-columns: 56px 1fr; gap: 0 12px; padding: 20px 24px; border-radius: 8px; background: var(--bg-deep); border: 1px solid transparent; transition: all 0.3s; }
   .exec-block:hover { background: var(--bg); border-color: var(--gray-200); }
   .exec-block-title { font-size: 14px; font-weight: 700; color: var(--fg); margin-bottom: 8px; grid-column: 2; }
@@ -67,6 +78,7 @@
   .exec-list { list-style: none; padding-left: 0; grid-column: 2; }
   .exec-list li { padding-left: 20px; position: relative; margin-bottom: 6px; font-size: 14px; line-height: 1.8; color: var(--gray-500); }
   .exec-list li::before { content: "—"; position: absolute; left: 0; color: var(--gray-300); }
+  /* BA Diagram */
   .ba-diagram { background: var(--bg-deep); border: 1px solid var(--gray-200); border-radius: 16px; padding: 36px; margin: 36px 0; }
   .ba-diagram-title { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--fg); margin-bottom: 28px; }
   .ba-grid { display: grid; grid-template-columns: 1fr 40px 1fr; gap: 0; align-items: stretch; }
@@ -85,13 +97,14 @@
   .ba-box-dark .ba-node { background: rgba(255,255,255,0.15); color: #fff; border: none; font-weight: 700; }
   .ba-box-dark .ba-node-ghost { background: transparent; border: 1px dashed rgba(255,255,255,0.3); color: rgba(255,255,255,0.6); font-size: 11px; padding: 6px 10px; border-radius: 6px; text-align: center; }
   .ba-box-dark .ba-result { color: #fff; font-weight: 500; }
+  /* Result */
   .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
-  .result-box { padding: 24px; border-radius: 12px; position: relative; overflow: hidden; transition: transform 0.3s ease; }
+  .result-box { border-radius: 12px; position: relative; overflow: hidden; transition: transform 0.3s ease; }
   .result-box:hover { transform: translateY(-2px); }
   .result-box::after { content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 2px; background: var(--fg); transition: all 0.4s ease; }
   .result-box:hover::after { width: 100%; left: 0; }
-  .result-box.quant { background: var(--bg-card); border: 1px solid var(--gray-200); }
-  .result-box.qual { background: var(--fg); color: #fff; }
+  .result-box.quant { background: var(--bg-card); border: 1px solid var(--gray-200); padding: 20px 24px; }
+  .result-box.qual { background: var(--fg); color: #fff; padding: 24px; }
   .result-box h4 { font-family: var(--mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; opacity: 0.5; }
   .result-box p, .result-box li { font-size: 13px; line-height: 1.8; }
   .result-box.qual h4 { color: #fff; opacity: 0.5; }
@@ -115,10 +128,12 @@
   .expand-block-dark .expand-num { font-family: var(--mono); font-size: 11px; color: var(--fg); }
   .expand-block-dark strong { color: var(--fg); }
   .expand-block-dark p { color: var(--gray-500); font-size: 13px; padding-left: 24px; }
+  /* Case Nav */
   .case-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--gray-200); }
   .case-nav a { font-family: var(--mono); font-size: 12px; color: var(--gray-400); text-decoration: none; letter-spacing: 0.05em; transition: color 0.3s; display: flex; align-items: center; gap: 8px; }
   .case-nav a:hover { color: var(--fg); }
   .case-nav .next { margin-left: auto; }
+  /* Footer */
   .site-footer { border-top: 1px solid var(--gray-200); padding: 48px 24px; margin-top: 60px; }
   .footer-inner { max-width: 900px; margin: 0 auto; display: flex; justify-content: center; align-items: center; }
   .footer-contact-btn { font-family: var(--mono); font-size: 11px; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; background: none; border: 1px solid var(--gray-200); padding: 8px 20px; border-radius: 6px; transition: all 0.3s; }
@@ -133,7 +148,10 @@
   .contact-card-close:hover { color: #5c5a58; }
   @media (max-width: 768px) {
     .case-title { font-size: 24px; }
-    .summary-card-grid { grid-template-columns: 1fr; }
+    .summary-main { grid-template-columns: 1fr; }
+    .summary-impact { grid-template-columns: 1fr; }
+    .summary-meta { flex-direction: column; gap: 16px; }
+    .summary-card { padding: 32px 24px; }
     .ba-grid { grid-template-columns: 1fr; gap: 16px; }
     .ba-arrow-col { transform: rotate(90deg); padding: 8px 0; }
     .result-grid { grid-template-columns: 1fr; }
@@ -146,9 +164,8 @@
 <body>
 <nav class="top-nav">
   <div class="nav-inner">
-    <a href="/cx-portfolio/" class="nav-logo">Portfolio</a>
+    <a href="/cx-portfolio/" class="nav-logo">Portfolio — Kim Moonju</a>
     <div class="nav-links">
-      <a href="/cx-portfolio/">Home</a>
       <a href="/cx-portfolio/cases/case01.html">Case 01</a>
       <a href="/cx-portfolio/cases/case02.html" class="active">Case 02</a>
       <a href="/cx-portfolio/cases/case03.html">Case 03</a>
@@ -160,35 +177,46 @@
     <div class="case-eyebrow">Case 02</div>
     <h1 class="case-title">교환 선출고(Pre-dispatch) 프로세스 설계</h1>
   </div>
+
+  <!-- Summary Card -->
   <div class="summary-card">
-    <div class="summary-card-grid">
-      <div>
+    <div class="summary-main">
+      <div class="summary-field">
         <div class="summary-field-label">Problem</div>
-        <div class="summary-field-value">교환 리드타임 9.2일, <strong>상담사가 '언제요?'에 답할 수 없는 구조</strong></div>
+        <div class="summary-field-value">교환 리드타임 9.2일, 상담사가 "언제"에 답할 수 없는 구조</div>
       </div>
-      <div>
+      <div class="summary-field">
         <div class="summary-field-label">Insight</div>
-        <div class="summary-field-value">"속도를 높인다"가 아니라, <strong>"기다림 자체를 없앤다"</strong></div>
+        <div class="summary-field-value">속도가 아니라 불확실성. <strong>기다림을 줄이는 게 아니라 없애는 것</strong></div>
       </div>
-      <div>
+      <div class="summary-field" style="grid-column: 1 / -1;">
         <div class="summary-field-label">Structure</div>
-        <div class="summary-field-value">반품 전 선출고로 순서 전환 + 리스크 관리 체계 + 파일럿 검증</div>
+        <div class="summary-field-value">회수 후 출고 → 선출고(Pre-dispatch)로 순서 전환</div>
       </div>
-      <div>
-        <div class="summary-field-label">Impact</div>
-        <div class="summary-field-value"><strong>2.3일</strong> 평균 교환 리드타임 (75%↓), <strong>Loss 0%</strong></div>
+    </div>
+    <div class="summary-impact">
+      <div class="impact-tile">
+        <div class="impact-num">2.3일</div>
+        <div class="impact-label">리드타임 (75%↓, 기존 9.2일)</div>
       </div>
-      <div>
-        <div class="summary-field-label">Role</div>
-        <div class="summary-field-value">CX Manager — 프로세스 설계, 리스크 관리, 파일럿 운영, 효과 검증</div>
+      <div class="impact-tile">
+        <div class="impact-num">0%</div>
+        <div class="impact-label">Loss율 (미반품 0건)</div>
       </div>
-      <div>
-        <div class="summary-field-label">Stakeholders</div>
-        <div class="summary-field-value">이커머스팀 · 개발팀 · 물류팀</div>
+    </div>
+    <div class="summary-meta">
+      <div class="meta-item">
+        <div class="meta-label">Role</div>
+        <div class="meta-value">CX Manager — 프로세스 설계 및 파일럿 운영</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Stakeholders</div>
+        <div class="meta-value">로지스틱스팀 (조율 대상)</div>
       </div>
     </div>
   </div>
 
+  <!-- 읽기 -->
   <div class="phase">
     <div class="phase-label">읽기</div>
     <p>교환 관련 VOC에서 같은 표현이 반복되고 있었습니다.</p>
@@ -225,6 +253,7 @@
     </p>
   </div>
 
+  <!-- 실행 -->
   <div class="phase">
     <div class="phase-label">실행</div>
     <div class="exec-block">
@@ -261,6 +290,7 @@
     </div>
   </div>
 
+  <!-- BA Diagram (Before/After serves as artifact) -->
   <div class="ba-diagram">
     <div class="ba-diagram-title">교환 구조: Before → After</div>
     <div class="ba-grid">
@@ -302,6 +332,7 @@
     </div>
   </div>
 
+  <!-- 결과 -->
   <div class="phase">
     <div class="phase-label">결과</div>
     <div class="result-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 24px;">
@@ -330,6 +361,7 @@
     </div>
   </div>
 
+  <!-- 확장 -->
   <details class="phase phase-expandable">
     <summary class="phase-label">확장 — 전 채널 적용 기획</summary>
     <p>파일럿에서 검증된 선출고 프로세스를 전 채널로 확장하기 위해<br>

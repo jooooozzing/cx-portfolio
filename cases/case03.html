@@ -30,15 +30,25 @@
   .nav-links a:hover { color: var(--fg); }
   .nav-links a.active { color: var(--fg); font-weight: 500; }
   .container { max-width: 900px; margin: 0 auto; padding: 100px 24px 120px; }
-  .summary-card { background: var(--bg); border: 1px solid var(--gray-200); border-radius: 14px; padding: 32px 36px; margin-bottom: 60px; }
-  .summary-card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .summary-field-label { font-family: var(--mono); font-size: 10px; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
-  .summary-field-value { font-size: 14px; color: var(--fg-muted); line-height: 1.7; }
-  .summary-field-value strong { color: var(--fg); }
+  /* Case Header */
   .case-header { margin-bottom: 60px; padding-top: 24px; }
   .case-eyebrow { font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
   .case-eyebrow::before { content: ''; width: 40px; height: 1px; background: var(--accent); }
   .case-title { font-family: var(--sans); font-size: 32px; font-weight: 900; color: var(--fg); letter-spacing: -0.5px; line-height: 1.4; }
+  /* Summary Card */
+  .summary-card { background: var(--bg-card); border-radius: 16px; padding: 48px; margin-bottom: 64px; }
+  .summary-main { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-bottom: 32px; }
+  .summary-field-label { font-family: var(--mono); font-size: 11px; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+  .summary-field-value { font-size: 15px; color: var(--fg); line-height: 1.7; }
+  .summary-field-value strong { color: var(--fg); font-weight: 700; }
+  .summary-impact { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 32px; }
+  .impact-tile { background: var(--bg-deep); border-radius: 10px; padding: 20px 24px; }
+  .impact-num { font-family: var(--display); font-size: 28px; font-weight: 900; color: var(--fg); letter-spacing: -0.5px; }
+  .impact-label { font-size: 12px; color: var(--gray-400); margin-top: 2px; }
+  .summary-meta { display: flex; gap: 40px; padding-top: 24px; border-top: 1px solid var(--gray-200); }
+  .meta-label { font-family: var(--mono); font-size: 10px; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+  .meta-value { font-size: 13px; color: var(--gray-500); line-height: 1.6; }
+  /* Phase */
   .phase { margin-bottom: 72px; }
   .phase-label { font-family: var(--mono); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--fg); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid var(--fg); }
   .phase p { margin-bottom: 8px; line-height: 1.8; }
@@ -61,6 +71,7 @@
   .dual-grid-item:hover { border-color: var(--gray-300); transform: translateY(-1px); }
   .dual-grid-item strong { font-size: 14px; color: var(--fg); }
   .dual-grid-item span { color: var(--gray-500); }
+  /* Exec */
   .exec-block { margin-bottom: 8px; display: grid; grid-template-columns: 56px 1fr; gap: 0 12px; padding: 20px 24px; border-radius: 8px; background: var(--bg-deep); border: 1px solid transparent; transition: all 0.3s; }
   .exec-block:hover { background: var(--bg); border-color: var(--gray-200); }
   .exec-block-title { font-size: 14px; font-weight: 700; color: var(--fg); margin-bottom: 8px; grid-column: 2; }
@@ -69,53 +80,66 @@
   .exec-list { list-style: none; padding-left: 0; grid-column: 2; }
   .exec-list li { padding-left: 20px; position: relative; margin-bottom: 6px; font-size: 14px; line-height: 1.8; color: var(--gray-500); }
   .exec-list li::before { content: "—"; position: absolute; left: 0; color: var(--gray-300); }
-  /* ER Diagram */
+  /* ER Diagram — NEW with column details */
   .er-diagram { background: var(--bg-deep); border: 1px solid var(--gray-200); border-radius: 16px; padding: 36px; margin: 36px 0; }
   .er-diagram-title { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--fg); margin-bottom: 4px; }
   .er-diagram-sub { font-size: 12px; color: var(--gray-400); margin-bottom: 28px; }
   .er-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-  .er-table { background: var(--bg); border: 1.5px solid var(--gray-200); border-radius: 10px; padding: 14px; text-align: center; transition: all 0.3s; }
+  .er-table { background: var(--bg); border: 1.5px solid var(--gray-200); border-radius: 10px; padding: 14px; transition: all 0.3s; }
   .er-table:hover { border-color: var(--accent-border); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
-  .er-table.primary { border-color: var(--accent); background: var(--accent-dim); }
-  .er-table-name { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--fg); margin-bottom: 4px; letter-spacing: 0.02em; }
-  .er-table-desc { font-size: 11px; color: var(--gray-400); line-height: 1.5; }
-  .er-table-count { font-family: var(--mono); font-size: 10px; color: var(--gray-300); margin-top: 6px; }
+  .er-table.primary { border-color: var(--accent); background: var(--accent-dim); grid-column: span 2; }
+  .er-table-name { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--fg); margin-bottom: 6px; letter-spacing: 0.02em; }
+  .er-table-desc { font-size: 11px; color: var(--gray-400); line-height: 1.5; margin-bottom: 8px; }
+  .er-table-count { font-family: var(--mono); font-size: 10px; color: var(--gray-300); }
+  .er-cols { list-style: none; padding: 0; }
+  .er-cols li { font-family: var(--mono); font-size: 10px; color: var(--gray-500); line-height: 1.8; padding-left: 10px; position: relative; }
+  .er-cols li::before { content: "·"; position: absolute; left: 0; }
+  .er-cols li .pk { color: var(--accent); font-weight: 700; }
+  .er-cols li .fk { color: var(--gray-500); font-weight: 500; }
+  /* TERM_MAPPING example table */
+  .term-example { margin-top: 20px; overflow-x: auto; }
+  .term-example-title { font-family: var(--mono); font-size: 11px; color: var(--gray-400); margin-bottom: 12px; letter-spacing: 0.05em; }
+  .term-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .term-table th { font-family: var(--mono); font-size: 10px; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.05em; padding: 8px 12px; text-align: left; border-bottom: 2px solid var(--gray-200); font-weight: 500; }
+  .term-table td { padding: 8px 12px; border-bottom: 1px solid var(--gray-100); color: var(--gray-500); }
+  .term-table td:first-child { color: var(--fg); font-weight: 500; }
+  .term-table tr:last-child td { border-bottom: none; }
   .er-relations { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--gray-200); }
   .er-rel-row { font-family: var(--mono); font-size: 11px; color: var(--gray-400); line-height: 2; display: flex; align-items: center; gap: 8px; }
   .er-rel-arrow { color: var(--accent); font-weight: 700; }
-  /* Data Architecture */
-  .ba-diagram { background: var(--bg-deep); border: 1px solid var(--gray-200); border-radius: 16px; padding: 36px; margin: 36px 0; }
-  .ba-diagram-title { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--fg); margin-bottom: 28px; }
-  .arch-flow { display: flex; flex-direction: column; gap: 12px; max-width: 600px; margin: 0 auto; }
-  .arch-input { background: var(--bg); border: 1.5px solid var(--gray-200); border-radius: 10px; padding: 16px 20px; text-align: center; transition: all 0.3s; }
-  .arch-input:hover { border-color: var(--gray-300); }
-  .arch-input .arch-label { font-family: var(--mono); font-size: 10px; color: var(--gray-400); margin-bottom: 4px; }
-  .arch-input .arch-main { font-size: 13px; font-weight: 700; color: var(--fg); }
-  .arch-input .arch-sub { font-size: 11px; color: var(--gray-400); margin-top: 4px; }
-  .arch-arrow { text-align: center; font-size: 11px; color: var(--gray-300); }
-  .arch-slots { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
-  .arch-slot { background: var(--bg-card); border: 1px solid var(--gray-200); border-radius: 8px; padding: 12px; text-align: center; font-size: 12px; transition: all 0.3s; }
-  .arch-slot:hover { border-color: var(--gray-300); }
-  .arch-slot .arch-label { font-family: var(--mono); font-size: 10px; color: var(--gray-400); margin-bottom: 4px; }
-  .arch-slot strong { color: var(--fg); }
-  .arch-slot span { color: var(--gray-400); }
-  .arch-options { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .arch-option { background: var(--fg); color: #fff; border-radius: 8px; padding: 14px; text-align: center; font-size: 12px; transition: all 0.3s; }
-  .arch-option:hover { background: #2a2a2a; }
-  .arch-option .arch-label { font-family: var(--mono); font-size: 10px; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
-  .arch-option strong { color: #fff; }
-  .arch-option span { opacity: 0.6; color: #fff; }
-  .arch-handoff { background: var(--bg); border: 1px dashed var(--gray-300); border-radius: 10px; padding: 14px 20px; text-align: center; font-size: 12px; color: var(--gray-400); transition: all 0.3s; }
-  .arch-handoff:hover { border-color: var(--gray-300); }
-  .arch-handoff strong { color: var(--fg); }
+  /* Conversation Scenario Flowchart */
+  .scenario-diagram { background: var(--bg-deep); border: 1px solid var(--gray-200); border-radius: 16px; padding: 36px; margin: 36px 0; }
+  .scenario-title { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--fg); margin-bottom: 4px; }
+  .scenario-sub { font-size: 12px; color: var(--gray-400); margin-bottom: 28px; }
+  .scenario-flow { display: flex; flex-direction: column; gap: 12px; max-width: 600px; margin: 0 auto; }
+  .scenario-entry { background: var(--bg); border: 1.5px solid var(--gray-200); border-radius: 10px; padding: 16px 20px; text-align: center; transition: all 0.3s; }
+  .scenario-entry:hover { border-color: var(--gray-300); }
+  .scenario-entry .s-label { font-family: var(--mono); font-size: 10px; color: var(--gray-400); margin-bottom: 4px; }
+  .scenario-entry .s-main { font-size: 13px; font-weight: 700; color: var(--fg); }
+  .scenario-entry .s-sub { font-size: 11px; color: var(--gray-400); margin-top: 4px; }
+  .scenario-arrow { text-align: center; font-size: 11px; color: var(--gray-300); }
+  .scenario-slots { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .scenario-slot { background: var(--bg-card); border: 1px solid var(--gray-200); border-radius: 8px; padding: 12px; text-align: center; font-size: 12px; transition: all 0.3s; }
+  .scenario-slot:hover { border-color: var(--gray-300); }
+  .scenario-slot .s-label { font-family: var(--mono); font-size: 10px; color: var(--gray-400); margin-bottom: 4px; }
+  .scenario-slot strong { color: var(--fg); }
+  .scenario-slot span { color: var(--gray-400); }
+  .scenario-options { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .scenario-option { background: var(--fg); color: #fff; border-radius: 8px; padding: 14px; text-align: center; font-size: 12px; transition: all 0.3s; }
+  .scenario-option:hover { background: #2a2a2a; }
+  .scenario-option .s-label { font-family: var(--mono); font-size: 10px; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
+  .scenario-option strong { color: #fff; }
+  .scenario-option span { opacity: 0.6; color: #fff; }
+  .scenario-handoff { background: var(--fg); color: #fff; border-radius: 10px; padding: 14px 20px; text-align: center; font-size: 12px; }
+  .scenario-handoff strong { color: #fff; }
   /* Result */
   .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
-  .result-box { padding: 24px; border-radius: 12px; position: relative; overflow: hidden; transition: transform 0.3s ease; }
+  .result-box { border-radius: 12px; position: relative; overflow: hidden; transition: transform 0.3s ease; }
   .result-box:hover { transform: translateY(-2px); }
   .result-box::after { content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 2px; background: var(--fg); transition: all 0.4s ease; }
   .result-box:hover::after { width: 100%; left: 0; }
-  .result-box.quant { background: var(--bg-card); border: 1px solid var(--gray-200); }
-  .result-box.qual { background: var(--fg); color: #fff; }
+  .result-box.quant { background: var(--bg-card); border: 1px solid var(--gray-200); padding: 20px 24px; }
+  .result-box.qual { background: var(--fg); color: #fff; padding: 24px; }
   .result-box h4 { font-family: var(--mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; opacity: 0.5; }
   .result-box p, .result-box li { font-size: 13px; line-height: 1.8; }
   .result-box.qual h4 { color: #fff; opacity: 0.5; }
@@ -134,10 +158,12 @@
   .expand-block .expand-num { font-family: var(--mono); font-size: 11px; color: var(--fg); }
   .expand-block strong { color: var(--fg); }
   .expand-block p { color: var(--gray-500); font-size: 13px; padding-left: 24px; }
+  /* Case Nav */
   .case-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--gray-200); }
   .case-nav a { font-family: var(--mono); font-size: 12px; color: var(--gray-400); text-decoration: none; letter-spacing: 0.05em; transition: color 0.3s; display: flex; align-items: center; gap: 8px; }
   .case-nav a:hover { color: var(--fg); }
   .case-nav .next { margin-left: auto; }
+  /* Footer */
   .site-footer { border-top: 1px solid var(--gray-200); padding: 48px 24px; margin-top: 60px; }
   .footer-inner { max-width: 900px; margin: 0 auto; display: flex; justify-content: center; align-items: center; }
   .footer-contact-btn { font-family: var(--mono); font-size: 11px; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; background: none; border: 1px solid var(--gray-200); padding: 8px 20px; border-radius: 6px; transition: all 0.3s; }
@@ -152,11 +178,15 @@
   .contact-card-close:hover { color: #5c5a58; }
   @media (max-width: 768px) {
     .case-title { font-size: 24px; }
-    .summary-card-grid { grid-template-columns: 1fr; }
+    .summary-main { grid-template-columns: 1fr; }
+    .summary-impact { grid-template-columns: 1fr; }
+    .summary-meta { flex-direction: column; gap: 16px; }
+    .summary-card { padding: 32px 24px; }
     .dual-grid { grid-template-columns: 1fr; }
     .er-grid { grid-template-columns: 1fr 1fr; }
-    .arch-slots { grid-template-columns: 1fr; }
-    .arch-options { grid-template-columns: 1fr; }
+    .er-table.primary { grid-column: span 2; }
+    .scenario-slots { grid-template-columns: 1fr; }
+    .scenario-options { grid-template-columns: 1fr; }
     .result-grid { grid-template-columns: 1fr; }
     .nav-links { display: none; }
     .top-nav { padding: 0 16px; }
@@ -167,9 +197,8 @@
 <body>
 <nav class="top-nav">
   <div class="nav-inner">
-    <a href="/cx-portfolio/" class="nav-logo">Portfolio</a>
+    <a href="/cx-portfolio/" class="nav-logo">Portfolio — Kim Moonju</a>
     <div class="nav-links">
-      <a href="/cx-portfolio/">Home</a>
       <a href="/cx-portfolio/cases/case01.html">Case 01</a>
       <a href="/cx-portfolio/cases/case02.html">Case 02</a>
       <a href="/cx-portfolio/cases/case03.html" class="active">Case 03</a>
@@ -181,35 +210,50 @@
     <div class="case-eyebrow">Case 03</div>
     <h1 class="case-title">AI 향 추천 서비스 기획 — 고객 언어 기반 데이터셋 설계</h1>
   </div>
+
+  <!-- Summary Card -->
   <div class="summary-card">
-    <div class="summary-card-grid">
-      <div>
+    <div class="summary-main">
+      <div class="summary-field">
         <div class="summary-field-label">Problem</div>
-        <div class="summary-field-value">'비슷한 향 없나요?' — <strong>추천할 구조도, 연결할 데이터도 없었다</strong></div>
+        <div class="summary-field-value">"비슷한 향 없나요?" — 추천 구조도, 연결 데이터도 없었다</div>
       </div>
-      <div>
+      <div class="summary-field">
         <div class="summary-field-label">Insight</div>
-        <div class="summary-field-value"><strong>고객의 언어를 향의 좌표로 번역하는 구조</strong>를 설계하는 것</div>
+        <div class="summary-field-value">고객은 정확한 매칭이 아니라 <strong>"이해받았다"는 감각</strong>을 원한다</div>
       </div>
-      <div>
+      <div class="summary-field" style="grid-column: 1 / -1;">
         <div class="summary-field-label">Structure</div>
-        <div class="summary-field-value">8개 테이블 관계형 데이터셋 + AI 발화 설계 + 가드레일</div>
+        <div class="summary-field-value">직원 감각 → 설문 데이터화 → 8 tables 관계형 데이터셋 → 대화 시나리오 설계 + 가드레일</div>
       </div>
-      <div>
-        <div class="summary-field-label">Impact</div>
-        <div class="summary-field-value"><strong>8</strong> tables · <strong>242</strong> mappings · <strong>422</strong> survey</div>
+    </div>
+    <div class="summary-impact">
+      <div class="impact-tile">
+        <div class="impact-num">8</div>
+        <div class="impact-label">tables</div>
       </div>
-      <div>
-        <div class="summary-field-label">Role</div>
-        <div class="summary-field-value">CX Manager — 데이터셋 설계, AI 발화 설계, 가드레일, 프로젝트 리드 (PM 없이)</div>
+      <div class="impact-tile">
+        <div class="impact-num">242</div>
+        <div class="impact-label">term mappings</div>
       </div>
-      <div>
-        <div class="summary-field-label">Stakeholders</div>
-        <div class="summary-field-value">AI 전담팀 · 오프라인 매장 직원 · 제품팀</div>
+      <div class="impact-tile">
+        <div class="impact-num">422</div>
+        <div class="impact-label">survey responses</div>
+      </div>
+    </div>
+    <div class="summary-meta">
+      <div class="meta-item">
+        <div class="meta-label">Role</div>
+        <div class="meta-value">프로젝트 기획·리드 (PM 없이 CX 관점에서 주관)</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Stakeholders</div>
+        <div class="meta-value">AI 전담팀 · 오프라인 스토어팀</div>
       </div>
     </div>
   </div>
 
+  <!-- 읽기 -->
   <div class="phase">
     <div class="phase-label">읽기</div>
     <p>단종 제품 문의가 반복되고 있었습니다.<br>
@@ -255,6 +299,7 @@
     </p>
   </div>
 
+  <!-- 실행 -->
   <div class="phase">
     <div class="phase-label">실행</div>
     <div class="exec-block">
@@ -290,7 +335,7 @@
       <ul class="exec-list">
         <li>화법 3원칙: Fine(감각을 흐리지 않는 정확한 묘사) · Bold(리스크를 먼저 말하는 태도) · Kind(정보보다 감정을 먼저 인정)</li>
         <li>추천 중단 조건 정의: 건강/안전 관련, 모순 조건 반복 → 즉시 상담 전환 프로토콜</li>
-        <li>금칙어·약점 표현 가이드: 평가가 아닌 구조 설명으로 전환 ("지속력이 약합니다" ✕ → "초반의 상쾌함에 초점을 둔 타입입니다" ○)</li>
+        <li>금칙어·약점 표현 가이드: 평가가 아닌 구조 설명으로 전환</li>
         <li>최대 2회 제안 후 상담 전환 — Slot 데이터·A/B 반응·제외 조건을 상담사에게 핸드오프하는 데이터 포맷 정의</li>
         <li>기획안을 기반으로 AI 전담팀에 미팅 후 프로젝트 시작 — PM 없이 프로젝트 리드</li>
         <li>데이터 구조·시나리오·가드레일·성공 기준은 CX에서 주관, 기술적 구현은 AI팀 담당</li>
@@ -299,102 +344,192 @@
     </div>
   </div>
 
-  <!-- ER Diagram -->
+  <!-- ER Diagram with column details -->
   <div class="er-diagram">
     <div class="er-diagram-title">관계형 데이터셋 구조 — 8 Tables</div>
     <div class="er-diagram-sub">고객 언어 → 향 좌표 → 제품 매핑을 위한 관계형 데이터 모델</div>
     <div class="er-grid">
       <div class="er-table">
-        <div class="er-table-name">FAMILY</div>
-        <div class="er-table-desc">향 계열<br>대분류</div>
+        <div class="er-table-name">01 FAMILY</div>
+        <div class="er-table-desc">향 계열 대분류</div>
+        <ul class="er-cols">
+          <li><span class="pk">family_id PK</span></li>
+          <li>family_name</li>
+          <li>description</li>
+        </ul>
       </div>
       <div class="er-table">
-        <div class="er-table-name">ACCORD</div>
-        <div class="er-table-desc">어코드<br>중분류</div>
+        <div class="er-table-name">02 ACCORD</div>
+        <div class="er-table-desc">어코드 중분류</div>
+        <ul class="er-cols">
+          <li><span class="pk">accord_id PK</span></li>
+          <li><span class="fk">family_id FK</span></li>
+          <li>accord_name</li>
+        </ul>
       </div>
       <div class="er-table">
-        <div class="er-table-name">NOTE</div>
-        <div class="er-table-desc">향료<br>소분류</div>
+        <div class="er-table-name">03 NOTE</div>
+        <div class="er-table-desc">향료 소분류</div>
+        <ul class="er-cols">
+          <li><span class="pk">note_id PK</span></li>
+          <li><span class="fk">accord_id FK</span></li>
+          <li>note_name</li>
+          <li>intensity</li>
+        </ul>
       </div>
       <div class="er-table">
-        <div class="er-table-name">PRODUCT</div>
-        <div class="er-table-desc">제품<br>마스터</div>
+        <div class="er-table-name">04 PRODUCT</div>
+        <div class="er-table-desc">제품 마스터</div>
+        <ul class="er-cols">
+          <li><span class="pk">product_id PK</span></li>
+          <li><span class="fk">family_id FK</span></li>
+          <li>product_name</li>
+          <li>product_type</li>
+        </ul>
+      </div>
+      <div class="er-table">
+        <div class="er-table-name">05 PRODUCT_NOTE</div>
+        <div class="er-table-desc">제품-향료 매핑</div>
+        <ul class="er-cols">
+          <li><span class="fk">product_id FK</span></li>
+          <li><span class="fk">note_id FK</span></li>
+          <li>note_role</li>
+        </ul>
       </div>
       <div class="er-table primary">
-        <div class="er-table-name">TERM_MAPPING</div>
-        <div class="er-table-desc">고객 표현 →<br>향료·제품 매핑</div>
+        <div class="er-table-name">06 TERM_MAPPING</div>
+        <div class="er-table-desc">고객 표현 → 향료·제품 매핑</div>
         <div class="er-table-count">242건</div>
+        <ul class="er-cols">
+          <li><span class="pk">term_id PK</span></li>
+          <li>customer_term</li>
+          <li>category (logic/texture)</li>
+          <li>weight (signature/standard/sub)</li>
+          <li><span class="fk">note_id FK</span></li>
+          <li><span class="fk">product_id FK</span></li>
+          <li>sentiment</li>
+        </ul>
       </div>
       <div class="er-table">
-        <div class="er-table-name">SURVEY</div>
-        <div class="er-table-desc">직원 설문<br>감각 데이터</div>
+        <div class="er-table-name">07 SURVEY</div>
+        <div class="er-table-desc">직원 설문 감각 데이터</div>
         <div class="er-table-count">422건</div>
+        <ul class="er-cols">
+          <li><span class="pk">survey_id PK</span></li>
+          <li><span class="fk">product_id FK</span></li>
+          <li>customer_expression</li>
+          <li>staff_interpretation</li>
+        </ul>
       </div>
       <div class="er-table">
-        <div class="er-table-name">GUARDRAIL</div>
-        <div class="er-table-desc">금칙어·중단<br>조건 정의</div>
-      </div>
-      <div class="er-table">
-        <div class="er-table-name">HANDOFF</div>
-        <div class="er-table-desc">상담 전환<br>데이터 포맷</div>
+        <div class="er-table-name">08 GUARDRAIL</div>
+        <div class="er-table-desc">금칙어·중단 조건</div>
+        <ul class="er-cols">
+          <li><span class="pk">rule_id PK</span></li>
+          <li>rule_type</li>
+          <li>condition</li>
+          <li>action</li>
+        </ul>
       </div>
     </div>
+
+    <!-- TERM_MAPPING example table -->
+    <div class="term-example">
+      <div class="term-example-title">TERM_MAPPING 예시 (3건)</div>
+      <table class="term-table">
+        <thead>
+          <tr>
+            <th>customer_term</th>
+            <th>category</th>
+            <th>weight</th>
+            <th>mapped_note</th>
+            <th>sentiment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>르라보 어나더13 같은</td>
+            <td>logic</td>
+            <td>signature</td>
+            <td>Ambroxan, Musk</td>
+            <td>positive</td>
+          </tr>
+          <tr>
+            <td>묵직한 / 무거운</td>
+            <td>texture</td>
+            <td>standard</td>
+            <td>Oud, Amber</td>
+            <td>neutral</td>
+          </tr>
+          <tr>
+            <td>포근한 / 따뜻한</td>
+            <td>texture</td>
+            <td>standard</td>
+            <td>Vanilla, Sandalwood</td>
+            <td>positive</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     <div class="er-relations">
       <div class="er-rel-row">FAMILY <span class="er-rel-arrow">→</span> ACCORD <span class="er-rel-arrow">→</span> NOTE <span class="er-rel-arrow">→</span> PRODUCT (4계층 분류)</div>
       <div class="er-rel-row">TERM_MAPPING <span class="er-rel-arrow">↔</span> NOTE, PRODUCT (고객 언어 ↔ 향 좌표)</div>
       <div class="er-rel-row">SURVEY <span class="er-rel-arrow">→</span> TERM_MAPPING (직원 감각 → 매핑 근거)</div>
-      <div class="er-rel-row">GUARDRAIL <span class="er-rel-arrow">→</span> HANDOFF (중단 조건 → 상담 전환)</div>
+      <div class="er-rel-row">GUARDRAIL <span class="er-rel-arrow">→</span> 상담 전환 (중단 조건 → 핸드오프)</div>
     </div>
   </div>
 
-  <!-- Data Architecture -->
-  <div class="ba-diagram">
-    <div class="ba-diagram-title">데이터 아키텍처: 고객 언어 → 향 좌표 → 추천</div>
-    <div class="arch-flow">
-      <div class="arch-input">
-        <div class="arch-label">INPUT</div>
-        <div class="arch-main">"비슷한 향 없나요?" · "가벼운 향이요" · "묵직한 느낌"</div>
-        <div class="arch-sub">고객의 언어 — 모호하고, 감각적이고, 불완전한</div>
+  <!-- Conversation Scenario Flowchart -->
+  <div class="scenario-diagram">
+    <div class="scenario-title">대화 시나리오 플로우차트</div>
+    <div class="scenario-sub">고객 진입 → 3-Slot 좌표 설정 → Harmony/Contrast 제안 → 상담 전환</div>
+    <div class="scenario-flow">
+      <div class="scenario-entry">
+        <div class="s-label">ENTRY</div>
+        <div class="s-main">"비슷한 향 없나요?" · "가벼운 향이요"</div>
+        <div class="s-sub">고객의 모호한 언어 진입</div>
       </div>
-      <div class="arch-arrow">↓ AI 발화로 취향 언어 유도</div>
-      <div class="arch-slots">
-        <div class="arch-slot">
-          <div class="arch-label">Slot 1</div>
+      <div class="scenario-arrow">↓ AI 발화로 취향 언어 유도</div>
+      <div class="scenario-slots">
+        <div class="scenario-slot">
+          <div class="s-label">Slot 1</div>
           <strong>Family</strong><br>
           <span>향 계열</span>
         </div>
-        <div class="arch-slot">
-          <div class="arch-label">Slot 2</div>
+        <div class="scenario-slot">
+          <div class="s-label">Slot 2</div>
           <strong>Accord</strong><br>
           <span>어코드</span>
         </div>
-        <div class="arch-slot">
-          <div class="arch-label">Slot 3</div>
+        <div class="scenario-slot">
+          <div class="s-label">Slot 3</div>
           <strong>Note/Texture</strong><br>
           <span>탐색축</span>
         </div>
       </div>
-      <div class="arch-arrow">↓ TERM_MAPPING (242건)</div>
-      <div class="arch-options">
-        <div class="arch-option">
-          <div class="arch-label">Option A · Harmony</div>
+      <div class="scenario-arrow">↓ TERM_MAPPING (242건)</div>
+      <div class="scenario-options">
+        <div class="scenario-option">
+          <div class="s-label">Option A · Harmony</div>
           <strong>동조</strong><br>
           <span>조건 전부 충족하는 안전한 선택</span>
         </div>
-        <div class="arch-option">
-          <div class="arch-label">Option B · Contrast</div>
+        <div class="scenario-option">
+          <div class="s-label">Option B · Contrast</div>
           <strong>변주</strong><br>
           <span>큰 틀 유지 + 탐색축에서 의외의 제안</span>
         </div>
       </div>
-      <div class="arch-arrow">↓ 2회 제안 후</div>
-      <div class="arch-handoff">
+      <div class="scenario-arrow">↓ 2회 제안 후</div>
+      <div class="scenario-handoff">
         <strong>상담 전환</strong> — 미세한 차이를 좁히는 건 상담사의 영역<br>
         Slot 데이터 + A/B 반응 + 제외 조건을 핸드오프
       </div>
     </div>
   </div>
 
+  <!-- 결과 -->
   <div class="phase">
     <div class="phase-label">결과</div>
     <div class="result-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 24px;">
@@ -430,6 +565,7 @@
     </div>
   </div>
 
+  <!-- 확장 -->
   <details class="phase phase-expandable">
     <summary class="phase-label">확장 — Beta v3 진행 중</summary>
     <p>Beta v2 내부 테스트를 완료하고, 현재 v3를 진행 중입니다.</p>
@@ -460,7 +596,7 @@
 
   <div class="case-nav">
     <a href="/cx-portfolio/cases/case02.html" class="prev">← Case 02 — 교환 선출고</a>
-    <a href="/cx-portfolio/" class="next">Home →</a>
+    <a href="/cx-portfolio/" class="next">Overview →</a>
   </div>
 </div>
 
