@@ -63,12 +63,12 @@
   .layer4-item { display: grid; grid-template-columns: 80px 1fr; gap: 16px; padding: 16px 20px; background: var(--bg); border-radius: 8px; align-items: center; border: 1px solid transparent; transition: all 0.3s; }
   .layer4-item:hover { background: var(--bg-card); border-color: var(--gray-300); }
   .layer4-item .layer-name { color: var(--fg); }
-  .cases-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 20px; }
+  .cases-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 20px; }
   .case-tag { font-family: var(--mono); font-size: 11px; text-align: center; padding: 12px 8px; background: var(--bg); border: 1px solid var(--accent-border); border-radius: 8px; line-height: 1.5; color: var(--gray-500); transition: all 0.3s; cursor: pointer; text-decoration: none; display: block; }
   .case-tag:hover { border-color: var(--gray-300); background: var(--bg-card); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
   .case-tag strong { display: block; font-weight: 700; color: var(--fg); margin-bottom: 2px; }
   /* Case Cards */
-  .case-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: var(--space-3xl); }
+  .case-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: var(--space-3xl); }
   .case-card { background: var(--bg-card); border-radius: 12px; padding: 36px; display: flex; flex-direction: column; gap: 0; min-height: 420px; transition: all 0.3s; cursor: pointer; text-decoration: none; color: inherit; border: 1px solid transparent; }
   .case-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); border-color: var(--gray-200); }
   .case-card-eyebrow { font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--gray-400); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
@@ -109,7 +109,7 @@
     .layer-item { grid-template-columns: 60px 1fr; }
     .layer-desc { display: none; }
     .layer4-row { grid-template-columns: 1fr; }
-    .cases-row { grid-template-columns: 1fr; }
+    .cases-row { grid-template-columns: 1fr 1fr; }
     .nav-links { display: none; }
     .top-nav { padding: 0 16px; }
     .container { padding: 80px 16px 80px; }
@@ -125,6 +125,7 @@
     .portfolio-header h1 { font-size: 36px; }
     .case-card { padding: 24px; }
     .layer-diagram { padding: 32px 20px; }
+    .cases-row { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -136,6 +137,7 @@
       <a href="/cx-portfolio/cases/case01.html">Case 01</a>
       <a href="/cx-portfolio/cases/case02.html">Case 02</a>
       <a href="/cx-portfolio/cases/case03.html">Case 03</a>
+      <a href="/cx-portfolio/cases/case04.html">Case 04</a>
     </div>
   </div>
 </nav>
@@ -151,7 +153,7 @@
   <div class="framework-intro">
     CX에서 대부분의 업무는 <strong>Layer 1</strong>에서 끝납니다.<br>
     고객이 말한 것을 분류하고, 처리하고, 종결합니다.<br><br>
-    세 개의 케이스는 <strong>Layer 2</strong>에서 시작합니다.<br>
+    네 개의 케이스는 <strong>Layer 2</strong>에서 시작합니다.<br>
     고객이 말한 것 뒤에 말하지 않은 것이 있고,<br>
     그것을 읽어낸 뒤 조직이 같은 이해로 같은 리액션을 할 수 있는 구조로 전환하고,<br>
     정량과 정성 모두로 검증하는 과정을 보여줍니다.
@@ -197,6 +199,7 @@
       <a href="/cx-portfolio/cases/case01.html" class="case-tag"><strong>Case 1</strong>제품 불량 기준 수립과<br>VOC-제품팀 공유 체계</a>
       <a href="/cx-portfolio/cases/case02.html" class="case-tag"><strong>Case 2</strong>선출고 프로세스 설계</a>
       <a href="/cx-portfolio/cases/case03.html" class="case-tag"><strong>Case 3</strong>AI 향 추천 서비스</a>
+      <a href="/cx-portfolio/cases/case04.html" class="case-tag"><strong>Case 4</strong>글로벌 CX 운영 체계<br>AI 기반 영문 CS 시스템</a>
     </div>
   </div>
 
@@ -250,6 +253,23 @@
       <div class="case-card-field">
         <div class="case-card-field-label">Impact</div>
         <div class="case-card-impact">8 tables 242 mappings 422 survey</div>
+      </div>
+      <span class="case-card-link">Read Case</span>
+    </a>
+    <a href="/cx-portfolio/cases/case04.html" class="case-card">
+      <div class="case-card-eyebrow">Case 04</div>
+      <div class="case-card-title">글로벌 CX 운영 체계 구축 — AI 기반 영문 CS 시스템 설계</div>
+      <div class="case-card-field">
+        <div class="case-card-field-label">Problem</div>
+        <div class="case-card-field-value">글로벌 채널 런칭, 본사 운영 기준 부재. 영문 CS 품질이 개인 역량에 의존하는 구조</div>
+      </div>
+      <div class="case-card-field">
+        <div class="case-card-field-label">Solution</div>
+        <div class="case-card-field-value">정책 우선순위 정의 + AI 워크플로우 설계 + 불량 유형별 시나리오 체계 + 글로벌 가이드 배포</div>
+      </div>
+      <div class="case-card-field">
+        <div class="case-card-field-label">Impact</div>
+        <div class="case-card-impact">JP 5건→40건/일, 글로벌 가이드 최초 배포</div>
       </div>
       <span class="case-card-link">Read Case</span>
     </a>
