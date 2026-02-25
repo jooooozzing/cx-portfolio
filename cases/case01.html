@@ -155,7 +155,12 @@
   .result-box.qual strong { color: #fff; }
   .stat-big { font-family: var(--display); font-size: 44px; font-weight: 900; letter-spacing: -1px; margin-bottom: 4px; color: var(--fg); }
   .stat-label { font-size: 12px; color: var(--gray-400); }
-  /* Case Nav */
+
+  /* Artifact diagram */
+  .er-diagram { background: var(--bg-deep); border: 1px solid var(--gray-200); border-radius: 16px; padding: 36px; margin: 36px 0; }
+  .er-diagram-title { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--fg); margin-bottom: 4px; }
+  .er-diagram-sub { font-size: 12px; color: var(--gray-400); margin-bottom: 28px; }
+    /* Case Nav */
   .case-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--gray-200); }
   .case-nav a { font-family: var(--mono); font-size: 12px; color: var(--gray-400); text-decoration: none; letter-spacing: 0.05em; transition: color 0.3s; display: flex; align-items: center; gap: 8px; }
   .case-nav a:hover { color: var(--fg); }
@@ -174,6 +179,7 @@
   .contact-card-close { position: absolute; top: 14px; right: 16px; background: none; border: none; cursor: pointer; font-size: 18px; color: #b8b5b2; transition: color 0.2s; line-height: 1; }
   .contact-card-close:hover { color: #5c5a58; }
   @media (max-width: 768px) {
+    .er-diagram ul { column-count: 1 !important; }
     .case-title { font-size: 24px; }
     .summary-main { grid-template-columns: 1fr; }
     .summary-impact { grid-template-columns: 1fr; }
@@ -423,7 +429,7 @@
 
 
   <!-- 산출물: 영문 불량 가이드 문서 구조 -->
-  <div class="er-diagram" style="background: var(--bg-deep); border: 1px solid var(--gray-200); border-radius: 16px; padding: 36px; margin: 36px 0;">
+  <div class="er-diagram">
     <div style="font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--fg); margin-bottom: 4px;">산출물 — CS GUIDE: Product Defect Handling (영문)</div>
     <div style="font-size: 12px; color: var(--gray-400); margin-bottom: 28px;">QA 기준서 부재 상태에서 CX가 선제적으로 작성 · 글로벌 법인·JV 대상 배포</div>
 

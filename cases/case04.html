@@ -75,7 +75,7 @@
   .exec-block:hover .exec-step-num { color: var(--fg); }
   .exec-list { list-style: none; padding-left: 0; grid-column: 2; }
   .exec-list li { padding-left: 20px; position: relative; margin-bottom: 6px; font-size: 14px; line-height: 1.8; color: var(--gray-500); }
-  .exec-list li::before { content: "4"; position: absolute; left: 0; color: var(--gray-300); }
+  .exec-list li::before { content: "—"; position: absolute; left: 0; color: var(--gray-300); }
   .er-diagram { background: var(--bg-deep); border: 1px solid var(--gray-200); border-radius: 16px; padding: 36px; margin: 36px 0; }
   .er-diagram-title { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--fg); margin-bottom: 4px; }
   .er-diagram-sub { font-size: 12px; color: var(--gray-400); margin-bottom: 28px; }
@@ -84,7 +84,7 @@
   .er-table-name { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--fg); margin-bottom: 6px; letter-spacing: 0.02em; }
   .er-cols { list-style: none; padding: 0; }
   .er-cols li { font-family: var(--mono); font-size: 10px; color: var(--gray-500); line-height: 1.8; padding-left: 10px; position: relative; }
-  .er-cols li::before { content: "\00B7"; position: absolute; left: 0; }
+  .er-cols li::before { content: "·"; position: absolute; left: 0; }
   .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
   .result-box { border-radius: 12px; position: relative; overflow: hidden; transition: transform 0.3s ease; }
   .result-box:hover { transform: translateY(-2px); }
@@ -123,7 +123,14 @@
   .contact-card-item span.material-symbols-outlined { font-size: 18px; color: #8a8785; }
   .contact-card-close { position: absolute; top: 14px; right: 16px; background: none; border: none; cursor: pointer; font-size: 18px; color: #b8b5b2; transition: color 0.2s; line-height: 1; }
   .contact-card-close:hover { color: #5c5a58; }
+  /* Workflow diagram grids */
+  .wf-steps { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .wf-split { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .principle-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
   @media (max-width: 768px) {
+    .wf-steps { grid-template-columns: 1fr; }
+    .wf-split { grid-template-columns: 1fr; }
+    .principle-grid { grid-template-columns: 1fr; }
     .case-title { font-size: 24px; }
     .summary-main { grid-template-columns: 1fr; }
     .summary-impact { grid-template-columns: 1fr; }
@@ -301,7 +308,7 @@
 
       <div style="text-align: center; font-size: 11px; color: var(--gray-300);">↓ AI 프롬프트 (정책 우선순위 + 가드레일 내장)</div>
 
-      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
+      <div class="wf-steps">
         <div style="background: var(--bg-card); border: 1px solid var(--gray-200); border-radius: 8px; padding: 12px; text-align: center;">
           <div style="font-family: var(--mono); font-size: 10px; color: var(--gray-400); margin-bottom: 4px;">STEP 1</div>
           <div style="font-size: 12px; font-weight: 700; color: var(--fg);">문의 해석</div>
@@ -321,7 +328,7 @@
 
       <div style="text-align: center; font-size: 11px; color: var(--gray-300);">↓ 담당자 검수</div>
 
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+      <div class="wf-split">
         <div style="background: var(--bg); border: 1.5px solid var(--gray-200); border-radius: 10px; padding: 14px; text-align: center;">
           <div style="font-family: var(--mono); font-size: 10px; color: var(--gray-400); margin-bottom: 4px;">OK</div>
           <div style="font-size: 12px; font-weight: 700; color: var(--fg);">그대로 발송</div>
@@ -346,7 +353,7 @@
     <div class="er-diagram-title">AI 프롬프트 설계 원칙</div>
     <div class="er-diagram-sub">CX 정책 → 가드레일 → 응대 구조를 AI 프롬프트에 내장</div>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px;">
+    <div class="principle-grid">
       <div class="er-table">
         <div class="er-table-name">정책 우선순위</div>
         <ul class="er-cols">
