@@ -177,6 +177,8 @@
   .contact-card-close { position: absolute; top: 14px; right: 16px; background: none; border: none; cursor: pointer; font-size: 18px; color: #b8b5b2; transition: color 0.2s; line-height: 1; }
   .contact-card-close:hover { color: #5c5a58; }
   @media (max-width: 768px) {
+    .er-hierarchy-flow { grid-template-columns: 1fr !important; gap: 8px !important; }
+    .er-hierarchy-flow > div[style*="padding: 0 4px"] { display: none; }
     .case-title { font-size: 24px; }
     .summary-main { grid-template-columns: 1fr; }
     .summary-impact { grid-template-columns: 1fr; }
@@ -228,8 +230,8 @@
         <div class="summary-field-value">직원 감각 → 설문 데이터화 → 8 tables 관계형 데이터셋 → 대화 시나리오 설계 + 가드레일</div>
       </div>
     </div>
-    <div style="grid-column: 1 / -1; margin-top: 16px; padding: 16px 20px; background: var(--fg); color: #fff; border-radius: 10px; font-size: 14px; line-height: 1.7;">
-      <strong>CX가 AI 프로젝트를 주도한 구조적 사례</strong> — PM 없이 데이터 구조·시나리오·가드레일을 CX 관점에서 설계하고, AI팀과 협업하여 고객 피드백이 제품 기능(추천 로직)에 직접 반영되는 CX → Product 파이프라인 구축
+    <div style="grid-column: 1 / -1; margin-top: 16px; padding: 16px 20px; background: var(--accent-dim); border: 1px solid var(--accent-border); border-radius: 10px; font-size: 14px; line-height: 1.7; color: var(--fg-muted);">
+      <strong style="color: var(--fg);">CX가 AI 프로젝트를 리드한 구조적 사례</strong> — PM 없이 데이터 구조·시나리오·가드레일을 CX 관점에서 설계하고, AI팀과 협업하여 고객 피드백이 제품 기능(추천 로직)에 직접 반영되는 CX → Product 파이프라인 구축
     </div>
     <div class="summary-impact">
       <div class="impact-tile">
@@ -352,149 +354,74 @@
   <div class="er-diagram">
     <div class="er-diagram-title">관계형 데이터셋 구조 — 8 Tables</div>
     <div class="er-diagram-sub">고객 언어 → 향 좌표 → 제품 매핑을 위한 관계형 데이터 모델</div>
-    <div class="er-grid">
-      <div class="er-table">
-        <div class="er-table-name">01 FAMILY</div>
-        <div class="er-table-desc">향 계열 대분류</div>
-        <ul class="er-cols">
-          <li><span class="pk">family_id PK</span></li>
-          <li>family_name</li>
-          <li>description</li>
-        </ul>
+    <div style="max-width: 700px; margin: 0 auto;">
+      <!-- 4계층 분류 체계: 가로 플로우 -->
+      <div class="er-hierarchy-flow" style="display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; gap: 0; align-items: center; margin-bottom: 20px;">
+        <div class="er-table" style="text-align: center;">
+          <div class="er-table-name">FAMILY</div>
+          <div class="er-table-desc">향 계열 대분류</div>
+        </div>
+        <div style="text-align: center; color: var(--accent); font-weight: 700; padding: 0 4px;">→</div>
+        <div class="er-table" style="text-align: center;">
+          <div class="er-table-name">ACCORD</div>
+          <div class="er-table-desc">어코드 중분류</div>
+        </div>
+        <div style="text-align: center; color: var(--accent); font-weight: 700; padding: 0 4px;">→</div>
+        <div class="er-table" style="text-align: center;">
+          <div class="er-table-name">NOTE</div>
+          <div class="er-table-desc">향료 소분류</div>
+        </div>
+        <div style="text-align: center; color: var(--accent); font-weight: 700; padding: 0 4px;">→</div>
+        <div class="er-table" style="text-align: center;">
+          <div class="er-table-name">PRODUCT</div>
+          <div class="er-table-desc">제품 마스터</div>
+        </div>
       </div>
-      <div class="er-table">
-        <div class="er-table-name">02 ACCORD</div>
-        <div class="er-table-desc">어코드 중분류</div>
-        <ul class="er-cols">
-          <li><span class="pk">accord_id PK</span></li>
-          <li><span class="fk">family_id FK</span></li>
-          <li>accord_name</li>
-        </ul>
-      </div>
-      <div class="er-table">
-        <div class="er-table-name">03 NOTE</div>
-        <div class="er-table-desc">향료 소분류</div>
-        <ul class="er-cols">
-          <li><span class="pk">note_id PK</span></li>
-          <li><span class="fk">accord_id FK</span></li>
-          <li>note_name</li>
-          <li>intensity</li>
-        </ul>
-      </div>
-      <div class="er-table">
-        <div class="er-table-name">04 PRODUCT</div>
-        <div class="er-table-desc">제품 마스터</div>
-        <ul class="er-cols">
-          <li><span class="pk">product_id PK</span></li>
-          <li><span class="fk">family_id FK</span></li>
-          <li>product_name</li>
-          <li>product_type</li>
-        </ul>
-      </div>
-      <div class="er-table">
-        <div class="er-table-name">05 PRODUCT_NOTE</div>
-        <div class="er-table-desc">제품-향료 매핑</div>
-        <ul class="er-cols">
-          <li><span class="fk">product_id FK</span></li>
-          <li><span class="fk">note_id FK</span></li>
-          <li>note_role</li>
-        </ul>
-      </div>
-      <div class="er-table primary">
-        <div class="er-table-name">06 TERM_MAPPING</div>
-        <div class="er-table-desc">고객 표현 → 향료·제품 매핑</div>
-        <div class="er-table-count">242건</div>
-        <ul class="er-cols">
-          <li><span class="pk">term_id PK</span></li>
-          <li>customer_term</li>
-          <li>category (logic/texture)</li>
-          <li>weight (signature/standard/sub)</li>
-          <li><span class="fk">note_id FK</span></li>
-          <li><span class="fk">product_id FK</span></li>
-          <li>sentiment</li>
-        </ul>
-      </div>
-      <div class="er-table">
-        <div class="er-table-name">07 SURVEY</div>
-        <div class="er-table-desc">직원 설문 감각 데이터</div>
-        <div class="er-table-count">422건</div>
-        <ul class="er-cols">
-          <li><span class="pk">survey_id PK</span></li>
-          <li><span class="fk">product_id FK</span></li>
-          <li>customer_expression</li>
-          <li>staff_interpretation</li>
-        </ul>
-      </div>
-      <div class="er-table">
-        <div class="er-table-name">08 GUARDRAIL</div>
-        <div class="er-table-desc">금칙어·중단 조건</div>
-        <ul class="er-cols">
-          <li><span class="pk">rule_id PK</span></li>
-          <li>rule_type</li>
-          <li>condition</li>
-          <li>action</li>
-        </ul>
-      </div>
-    </div>
 
-    <!-- TERM_MAPPING example table -->
-    <div class="term-example">
-      <div class="term-example-title">TERM_MAPPING 예시 (5건)</div>
-      <table class="term-table">
-        <thead>
-          <tr>
-            <th>customer_term</th>
-            <th>category</th>
-            <th>weight</th>
-            <th>mapped_note</th>
-            <th>sentiment</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>깔끔하고 시원한</td>
-            <td>texture</td>
-            <td>standard</td>
-            <td>Bergamot, Green Tea</td>
-            <td>positive</td>
-          </tr>
-          <tr>
-            <td>달달하고 포근한</td>
-            <td>texture</td>
-            <td>standard</td>
-            <td>Vanilla, Tonka Bean</td>
-            <td>positive</td>
-          </tr>
-          <tr>
-            <td>비 온 뒤 같은 향</td>
-            <td>texture</td>
-            <td>sub</td>
-            <td>Petrichor, Iris</td>
-            <td>positive</td>
-          </tr>
-          <tr>
-            <td>향수 같지 않은 자연스러운</td>
-            <td>logic</td>
-            <td>standard</td>
-            <td>White Musk, Cedarwood</td>
-            <td>neutral</td>
-          </tr>
-          <tr>
-            <td>00 브랜드 △△ 같은 느낌</td>
-            <td>logic</td>
-            <td>signature</td>
-            <td>Ambroxan, Santal</td>
-            <td>positive</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      <!-- 연결 화살표 -->
+      <div style="text-align: center; color: var(--gray-300); font-size: 11px; margin-bottom: 12px;">
+        ↕ NOTE, PRODUCT와 매핑
+      </div>
 
-    <div class="er-relations">
-      <div class="er-rel-row">FAMILY <span class="er-rel-arrow">→</span> ACCORD <span class="er-rel-arrow">→</span> NOTE <span class="er-rel-arrow">→</span> PRODUCT (4계층 분류)</div>
-      <div class="er-rel-row">TERM_MAPPING <span class="er-rel-arrow">↔</span> NOTE, PRODUCT (고객 언어 ↔ 향 좌표)</div>
-      <div class="er-rel-row">SURVEY <span class="er-rel-arrow">→</span> TERM_MAPPING (직원 감각 → 매핑 근거)</div>
-      <div class="er-rel-row">GUARDRAIL <span class="er-rel-arrow">→</span> 상담 전환 (중단 조건 → 핸드오프)</div>
+      <!-- 핵심: TERM_MAPPING (가장 크게) -->
+      <div class="er-table primary" style="margin-bottom: 12px; padding: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline;">
+          <div>
+            <div class="er-table-name" style="font-size: 13px;">TERM_MAPPING</div>
+            <div class="er-table-desc">고객 표현 → 향료·제품 매핑 (핵심 테이블)</div>
+          </div>
+          <div class="er-table-count" style="font-size: 12px;">242건</div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 12px;">
+          <div style="font-family: var(--mono); font-size: 10px; color: var(--gray-500); background: var(--bg); padding: 6px 8px; border-radius: 4px;">customer_term</div>
+          <div style="font-family: var(--mono); font-size: 10px; color: var(--gray-500); background: var(--bg); padding: 6px 8px; border-radius: 4px;">category</div>
+          <div style="font-family: var(--mono); font-size: 10px; color: var(--gray-500); background: var(--bg); padding: 6px 8px; border-radius: 4px;">weight</div>
+          <div style="font-family: var(--mono); font-size: 10px; color: var(--gray-500); background: var(--bg); padding: 6px 8px; border-radius: 4px;">sentiment</div>
+        </div>
+      </div>
+
+      <!-- 연결 화살표 -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+        <div style="text-align: center; color: var(--gray-300); font-size: 11px;">↑ 감각 데이터 → 매핑 근거</div>
+        <div style="text-align: center; color: var(--gray-300); font-size: 11px;">↑ 중단 조건 → 핸드오프</div>
+      </div>
+
+      <!-- 보조 테이블: SURVEY + PRODUCT_NOTE + GUARDRAIL -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;">
+        <div class="er-table" style="text-align: center;">
+          <div class="er-table-name">SURVEY</div>
+          <div class="er-table-desc">직원 설문 감각 데이터</div>
+          <div class="er-table-count">422건</div>
+        </div>
+        <div class="er-table" style="text-align: center;">
+          <div class="er-table-name">PRODUCT_NOTE</div>
+          <div class="er-table-desc">제품-향료 매핑</div>
+        </div>
+        <div class="er-table" style="text-align: center;">
+          <div class="er-table-name">GUARDRAIL</div>
+          <div class="er-table-desc">금칙어·중단 조건</div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -550,36 +477,27 @@
   <!-- 결과 -->
   <div class="phase">
     <div class="phase-label">결과</div>
-    <div class="result-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 24px;">
+    <div class="result-grid">
       <div class="result-box quant">
-        <div class="stat-big">8</div>
-        <div class="stat-label">데이터셋 테이블</div>
-        <div style="font-size:12px; color:var(--gray-400); margin-top:4px;">관계형 구조 설계·구축</div>
+        <h4>정량</h4>
+        <p style="margin-bottom: 12px;"><strong>Beta v2 내부 테스트 완료</strong>, v3 진행 중</p>
+        <p style="margin-bottom: 12px;"><strong>데이터셋:</strong> 8 tables / 242 term mappings / 422 survey</p>
+        <p><strong>프로젝트 리드:</strong> PM 없이 CX 관점에서 기획·설계 주관, AI팀 협업</p>
       </div>
-      <div class="result-box quant">
-        <div class="stat-big">242</div>
-        <div class="stat-label">고객 언어 매핑</div>
-        <div style="font-size:12px; color:var(--gray-400); margin-top:4px;">표현 → 향료·제품 연결</div>
+      <div class="result-box qual">
+        <h4>정성</h4>
+        <p>이 프로젝트의 성공 기준은 <strong>"추천을 맞혔는가"가 아닙니다.</strong></p>
+        <p style="margin-top:12px;">
+          <strong>"고객이 자신의 취향을 더 정확하게 말할 수 있게 되었는가"</strong>입니다.<br>
+          AI가 정답을 내리는 것이 아니라,<br>
+          고객의 모호한 언어에서 좌표를 추출하고,<br>
+          AI의 발화로 고객이 더 정확한 언어를 뱉게 만드는 구조.
+        </p>
+        <p style="margin-top:12px; opacity:0.5;">
+          직원 한 명의 감각을 데이터로 전환하여,<br>
+          조직 누구나 같은 깊이로 고객의 말을 읽을 수 있는 기반을 만들었습니다.
+        </p>
       </div>
-      <div class="result-box quant">
-        <div class="stat-big">422</div>
-        <div class="stat-label">직원 설문 데이터</div>
-        <div style="font-size:12px; color:var(--gray-400); margin-top:4px;">감각의 언어화·데이터화</div>
-      </div>
-    </div>
-    <div class="result-box qual">
-      <h4>정성</h4>
-      <p>이 프로젝트의 성공 기준은 <strong>"추천을 맞혔는가"가 아닙니다.</strong></p>
-      <p style="margin-top:12px;">
-        <strong>"고객이 자신의 취향을 더 정확하게 말할 수 있게 되었는가"</strong>입니다.<br>
-        AI가 정답을 내리는 것이 아니라,<br>
-        고객의 모호한 언어에서 좌표를 추출하고,<br>
-        AI의 발화로 고객이 더 정확한 언어를 뱉게 만드는 구조.
-      </p>
-      <p style="margin-top:12px; opacity:0.5;">
-        직원 한 명의 감각을 데이터로 전환하여,<br>
-        조직 누구나 같은 깊이로 고객의 말을 읽을 수 있는 기반을 만들었습니다.
-      </p>
     </div>
   </div>
 
@@ -618,7 +536,7 @@
       <div class="expand-block">
         <div style="display:flex; align-items:baseline; gap:8px; margin-bottom:6px;">
           <span class="expand-num">04</span>
-          <strong>내부 상담사 지원 AI로의 확장</strong>
+          <strong>내부 상담사 지원 AI로의 확장 기획</strong>
         </div>
         <p>→ 이 데이터셋 구조는 고객 대면 추천뿐 아니라, 내부 상담사가 고객의 모호한 표현을 해석할 때 참조하는 AI 어시스턴트에도 동일하게 적용 가능한 설계</p>
       </div>
