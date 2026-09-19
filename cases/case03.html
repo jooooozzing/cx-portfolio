@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Case 03 — AI 향 추천 서비스 기획 | 김문주 CX Portfolio</title>
+<title>Case 03 — 기계가 읽을 수 있는 지식 | 김문주 CX Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..48,100..700,0..1&display=swap" rel="stylesheet">
 <style>
@@ -41,7 +41,7 @@
   .summary-field-label { font-family: var(--mono); font-size: 11px; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
   .summary-field-value { font-size: 15px; color: var(--fg); line-height: 1.7; }
   .summary-field-value strong { color: var(--fg); font-weight: 700; }
-  .summary-impact { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 32px; }
+  .summary-impact { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 32px; }
   .impact-tile { background: var(--bg-deep); border-radius: 10px; padding: 20px 24px; }
   .impact-num { font-family: var(--display); font-size: 28px; font-weight: 900; color: var(--fg); letter-spacing: -0.5px; }
   .impact-label { font-size: 12px; color: var(--gray-400); margin-top: 2px; }
@@ -66,11 +66,9 @@
   .hidden-block .hidden-label { font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
   .hidden-block p strong { color: #fff; }
   .hidden-block p span { color: rgba(255,255,255,0.7); }
-  .dual-grid { margin: 20px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .dual-grid-item { background: var(--bg-card); border: 1px solid var(--gray-200); border-radius: 10px; padding: 16px 20px; font-size: 13px; line-height: 1.8; transition: all 0.3s; }
-  .dual-grid-item:hover { border-color: var(--gray-300); transform: translateY(-1px); }
-  .dual-grid-item strong { font-size: 14px; color: var(--fg); }
-  .dual-grid-item span { color: var(--gray-500); }
+  .flow-block { margin: 24px 0; padding: 20px 24px; background: var(--bg-card); border: 1px solid var(--gray-200); border-radius: 10px; font-family: var(--mono); font-size: 12px; line-height: 2.4; color: var(--gray-500); transition: all 0.3s; }
+  .flow-block:hover { border-color: var(--gray-300); }
+  .flow-block pre { margin: 0; white-space: pre; font-family: var(--mono); }
   /* Exec */
   .exec-block { margin-bottom: 8px; display: grid; grid-template-columns: 56px 1fr; gap: 0 12px; padding: 20px 24px; border-radius: 8px; background: var(--bg-deep); border: 1px solid transparent; transition: all 0.3s; }
   .exec-block:hover { background: var(--bg); border-color: var(--gray-200); }
@@ -80,58 +78,25 @@
   .exec-list { list-style: none; padding-left: 0; grid-column: 2; }
   .exec-list li { padding-left: 20px; position: relative; margin-bottom: 6px; font-size: 14px; line-height: 1.8; color: var(--gray-500); }
   .exec-list li::before { content: "—"; position: absolute; left: 0; color: var(--gray-300); }
-  /* ER Diagram — NEW with column details */
-  .er-diagram { background: var(--bg-deep); border: 1px solid var(--gray-200); border-radius: 16px; padding: 36px; margin: 36px 0; }
-  .er-diagram-title { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--fg); margin-bottom: 4px; }
-  .er-diagram-sub { font-size: 12px; color: var(--gray-400); margin-bottom: 28px; }
-  .er-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-  .er-table { background: var(--bg); border: 1.5px solid var(--gray-200); border-radius: 10px; padding: 14px; transition: all 0.3s; }
-  .er-table:hover { border-color: var(--accent-border); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
-  .er-table.primary { border-color: var(--accent); background: var(--accent-dim); grid-column: span 2; }
-  .er-table-name { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--fg); margin-bottom: 6px; letter-spacing: 0.02em; }
-  .er-table-desc { font-size: 11px; color: var(--gray-400); line-height: 1.5; margin-bottom: 8px; }
-  .er-table-count { font-family: var(--mono); font-size: 10px; color: var(--gray-300); }
-  .er-cols { list-style: none; padding: 0; }
-  .er-cols li { font-family: var(--mono); font-size: 10px; color: var(--gray-500); line-height: 1.8; padding-left: 10px; position: relative; }
-  .er-cols li::before { content: "·"; position: absolute; left: 0; }
-  .er-cols li .pk { color: var(--accent); font-weight: 700; }
-  .er-cols li .fk { color: var(--gray-500); font-weight: 500; }
-  /* TERM_MAPPING example table */
-  .term-example { margin-top: 20px; overflow-x: auto; }
-  .term-example-title { font-family: var(--mono); font-size: 11px; color: var(--gray-400); margin-bottom: 12px; letter-spacing: 0.05em; }
-  .term-table { width: 100%; border-collapse: collapse; font-size: 12px; }
-  .term-table th { font-family: var(--mono); font-size: 10px; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.05em; padding: 8px 12px; text-align: left; border-bottom: 2px solid var(--gray-200); font-weight: 500; }
-  .term-table td { padding: 8px 12px; border-bottom: 1px solid var(--gray-100); color: var(--gray-500); }
-  .term-table td:first-child { color: var(--fg); font-weight: 500; }
-  .term-table tr:last-child td { border-bottom: none; }
-  .er-relations { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--gray-200); }
-  .er-rel-row { font-family: var(--mono); font-size: 11px; color: var(--gray-400); line-height: 2; display: flex; align-items: center; gap: 8px; }
-  .er-rel-arrow { color: var(--accent); font-weight: 700; }
-  /* Conversation Scenario Flowchart */
-  .scenario-diagram { background: var(--bg-deep); border: 1px solid var(--gray-200); border-radius: 16px; padding: 36px; margin: 36px 0; }
-  .scenario-title { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--fg); margin-bottom: 4px; }
-  .scenario-sub { font-size: 12px; color: var(--gray-400); margin-bottom: 28px; }
-  .scenario-flow { display: flex; flex-direction: column; gap: 12px; max-width: 600px; margin: 0 auto; }
-  .scenario-entry { background: var(--bg); border: 1.5px solid var(--gray-200); border-radius: 10px; padding: 16px 20px; text-align: center; transition: all 0.3s; }
-  .scenario-entry:hover { border-color: var(--gray-300); }
-  .scenario-entry .s-label { font-family: var(--mono); font-size: 10px; color: var(--gray-400); margin-bottom: 4px; }
-  .scenario-entry .s-main { font-size: 13px; font-weight: 700; color: var(--fg); }
-  .scenario-entry .s-sub { font-size: 11px; color: var(--gray-400); margin-top: 4px; }
-  .scenario-arrow { text-align: center; font-size: 11px; color: var(--gray-300); }
-  .scenario-slots { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
-  .scenario-slot { background: var(--bg-card); border: 1px solid var(--gray-200); border-radius: 8px; padding: 12px; text-align: center; font-size: 12px; transition: all 0.3s; }
-  .scenario-slot:hover { border-color: var(--gray-300); }
-  .scenario-slot .s-label { font-family: var(--mono); font-size: 10px; color: var(--gray-400); margin-bottom: 4px; }
-  .scenario-slot strong { color: var(--fg); }
-  .scenario-slot span { color: var(--gray-400); }
-  .scenario-options { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .scenario-option { background: var(--fg); color: #fff; border-radius: 8px; padding: 14px; text-align: center; font-size: 12px; transition: all 0.3s; }
-  .scenario-option:hover { background: #2a2a2a; }
-  .scenario-option .s-label { font-family: var(--mono); font-size: 10px; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
-  .scenario-option strong { color: #fff; }
-  .scenario-option span { opacity: 0.6; color: #fff; }
-  .scenario-handoff { background: var(--fg); color: #fff; border-radius: 10px; padding: 14px 20px; text-align: center; font-size: 12px; }
-  .scenario-handoff strong { color: #fff; }
+  /* BA Diagram */
+  .ba-diagram { background: var(--bg-deep); border: 1px solid var(--gray-200); border-radius: 16px; padding: 36px; margin: 36px 0; }
+  .ba-diagram-title { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--fg); margin-bottom: 28px; }
+  .ba-grid { display: grid; grid-template-columns: 1fr 40px 1fr; gap: 0; align-items: stretch; }
+  .ba-box { background: var(--bg); border: 1px solid var(--gray-200); border-radius: 12px; padding: 24px; transition: all 0.3s; display: flex; flex-direction: column; }
+  .ba-box:hover { border-color: var(--gray-300); }
+  .ba-box h4 { font-size: 16px; font-weight: 900; color: var(--fg); margin-bottom: 4px; }
+  .ba-box .ba-tag { font-family: var(--mono); font-size: 11px; color: var(--gray-400); margin-bottom: 16px; display: block; }
+  .ba-tree { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 8px; flex: 1; justify-content: center; }
+  .ba-node { font-size: 12px; font-weight: 500; padding: 8px 14px; border-radius: 6px; text-align: center; color: var(--fg-muted); }
+  .ba-node.parent { background: var(--bg-card); border: 1.5px solid var(--gray-200); }
+  .ba-arrow-col { display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--gray-300); }
+  .ba-result { font-size: 12px; color: var(--gray-400); margin-top: auto; padding-top: 16px; line-height: 1.6; }
+  .ba-box-dark { background: var(--fg); color: #fff; border: none; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; }
+  .ba-box-dark h4 { color: #fff; }
+  .ba-box-dark .ba-tag { font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,0.5); margin-bottom: 16px; display: block; }
+  .ba-box-dark .ba-node { background: rgba(255,255,255,0.15); color: #fff; border: none; font-weight: 700; }
+  .ba-box-dark .ba-node-ghost { background: transparent; border: 1px dashed rgba(255,255,255,0.3); color: rgba(255,255,255,0.6); font-size: 11px; padding: 6px 10px; border-radius: 6px; text-align: center; }
+  .ba-box-dark .ba-result { color: #fff; font-weight: 500; }
   /* Result */
   .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
   .result-box { border-radius: 12px; position: relative; overflow: hidden; transition: transform 0.3s ease; }
@@ -158,6 +123,34 @@
   .expand-block .expand-num { font-family: var(--mono); font-size: 11px; color: var(--fg); }
   .expand-block strong { color: var(--fg); }
   .expand-block p { color: var(--gray-500); font-size: 13px; padding-left: 24px; }
+  .expand-block-dark { background: var(--accent-dim); border: 1px solid var(--accent-border); border-radius: 10px; padding: 20px 24px; font-size: 14px; line-height: 1.9; transition: all 0.3s; }
+  .expand-block-dark:hover { border-color: var(--gray-300); }
+  .expand-block-dark .expand-num { font-family: var(--mono); font-size: 11px; color: var(--fg); }
+  .expand-block-dark strong { color: var(--fg); }
+  .expand-block-dark p { color: var(--gray-500); font-size: 13px; padding-left: 24px; }
+  /* Dual grid */
+  .dual-grid { margin: 20px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .dual-grid-item { background: var(--bg-card); border: 1px solid var(--gray-200); border-radius: 10px; padding: 16px 20px; font-size: 13px; line-height: 1.8; transition: all 0.3s; }
+  .dual-grid-item:hover { border-color: var(--gray-300); transform: translateY(-1px); }
+  .dual-grid-item strong { font-size: 14px; color: var(--fg); }
+  .dual-grid-item span { color: var(--gray-500); }
+  /* Structure diagram */
+  .er-diagram { background: var(--bg-deep); border: 1px solid var(--gray-200); border-radius: 16px; padding: 36px; margin: 36px 0; }
+  .er-diagram-title { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--fg); margin-bottom: 4px; }
+  .er-diagram-sub { font-size: 12px; color: var(--gray-400); margin-bottom: 28px; }
+  .er-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .er-table { background: var(--bg); border: 1.5px solid var(--gray-200); border-radius: 10px; padding: 14px; transition: all 0.3s; }
+  .er-table:hover { border-color: var(--accent-border); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
+  .er-table.primary { border-color: var(--accent); background: var(--accent-dim); grid-column: span 2; }
+  .er-table-name { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--fg); margin-bottom: 6px; letter-spacing: 0.02em; }
+  .er-table-desc { font-size: 11px; color: var(--gray-400); line-height: 1.5; margin-bottom: 8px; }
+  .er-table-count { font-family: var(--mono); font-size: 10px; color: var(--gray-300); }
+  .er-cols { list-style: none; padding: 0; }
+  .er-cols li { font-family: var(--mono); font-size: 10px; color: var(--gray-500); line-height: 1.8; padding-left: 10px; position: relative; }
+  .er-cols li::before { content: "\00b7"; position: absolute; left: 0; }
+  .wf-steps { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .wf-split { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .principle-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
   /* Case Nav */
   .case-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--gray-200); }
   .case-nav a { font-family: var(--mono); font-size: 12px; color: var(--gray-400); text-decoration: none; letter-spacing: 0.05em; transition: color 0.3s; display: flex; align-items: center; gap: 8px; }
@@ -177,22 +170,24 @@
   .contact-card-close { position: absolute; top: 14px; right: 16px; background: none; border: none; cursor: pointer; font-size: 18px; color: #b8b5b2; transition: color 0.2s; line-height: 1; }
   .contact-card-close:hover { color: #5c5a58; }
   @media (max-width: 768px) {
-    .er-hierarchy-flow { grid-template-columns: 1fr !important; gap: 8px !important; }
-    .er-hierarchy-flow > div[style*="padding: 0 4px"] { display: none; }
     .case-title { font-size: 24px; }
     .summary-main { grid-template-columns: 1fr; }
     .summary-impact { grid-template-columns: 1fr; }
     .summary-meta { flex-direction: column; gap: 16px; }
     .summary-card { padding: 32px 24px; }
-    .dual-grid { grid-template-columns: 1fr; }
-    .er-grid { grid-template-columns: 1fr 1fr; }
-    .er-table.primary { grid-column: span 2; }
-    .scenario-slots { grid-template-columns: 1fr; }
-    .scenario-options { grid-template-columns: 1fr; }
+    .ba-grid { grid-template-columns: 1fr; gap: 16px; }
+    .ba-arrow-col { transform: rotate(90deg); padding: 8px 0; }
     .result-grid { grid-template-columns: 1fr; }
     .nav-links { display: none; }
     .top-nav { padding: 0 16px; }
     .stat-big { font-size: 36px; }
+    .dual-grid { grid-template-columns: 1fr; }
+    .er-grid { grid-template-columns: 1fr 1fr; }
+    .er-table.primary { grid-column: span 2; }
+    .wf-steps { grid-template-columns: 1fr; }
+    .wf-split { grid-template-columns: 1fr; }
+    .principle-grid { grid-template-columns: 1fr; }
+    .er-diagram { padding: 24px 18px; }
   }
 </style>
 </head>
@@ -211,7 +206,7 @@
 <div class="container">
   <div class="case-header">
     <div class="case-eyebrow">Case 03</div>
-    <h1 class="case-title">AI 향 추천 서비스 기획 — 고객 언어 기반 데이터셋 설계</h1>
+    <h1 class="case-title">기계가 읽을 수 있는 지식</h1>
   </div>
 
   <!-- Summary Card -->
@@ -219,28 +214,43 @@
     <div class="summary-main">
       <div class="summary-field">
         <div class="summary-field-label">Problem</div>
-        <div class="summary-field-value">"비슷한 향 없나요?" — 추천 구조도, 연결 데이터도 없었다</div>
+        <div class="summary-field-value">스크립트와 정책이 여러 문서에 흩어져 <strong>같은 질문에 다른 답</strong>이 나갔고, AI가 참조할 수 있는 형태도 아니었습니다</div>
       </div>
       <div class="summary-field">
         <div class="summary-field-label">Insight</div>
-        <div class="summary-field-value">고객은 정확한 매칭이 아니라 <strong>"이해받았다"는 감각</strong>을 원한다</div>
+        <div class="summary-field-value">문서를 한곳에 모으는 것과, <strong>질문 단위로 쪼개 블록으로 만드는 것</strong>은 다른 작업입니다</div>
       </div>
       <div class="summary-field" style="grid-column: 1 / -1;">
         <div class="summary-field-label">Structure</div>
-        <div class="summary-field-value">직원 감각 → 설문 데이터화 → 8 tables 관계형 데이터셋 → 대화 시나리오 설계 + 가드레일</div>
+        <div class="summary-field-value">마스터 DB 통합 → 실제 상담 발화 클러스터링 → 문의 단계별 지식 블록 재구성 → Databricks 기반 내부 챗봇 → L1~L4 고도화 로드맵</div>
       </div>
     </div>
-    <div style="grid-column: 1 / -1; margin-top: 16px; padding: 16px 20px; background: var(--accent-dim); border: 1px solid var(--accent-border); border-radius: 10px; font-size: 14px; line-height: 1.7; color: var(--fg-muted);">
-      <strong style="color: var(--fg);">CX가 AI 프로젝트를 리드한 구조적 사례</strong> — PM 없이 데이터 구조·시나리오·가드레일을 CX 관점에서 설계하고, AI팀과 협업하여 고객 피드백이 제품 기능(추천 로직)에 직접 반영되는 CX → Product 파이프라인 구축
+    <div class="summary-impact">
+      <div class="impact-tile">
+        <div class="impact-num">904행</div>
+        <div class="impact-label">통합 마스터 DB (v3.1)</div>
+      </div>
+      <div class="impact-tile">
+        <div class="impact-num">102건 → 7 · 6</div>
+        <div class="impact-label">실제 상담 발화를 7개 패턴 · 6개 그룹으로 클러스터링</div>
+      </div>
+      <div class="impact-tile">
+        <div class="impact-num">109 / 102행</div>
+        <div class="impact-label">재구성한 상담 DB · 질문 DB</div>
+      </div>
+      <div class="impact-tile">
+        <div class="impact-num">배포 전</div>
+        <div class="impact-label">내부 챗봇 — 기본 질의응답 동작 확인 단계</div>
+      </div>
     </div>
     <div class="summary-meta">
       <div class="meta-item">
         <div class="meta-label">Role</div>
-        <div class="meta-value">프로젝트 기획·리드 (PM 없이 CX 관점에서 주관)</div>
+        <div class="meta-value">CX Manager — 지식 구조 설계 · 데이터셋 정의 · 챗봇 기획</div>
       </div>
       <div class="meta-item">
         <div class="meta-label">Stakeholders</div>
-        <div class="meta-value">AI 전담팀 · 오프라인 스토어팀</div>
+        <div class="meta-value">데이터 담당 부서 · 운영 조직 · 내부 챗봇 개발</div>
       </div>
     </div>
   </div>
@@ -248,46 +258,25 @@
   <!-- 읽기 -->
   <div class="phase">
     <div class="phase-label">읽기</div>
-    <p>단종 제품 문의가 반복되고 있었습니다.<br>
-    고객은 같은 질문을 했고, 상담사는 매번 같은 한계에 부딪혔습니다.</p>
+    <p>같은 질문에 다른 답이 나갔습니다.<br>
+    기준이 없어서가 아니라, 기준이 여러 문서에 나뉘어 있었기 때문입니다.</p>
     <div class="voice-block">
-      <div class="voice-label">고객이 말한 것</div>
-      <p>"<strong>이 향 단종인가요?</strong>"</p>
-      <p>"<strong>비슷한 향 없나요?</strong>"</p>
-      <p>"<strong>가벼운 향이요</strong>"</p>
+      <div class="voice-label">현장에서 반복된 상황</div>
+      <p>같은 문의인데 <strong>참조한 문서가 다르면 답이 달라집니다</strong></p>
+      <p>어느 문서가 최신인지 확인하는 데 시간이 듭니다</p>
     </div>
-    <p>표면적으로는 대체 제품을 찾는 문의였습니다.<br>
-    그러나 이 말 뒤에는 두 가지가 숨어 있었습니다.</p>
+    <p>문서를 한곳에 모으는 것으로는 풀리지 않는 문제였습니다.<br>
+    모아두어도, 사람이 그 안에서 맞는 조각을 찾아야 하는 구조는 그대로이기 때문입니다.</p>
     <div class="hidden-block">
-      <div class="hidden-label">말하지 않은 것</div>
-      <p><strong>① 자신이 원하는 향을 정확히 표현할 언어가 없다</strong><br>
-      <span>— "비슷한"이 무엇과 비슷한 건지, "가벼운"이 어떤 가벼움인지 고객 자신도 모른다</span></p>
-      <p style="margin-top:10px;"><strong>② 추천의 근거를 알고 싶은 것이 아니라, "이해받았다"는 감각을 원한다</strong><br>
-      <span>— 정확한 매칭보다, 내 말을 제대로 읽었다는 느낌</span></p>
+      <div class="hidden-label">실제 문제</div>
+      <p><strong>① 문서가 사람 기준으로 정리돼 있었습니다</strong><br>
+      <span>— 부서별 · 시기별 · 파일별. 읽는 사람은 맥락을 알지만, 기계는 모릅니다</span></p>
+      <p style="margin-top:10px;"><strong>② 기계가 참조하려면 질문 단위로 쪼개져 있어야 합니다</strong><br>
+      <span>— "교환 정책 문서"가 아니라 "이 질문에는 이 근거로 이렇게 답한다"의 단위</span></p>
     </div>
-    <p>그리고 이것을 증폭시키는 <strong>구조적 문제</strong>가 있었습니다.</p>
-    <p>"비슷한 향"으로 연결해줄 구조 자체가 없었습니다.<br>
-    고객이 좋아하는 향과 <strong>유사한 다른 제품도, 같은 취향의 다른 제형도 연결되지 않는 상태.</strong><br>
-    단종 문의에 대체 향을 안내하려 해도, 근거가 될 데이터도 로직도 없었습니다.</p>
-    <p>오프라인 매장의 숙련된 직원은 이것을 감각적으로 읽어냅니다.<br>
-    문제는 이 감각이 <strong>그 직원 한 사람에게 갇혀 있다</strong>는 것이었습니다.</p>
-    <p>여기서 두 가지를 설계해야 했습니다.</p>
-    <div class="dual-grid">
-      <div class="dual-grid-item">
-        <strong>① "비슷한"을 어떻게 추출할 것인가</strong><br>
-        <span>고객의 모호한 언어에서 향의 좌표를 뽑아내는 구조</span>
-      </div>
-      <div class="dual-grid-item">
-        <strong>② 고객이 어떤 언어를 뱉게 할 것인가</strong><br>
-        <span>AI가 발화하는 방식을 설계하여 고객의 취향 언어를 이끌어내는 구조</span>
-      </div>
-    </div>
-    <p>당시 사내에 AI 도입 사례는 전무했습니다.<br>
-    기획안을 가지고 AI 전담팀에 미팅을 잡았습니다.</p>
     <p class="insight">
-      이 프로젝트의 출발점은 기술이 아니었습니다.<br>
-      <strong>"고객의 언어를 향의 좌표로 번역하는 구조"</strong>를 설계하는 것.<br>
-      AI는 그 구조 위에 얹히는 도구였습니다.
+      그래서 목표를 다시 잡았습니다.<br>
+      문서를 정리하는 것이 아니라, <strong>기계가 참조할 수 있는 단위로 지식을 다시 쓰는 것.</strong>
     </p>
   </div>
 
@@ -296,168 +285,99 @@
     <div class="phase-label">실행</div>
     <div class="exec-block">
       <span class="exec-step-num">01</span>
-      <div class="exec-block-title">직원 감각 데이터 확보 — 설문 설계·수집 (422건)</div>
+      <div class="exec-block-title">마스터 DB 통합 — 904행 (v3.1)</div>
       <ul class="exec-list">
-        <li>오프라인 매장 직원 대상 설문 설계: 제품별 고객 실제 표현, 호/불호 이유, 비교 언급, 체감 강도, 직원 해석, 킬링 멘트 7개 항목</li>
-        <li>"고객이 이렇게 말했을 때, 실제로는 이런 뜻이다"를 직원의 언어로 기록</li>
-        <li>직원 개인에게 갇혀 있던 감각을 데이터로 추출하는 첫 단계</li>
+        <li>여러 문서에 흩어져 있던 스크립트와 정책을 하나의 마스터 DB로 통합. 현재 904행, 버전 v3.1로 관리</li>
+        <li>반복해서 쓰이는 문장은 표준문장 S-01~S-08로 분리해, 개별 답변이 아니라 공통 블록을 참조하도록 구성</li>
+        <li>표준문장은 4개국어로 관리해, 언어가 달라도 같은 근거를 참조하도록 했습니다</li>
       </ul>
     </div>
     <div class="exec-block">
       <span class="exec-step-num">02</span>
-      <div class="exec-block-title">고객 언어 → 향 좌표 매핑 데이터셋 설계 (8개 테이블, 242건)</div>
+      <div class="exec-block-title">실제 상담 발화 클러스터링 — 약 102건 → 7개 패턴 → 6개 그룹</div>
       <ul class="exec-list">
-        <li>관계형 데이터 구조 설계: 향 계열(Family) → 어코드(Accord) → 향료(Note) → 제품(Product)의 4계층 분류 체계</li>
-        <li>핵심 테이블 TERM_MAPPING: 고객 실제 표현 → 향료·제품 매핑, 카테고리(logic/texture), 가중치(signature/standard/sub), 감정 분석</li>
-        <li>"묵직한", "포근한", "시원한" 같은 감각어를 향료 좌표로 전환 — 고객의 모호한 언어에서 추천 근거를 추출하는 구조</li>
+        <li>기획 문서가 아니라 실제 상담에서 오간 발화 약 102건을 수집해 출발점으로 삼았습니다</li>
+        <li>표현을 7개 패턴으로 묶고, 패턴을 다시 6개 그룹으로 정리. 고객이 실제로 쓰는 말이 분류의 기준이 되도록 했습니다</li>
+        <li>분류 체계를 먼저 만들고 발화를 끼워 넣는 방식은 쓰지 않았습니다. 그 경우 실제 문의가 분류에 안 맞는 일이 반복됩니다</li>
       </ul>
     </div>
     <div class="exec-block">
       <span class="exec-step-num">03</span>
-      <div class="exec-block-title">AI 발화 설계 — 고객의 취향 언어를 이끌어내는 구조</div>
+      <div class="exec-block-title">문의 단계별 지식 블록 재구성 — 상담 DB 109행 · 질문 DB 102행</div>
       <ul class="exec-list">
-        <li>"비슷한 향 없나요?"에서 멈추지 않고, 고객이 자신의 취향을 더 구체적으로 말할 수 있게 AI의 발화 자체를 설계</li>
-        <li>3-Slot 좌표 설정: 자유 발화 유도 → 예시 기반 가이드 → 향 계열·어코드·탐색축을 순차 추출</li>
-        <li>Harmony(동조) vs Contrast(변주) A/B 제안: 2개 선택지로 고객 반응 데이터를 수집하는 탐색형 구조</li>
+        <li>클러스터링 결과를 문의가 진행되는 단계에 따라 다시 배치. 같은 주제라도 첫 문의와 재문의는 필요한 근거가 다릅니다</li>
+        <li>상담 DB 109행(응대 단위)과 질문 DB 102행(질의 단위)으로 나눠, 질문에서 근거를 찾아가는 경로를 만들었습니다</li>
       </ul>
     </div>
     <div class="exec-block">
       <span class="exec-step-num">04</span>
-      <div class="exec-block-title">가드레일 및 운영 기준 설계</div>
+      <div class="exec-block-title">Databricks 기반 내부 챗봇 개발</div>
       <ul class="exec-list">
-        <li>화법 3원칙: 정확한 묘사 · 리스크 선제 안내 · 감정 우선 인정</li>
-        <li>추천 중단 조건 정의: 건강/안전 관련, 모순 조건 반복 → 즉시 상담 전환 프로토콜</li>
-        <li>금칙어·약점 표현 가이드: 평가가 아닌 구조 설명으로 전환</li>
-        <li>최대 2회 제안 후 상담 전환 — Slot 데이터·A/B 반응·제외 조건을 상담사에게 핸드오프하는 데이터 포맷 정의</li>
-        <li>기획안을 기반으로 AI 전담팀에 미팅 후 프로젝트 시작 — PM 없이 프로젝트 리드</li>
-        <li>데이터 구조·시나리오·가드레일·성공 기준은 CX에서 주관, 기술적 구현은 AI팀 담당</li>
-        <li>Beta v2 내부 테스트 완료, v3 진행 중</li>
+        <li>재구성한 지식 블록을 참조하는 내부용 챗봇을 개발. 상담사가 정책 근거를 찾는 시간을 줄이는 것이 1차 목적입니다</li>
+        <li>현재 기본 질의응답 동작을 확인한 단계이며, 배포 전입니다</li>
       </ul>
     </div>
   </div>
 
-  <!-- ER Diagram with column details -->
+  <!-- 지식 구조 -->
   <div class="er-diagram">
-    <div class="er-diagram-title">관계형 데이터셋 구조 — 8 Tables</div>
-    <div class="er-diagram-sub">고객 언어 → 향 좌표 → 제품 매핑을 위한 관계형 데이터 모델</div>
-    <div style="max-width: 700px; margin: 0 auto;">
-      <!-- 4계층 분류 체계: 가로 플로우 -->
-      <div class="er-hierarchy-flow" style="display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; gap: 0; align-items: center; margin-bottom: 20px;">
-        <div class="er-table" style="text-align: center;">
-          <div class="er-table-name">FAMILY</div>
-          <div class="er-table-desc">향 계열 대분류</div>
-        </div>
-        <div style="text-align: center; color: var(--accent); font-weight: 700; padding: 0 4px;">→</div>
-        <div class="er-table" style="text-align: center;">
-          <div class="er-table-name">ACCORD</div>
-          <div class="er-table-desc">어코드 중분류</div>
-        </div>
-        <div style="text-align: center; color: var(--accent); font-weight: 700; padding: 0 4px;">→</div>
-        <div class="er-table" style="text-align: center;">
-          <div class="er-table-name">NOTE</div>
-          <div class="er-table-desc">향료 소분류</div>
-        </div>
-        <div style="text-align: center; color: var(--accent); font-weight: 700; padding: 0 4px;">→</div>
-        <div class="er-table" style="text-align: center;">
-          <div class="er-table-name">PRODUCT</div>
-          <div class="er-table-desc">제품 마스터</div>
-        </div>
+    <div class="er-diagram-title">지식이 다시 쓰인 경로</div>
+    <div class="er-diagram-sub">흩어진 문서 → 통합 마스터 DB → 실제 발화 기반 재구성 → 참조 가능한 블록</div>
+    <div class="er-grid" style="grid-template-columns: repeat(4, 1fr);">
+      <div class="er-table">
+        <div class="er-table-name">흩어진 문서</div>
+        <div class="er-table-desc">부서별 · 시기별 · 파일별</div>
+        <ul class="er-cols">
+          <li>최신본 확인 필요</li>
+          <li>같은 질문, 다른 답</li>
+          <li>기계 참조 불가</li>
+        </ul>
       </div>
-
-      <!-- 연결 화살표 -->
-      <div style="text-align: center; color: var(--gray-300); font-size: 11px; margin-bottom: 12px;">
-        ↕ NOTE, PRODUCT와 매핑
+      <div class="er-table primary" style="grid-column: span 1;">
+        <div class="er-table-name">마스터 DB</div>
+        <div class="er-table-desc">통합 · 버전 관리</div>
+        <div class="er-table-count">904행 · v3.1</div>
+        <ul class="er-cols">
+          <li>표준문장 S-01~S-08</li>
+          <li>4개국어 관리</li>
+        </ul>
       </div>
-
-      <!-- 핵심: TERM_MAPPING (가장 크게) -->
-      <div class="er-table primary" style="margin-bottom: 12px; padding: 20px;">
-        <div style="display: flex; justify-content: space-between; align-items: baseline;">
-          <div>
-            <div class="er-table-name" style="font-size: 13px;">TERM_MAPPING</div>
-            <div class="er-table-desc">고객 표현 → 향료·제품 매핑 (핵심 테이블)</div>
-          </div>
-          <div class="er-table-count" style="font-size: 12px;">242건</div>
-        </div>
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 12px;">
-          <div style="font-family: var(--mono); font-size: 10px; color: var(--gray-500); background: var(--bg); padding: 6px 8px; border-radius: 4px;">customer_term</div>
-          <div style="font-family: var(--mono); font-size: 10px; color: var(--gray-500); background: var(--bg); padding: 6px 8px; border-radius: 4px;">category</div>
-          <div style="font-family: var(--mono); font-size: 10px; color: var(--gray-500); background: var(--bg); padding: 6px 8px; border-radius: 4px;">weight</div>
-          <div style="font-family: var(--mono); font-size: 10px; color: var(--gray-500); background: var(--bg); padding: 6px 8px; border-radius: 4px;">sentiment</div>
-        </div>
+      <div class="er-table">
+        <div class="er-table-name">발화 클러스터링</div>
+        <div class="er-table-desc">실제 상담 발화에서 출발</div>
+        <div class="er-table-count">약 102건 → 7패턴 → 6그룹</div>
+        <ul class="er-cols">
+          <li>고객 표현이 분류 기준</li>
+        </ul>
       </div>
-
-      <!-- 연결 화살표 -->
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
-        <div style="text-align: center; color: var(--gray-300); font-size: 11px;">↑ 감각 데이터 → 매핑 근거</div>
-        <div style="text-align: center; color: var(--gray-300); font-size: 11px;">↑ 중단 조건 → 핸드오프</div>
+      <div class="er-table">
+        <div class="er-table-name">지식 블록</div>
+        <div class="er-table-desc">문의 단계별 재배치</div>
+        <div class="er-table-count">상담 DB 109행 · 질문 DB 102행</div>
+        <ul class="er-cols">
+          <li>질문 → 근거 경로</li>
+          <li>챗봇 참조 대상</li>
+        </ul>
       </div>
-
-      <!-- 보조 테이블: SURVEY + PRODUCT_NOTE + GUARDRAIL -->
-      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;">
-        <div class="er-table" style="text-align: center;">
-          <div class="er-table-name">SURVEY</div>
-          <div class="er-table-desc">직원 설문 감각 데이터</div>
-          <div class="er-table-count">422건</div>
-        </div>
-        <div class="er-table" style="text-align: center;">
-          <div class="er-table-name">PRODUCT_NOTE</div>
-          <div class="er-table-desc">제품-향료 매핑</div>
-        </div>
-        <div class="er-table" style="text-align: center;">
-          <div class="er-table-name">GUARDRAIL</div>
-          <div class="er-table-desc">금칙어·중단 조건</div>
-        </div>
-      </div>
+    </div>
+    <div class="er-relations">
+      <div class="er-rel-row"><span class="er-rel-arrow">→</span> 분류를 먼저 만들지 않고, 실제 발화에서 분류를 끌어냈습니다</div>
+      <div class="er-rel-row"><span class="er-rel-arrow">→</span> 블록 단위이므로 한 조각이 바뀌어도 문서 전체를 다시 쓰지 않습니다</div>
     </div>
   </div>
 
-  <!-- Conversation Scenario Flowchart -->
-  <div class="scenario-diagram">
-    <div class="scenario-title">대화 시나리오 플로우차트</div>
-    <div class="scenario-sub">고객 진입 → 3-Slot 좌표 설정 → Harmony/Contrast 제안 → 상담 전환</div>
-    <div class="scenario-flow">
-      <div class="scenario-entry">
-        <div class="s-label">ENTRY</div>
-        <div class="s-main">"비슷한 향 없나요?" · "가벼운 향이요"</div>
-        <div class="s-sub">고객의 모호한 언어 진입</div>
-      </div>
-      <div class="scenario-arrow">↓ AI 발화로 취향 언어 유도</div>
-      <div class="scenario-slots">
-        <div class="scenario-slot">
-          <div class="s-label">Slot 1</div>
-          <strong>Family</strong><br>
-          <span>향 계열</span>
-        </div>
-        <div class="scenario-slot">
-          <div class="s-label">Slot 2</div>
-          <strong>Accord</strong><br>
-          <span>어코드</span>
-        </div>
-        <div class="scenario-slot">
-          <div class="s-label">Slot 3</div>
-          <strong>Note/Texture</strong><br>
-          <span>탐색축</span>
-        </div>
-      </div>
-      <div class="scenario-arrow">↓ TERM_MAPPING (242건)</div>
-      <div class="scenario-options">
-        <div class="scenario-option">
-          <div class="s-label">Option A · Harmony</div>
-          <strong>동조</strong><br>
-          <span>조건 전부 충족하는 안전한 선택</span>
-        </div>
-        <div class="scenario-option">
-          <div class="s-label">Option B · Contrast</div>
-          <strong>변주</strong><br>
-          <span>큰 틀 유지 + 탐색축에서 의외의 제안</span>
-        </div>
-      </div>
-      <div class="scenario-arrow">↓ 2회 제안 후</div>
-      <div class="scenario-handoff">
-        <strong>상담 전환</strong> — 미세한 차이를 좁히는 건 상담사의 영역<br>
-        Slot 데이터 + A/B 반응 + 제외 조건을 핸드오프
-      </div>
-    </div>
+  <!-- 선행 작업 -->
+  <div class="phase">
+    <div class="phase-label">선행 작업 — 같은 원리로 먼저 했던 것</div>
+    <p>이 구조는 처음 시도한 방식이 아닙니다.<br>
+    향 추천 AI 데이터셋을 설계할 때, 고객이 쓰는 표현과 내부 용어를 잇는 매핑 구조를 먼저 만들었습니다.
+    고객은 내부 분류명으로 말하지 않기 때문에, 표현과 용어를 연결해 두지 않으면 어떤 추천도 성립하지 않습니다.
+    SKU 183행을 기준으로 이 매핑을 구성했고, <strong>고객 언어를 입구로 두고 내부 지식을 연결한다</strong>는 점에서 지금의 지식 블록 구조와 같은 원리였습니다.</p>
+
+    <p style="margin-top:28px;">영문 CS 응대 워크플로우도 같은 흐름에 있습니다.
+    영문 채널을 운영하면서, 응대 판단 기준을 Accuracy — Policy Compliance — Safety — Customer Experience 순으로 명문화하고,
+    카테고리별 금칙어와 안전 표현을 정의한 뒤, 문의 해석 → 한글 초안 → 영문 최종의 3단계와 6단계 내부 점검 시퀀스를 AI 워크플로우에 내장했습니다.
+    개인의 어학 역량이 아니라 <strong>프롬프트에 내장된 기준</strong>이 답변 품질을 담보하도록 한 작업으로, 정책을 기계가 참조하는 형태로 옮긴 첫 시도에 해당합니다.</p>
   </div>
 
   <!-- 결과 -->
@@ -465,73 +385,67 @@
     <div class="phase-label">결과</div>
     <div class="result-grid">
       <div class="result-box quant">
-        <h4>정량</h4>
-        <p style="margin-bottom: 12px;"><strong>Beta v2 내부 테스트 완료</strong>, v3 진행 중</p>
-        <p style="margin-bottom: 12px;"><strong>데이터셋:</strong> 8 tables / 242 term mappings / 422 survey</p>
-        <p><strong>프로젝트 리드:</strong> PM 없이 CX 관점에서 기획·설계 주관, AI팀 협업</p>
+        <h4>산출물</h4>
+        <p style="margin-bottom: 10px;"><strong>마스터 DB</strong> — 904행 통합, v3.1 버전 관리, 표준문장 S-01~S-08 4개국어</p>
+        <p style="margin-bottom: 10px;"><strong>클러스터링</strong> — 실제 상담 발화 약 102건 → 7개 패턴 → 6개 그룹</p>
+        <p style="margin-bottom: 10px;"><strong>지식 블록</strong> — 상담 DB 109행 · 질문 DB 102행</p>
+        <p style="margin-bottom: 10px;"><strong>내부 챗봇</strong> — Databricks 기반, 기본 질의응답 동작 확인</p>
+        <p><strong>로드맵</strong> — L1~L4 고도화 단계 정의</p>
+        <p style="font-size:12px; color:var(--gray-400); margin-top:12px;">챗봇은 배포 전 단계이며, 운영 지표는 아직 없습니다.</p>
       </div>
       <div class="result-box qual">
         <h4>정성</h4>
-        <p>이 프로젝트의 성공 기준은 <strong>"추천을 맞혔는가"가 아닙니다.</strong></p>
-        <p style="margin-top:12px;">
-          <strong>"고객이 자신의 취향을 더 정확하게 말할 수 있게 되었는가"</strong>입니다.<br>
-          AI가 정답을 내리는 것이 아니라,<br>
-          고객의 모호한 언어에서 좌표를 추출하고,<br>
-          AI의 발화로 고객이 더 정확한 언어를 뱉게 만드는 구조.
-        </p>
-        <p style="margin-top:12px; opacity:0.5;">
-          직원 한 명의 감각을 데이터로 전환하여,<br>
-          조직 누구나 같은 깊이로 고객의 말을 읽을 수 있는 기반을 만들었습니다.
-        </p>
+        <p>지식을 모으는 일과 <strong>기계가 읽을 수 있게 만드는 일은 다릅니다.</strong><br>
+        전자는 보관의 문제이고, 후자는 구조의 문제입니다.</p>
+        <p style="margin-top:12px;">분류를 먼저 정하지 않고 실제 발화에서 끌어낸 것이 이 작업의 판단이었습니다.<br>
+        기획자가 예상한 질문이 아니라, 고객이 실제로 한 질문이 지식의 입구가 됩니다.</p>
+        <p style="margin-top:12px; opacity:0.5;">같은 질문에 같은 근거로 답하려면, 그 근거가 먼저 참조 가능한 형태여야 합니다.</p>
       </div>
     </div>
   </div>
 
   <!-- 확장 -->
   <details class="phase phase-expandable">
-    <summary class="phase-label">확장 — Beta v3 진행 중</summary>
-    <p>Beta v2 내부 테스트를 완료하고, 현재 v3를 진행 중입니다.</p>
-
-    <div style="margin: 24px 0; padding: 24px; background: var(--bg-card); border: 1px dashed var(--gray-300); border-radius: 12px; text-align: center;">
-      <div style="font-family: var(--mono); font-size: 11px; color: var(--gray-400); margin-bottom: 8px;">BETA TEST SCREENSHOT</div>
-      <div style="font-size: 13px; color: var(--gray-500);">시나리오 의도대로 AI 대화가 작동하는 실제 테스트 화면<br>(더미 데이터 적용, 내부 정보 마스킹)</div>
-      <!-- 추후 <img src="../assets/beta-screenshot.png" alt="Beta test screenshot" style="max-width: 100%; border-radius: 8px; margin-top: 16px;"> 로 교체 -->
-    </div>
+    <summary class="phase-label">확장 — L1~L4 고도화 로드맵</summary>
     <div style="margin:24px 0; display:grid; gap:16px;">
       <div class="expand-block">
         <div style="display:flex; align-items:baseline; gap:8px; margin-bottom:6px;">
-          <span class="expand-num">01</span>
-          <strong>CX → Product 파이프라인</strong>
+          <span class="expand-num">L1</span>
+          <strong>기본 질의응답</strong>
         </div>
-        <p>→ 고객 피드백이 추천 로직이라는 제품 기능에 직접 반영되는 구조</p>
+        <p>→ 정리된 지식 블록을 참조해 답을 반환하는 단계. 현재 동작을 확인한 지점입니다.</p>
       </div>
       <div class="expand-block">
         <div style="display:flex; align-items:baseline; gap:8px; margin-bottom:6px;">
-          <span class="expand-num">02</span>
-          <strong>고객 언어 데이터의 재사용</strong>
+          <span class="expand-num">L2</span>
+          <strong>문맥 기반 응답</strong>
         </div>
-        <p>→ 매핑 데이터셋은 AI 추천뿐 아니라, CS 응대 가이드·마케팅 카피·상품 기획의 공통 언어 자원으로 확장 가능</p>
+        <p>→ 문의 단계와 이전 대화를 반영해 같은 주제에서도 다른 근거를 고르는 단계.</p>
       </div>
       <div class="expand-block">
         <div style="display:flex; align-items:baseline; gap:8px; margin-bottom:6px;">
-          <span class="expand-num">03</span>
-          <strong>AI-Human 협업 모델의 프로토타입</strong>
+          <span class="expand-num">L3</span>
+          <strong>정책 판단 지원</strong>
         </div>
-        <p>→ AI가 탐색하고 인간이 좁히는 구조. 2회 제안 후 상담 전환은 "AI의 한계"가 아니라 "역할 분담의 설계"</p>
+        <p>→ 답변 제시에서 나아가, 어떤 정책 조항이 적용되는지와 적용 상태를 함께 제시하는 단계.</p>
       </div>
-      <div class="expand-block">
+      <div class="expand-block-dark">
         <div style="display:flex; align-items:baseline; gap:8px; margin-bottom:6px;">
-          <span class="expand-num">04</span>
-          <strong>내부 상담사 지원 AI로의 확장 기획</strong>
+          <span class="expand-num">L4</span>
+          <strong>지식 갱신 루프</strong>
         </div>
-        <p>→ 이 데이터셋 구조는 고객 대면 추천뿐 아니라, 내부 상담사가 고객의 모호한 표현을 해석할 때 참조하는 AI 어시스턴트에도 동일하게 적용 가능한 설계</p>
+        <p>→ 응대에서 드러난 공백이 다시 지식 블록으로 반영되는 단계. 여기까지 가야 사람이 문서를 손보지 않아도 지식이 유지됩니다.</p>
       </div>
     </div>
+    <p class="insight">
+      현재는 L1을 확인한 상태이며, 배포 전입니다.<br>
+      <strong>단계를 미리 나눠 둔 이유는, 어디까지 왔는지를 매번 다시 설명하지 않기 위해서입니다.</strong>
+    </p>
   </details>
 
   <div class="case-nav">
-    <a href="/cx-portfolio/cases/case02.html" class="prev">← Case 02 — 교환 선출고</a>
-    <a href="/cx-portfolio/cases/case04.html" class="next">Case 04 — 글로벌 CX 운영 →</a>
+    <a href="/cx-portfolio/cases/case02.html" class="prev">← Case 02 — 조건이 다른 조직에 하나의 정책 적용하기</a>
+    <a href="/cx-portfolio/cases/case04.html" class="next">Case 04 — 데이터로 타 조직을 움직이기 →</a>
   </div>
 </div>
 
@@ -544,7 +458,6 @@
   <div class="contact-card">
     <button class="contact-card-close" onclick="document.getElementById('contactOverlay').classList.remove('active')">✕</button>
     <div class="contact-card-name">김문주</div>
-    <div class="contact-card-item"><span class="material-symbols-outlined">call</span>+82 10 9961 1899</div>
     <div class="contact-card-item"><span class="material-symbols-outlined">mail</span>moonjukim2023@gmail.com</div>
   </div>
 </div>

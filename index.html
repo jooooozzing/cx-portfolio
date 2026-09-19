@@ -81,6 +81,12 @@
   .case-card-link:hover { color: var(--accent); }
   .case-card-link::after { content: '→'; transition: transform 0.3s; }
   .case-card-link:hover::after { transform: translateX(4px); }
+  /* Archive */
+  .archive-section { border-top: 1px solid var(--gray-200); padding-top: 40px; margin-bottom: var(--space-2xl); }
+  .archive-label { font-family: var(--mono); font-size: 11px; color: var(--gray-400); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 10px; }
+  .archive-desc { font-size: 13px; color: var(--gray-400); line-height: 1.7; margin-bottom: 20px; max-width: 520px; }
+  .archive-section .cases-row { margin-top: 0; }
+  .archive-section .case-tag { border-color: var(--gray-200); }
   /* Footer */
   .site-footer { border-top: 1px solid var(--gray-200); padding: 48px 24px; margin-top: 0; }
   .footer-inner { max-width: 900px; margin: 0 auto; display: flex; justify-content: center; align-items: center; }
@@ -146,60 +152,63 @@
   <header class="portfolio-header">
     <div class="header-eyebrow">CX Manager</div>
     <h1>김문주</h1>
-    <div class="subtitle">보이지 않는 것에 진짜가 있다</div>
+    <div class="subtitle">판단이 한 사람 안에 남지 않도록</div>
   </header>
 
   <!-- ════════════ FRAMEWORK INTRO ════════════ -->
   <div class="framework-intro">
-    CX에서 대부분의 업무는 <strong>Layer 1</strong>에서 끝납니다.<br>
-    고객이 말한 것을 분류하고, 처리하고, 종결합니다.<br><br>
-    네 개의 케이스는 <strong>Layer 2</strong>에서 시작합니다.<br>
-    고객이 말한 것 뒤에 말하지 않은 것이 있고,<br>
-    그것을 읽어낸 뒤 조직이 같은 이해로 같은 리액션을 할 수 있는 구조로 전환하고,<br>
-    정량과 정성 모두로 검증하는 과정을 보여줍니다.
+    CS에서 판단은 대체로 사람 안에 남습니다.<br>
+    오래 일한 사람이 알고, 물어보면 답해주고, 그 사람이 없으면 답이 달라집니다.<br><br>
+    네 개의 케이스는 그 판단을 밖으로 옮긴 기록입니다.<br>
+    개인이 내리던 판단을 <strong>팀 문서</strong>로, 문서를 <strong>조직 정책</strong>으로,<br>
+    정책을 <strong>본사 밖 조직이 실행할 수 있는 형태</strong>로,<br>
+    다시 <strong>AI가 참조할 수 있는 지식</strong>으로 옮겨왔습니다.<br><br>
+    읽어내는 감각이 없어진 것은 아닙니다.<br>
+    다만 그것은 결론이 아니라, 구조에 넣을 재료에 가깝습니다.
   </div>
 
   <!-- ════════════ LAYER DIAGRAM ════════════ -->
   <div class="layer-diagram">
-    <div class="layer-diagram-title">CX 읽기 프레임워크</div>
-    <div class="layer-diagram-sub">고객이 말한 것 → 말하지 않은 것 → 구조 전환 → 검증</div>
+    <div class="layer-diagram-title">판단이 옮겨간 자리</div>
+    <div class="layer-diagram-sub">개인 판단 → 팀 문서 → 조직 정책 → 본사 밖 조직 → AI가 참조하는 지식</div>
     <div class="layer-stack">
       <div class="layer-item">
         <span class="layer-label">Layer 1</span>
-        <span class="layer-name">고객이 말한 것</span>
-        <span class="layer-desc">"펌프가 안 나와요" "교환 언제 돼요?" "이 향 단종됐나요?"</span>
+        <span class="layer-name">개인 판단</span>
+        <span class="layer-desc">경험과 감각으로 내리는 판단 · 물어봐야 알 수 있는 상태</span>
       </div>
-      <div class="layer-note">대부분의 CX는 여기서 처리한다</div>
+      <div class="layer-note">대부분의 CS 지식은 여기에 머문다</div>
       <div class="layer-arrow">↓</div>
-      <div class="layer-item active">
+      <div class="layer-item">
         <span class="layer-label">Layer 2</span>
-        <span class="layer-name">고객이 말하지 않은 것</span>
-        <span class="layer-desc">증상 뒤의 원인 · 불만 뒤의 불안 · 질문 뒤의 욕구</span>
+        <span class="layer-name">팀 문서</span>
+        <span class="layer-desc">매뉴얼 · 스크립트 · 시스템 가이드로 옮긴 판단</span>
       </div>
-      <div class="layer-note portfolio-start">← 이 포트폴리오의 시작점</div>
       <div class="layer-arrow">↓</div>
       <div class="layer-item">
         <span class="layer-label">Layer 3</span>
-        <span class="layer-name">감각을 구조로 전환</span>
-        <span class="layer-desc">분류 체계 · 프로세스 · 데이터셋 · 도구</span>
+        <span class="layer-name">조직 정책</span>
+        <span class="layer-desc">적용 범위와 버전을 가진 기준 · 예외 판단의 근거</span>
       </div>
       <div class="layer-arrow">↓</div>
-      <div class="layer4-row">
-        <div class="layer4-item">
-          <span class="layer-label">Layer 4a</span>
-          <span class="layer-name">정량 검증</span>
-        </div>
-        <div class="layer4-item">
-          <span class="layer-label">Layer 4b</span>
-          <span class="layer-name">정성 검증</span>
-        </div>
+      <div class="layer-item">
+        <span class="layer-label">Layer 4</span>
+        <span class="layer-name">본사 밖 조직</span>
+        <span class="layer-desc">도급사 · 조건이 서로 다른 복수 조직이 같은 기준으로 실행</span>
       </div>
+      <div class="layer-arrow">↓</div>
+      <div class="layer-item active">
+        <span class="layer-label">Layer 5</span>
+        <span class="layer-name">AI가 참조하는 지식</span>
+        <span class="layer-desc">기계가 읽을 수 있는 형태로 정리된 지식 블록</span>
+      </div>
+      <div class="layer-note portfolio-start">← 지금 작업하고 있는 지점</div>
     </div>
     <div class="cases-row">
-      <a href="/cx-portfolio/cases/case01.html" class="case-tag"><strong>Case 1</strong>제품 불량 기준 수립과<br>VOC-제품팀 공유 체계</a>
-      <a href="/cx-portfolio/cases/case02.html" class="case-tag"><strong>Case 2</strong>선출고 프로세스 설계</a>
-      <a href="/cx-portfolio/cases/case03.html" class="case-tag"><strong>Case 3</strong>AI 향 추천 서비스</a>
-      <a href="/cx-portfolio/cases/case04.html" class="case-tag"><strong>Case 4</strong>글로벌 영문 CS 운영<br>AI 워크플로우 설계</a>
+      <a href="/cx-portfolio/cases/case01.html" class="case-tag"><strong>Case 1</strong>판단을 위임하는 구조<br>컨택센터 도급 전환</a>
+      <a href="/cx-portfolio/cases/case02.html" class="case-tag"><strong>Case 2</strong>조건이 다른 조직에<br>하나의 정책 적용하기</a>
+      <a href="/cx-portfolio/cases/case03.html" class="case-tag"><strong>Case 3</strong>기계가 읽을 수 있는<br>지식</a>
+      <a href="/cx-portfolio/cases/case04.html" class="case-tag"><strong>Case 4</strong>데이터로<br>타 조직을 움직이기</a>
     </div>
   </div>
 
@@ -207,72 +216,83 @@
   <div class="case-cards">
     <a href="/cx-portfolio/cases/case01.html" class="case-card">
       <div class="case-card-eyebrow">Case 01</div>
-      <div class="case-card-title">제품 불량 기준 수립과 VOC-제품팀 공유 체계 구축</div>
+      <div class="case-card-title">판단을 위임하는 구조 — 컨택센터 도급 전환</div>
       <div class="case-card-field">
         <div class="case-card-field-label">Problem</div>
-        <div class="case-card-field-value">제품 불량 VOC 50%인데 판단 기준도, 분류 체계도 없었다</div>
+        <div class="case-card-field-value">본사 1인이 전담하던 CS를 외부 조직으로 이관. 지식이 개인 안에 있어 위임할 근거가 없었다</div>
       </div>
       <div class="case-card-field">
         <div class="case-card-field-label">Solution</div>
-        <div class="case-card-field-value">VOC 티켓 필드 전체 재설계 — 원인 기반 분류 체계(7·27·98) + 제품팀 공유 파이프라인</div>
+        <div class="case-card-field-value">처리 가능 범위 조사 설계 · 교육 허브 3축 · 사내 문의 답변 주체 전환 · 주간 QA를 위임 공백 식별 방향으로 재설계</div>
       </div>
       <div class="case-card-field">
         <div class="case-card-field-label">Impact</div>
-        <div class="case-card-impact">85%↓ 펌프 불량 VOC</div>
+        <div class="case-card-impact">교육 허브 3축, 채용 요건 재정의 4명</div>
       </div>
       <span class="case-card-link">Read Case</span>
     </a>
     <a href="/cx-portfolio/cases/case02.html" class="case-card">
       <div class="case-card-eyebrow">Case 02</div>
-      <div class="case-card-title">교환 선출고 프로세스 설계</div>
+      <div class="case-card-title">조건이 다른 조직에 하나의 정책을 적용하기</div>
       <div class="case-card-field">
         <div class="case-card-field-label">Problem</div>
-        <div class="case-card-field-value">교환 리드타임 9.2일, 상담사가 "언제요?"에 답할 수 없는 구조</div>
+        <div class="case-card-field-value">해외 거주 고객의 불량 교환을, 규제·정산 조건이 서로 다른 복수 조직에 같은 기준으로 적용해야 했다</div>
       </div>
       <div class="case-card-field">
         <div class="case-card-field-label">Solution</div>
-        <div class="case-card-field-value">반품 전 선출고로 순서 전환, 기다림 자체를 제거</div>
+        <div class="case-card-field-value">조건별로 시행·유지·보류를 구분한 단계적 적용 설계 · KR/EN 이중 문서와 버전 관리 · 발생 건수 집계 기반 정산 주기 조정 협의</div>
       </div>
       <div class="case-card-field">
         <div class="case-card-field-label">Impact</div>
-        <div class="case-card-impact">2.3일 (75%↓), Loss 0%</div>
+        <div class="case-card-impact">11개월 31건 집계 기반 운영, 문서 v1.2</div>
       </div>
       <span class="case-card-link">Read Case</span>
     </a>
     <a href="/cx-portfolio/cases/case03.html" class="case-card">
       <div class="case-card-eyebrow">Case 03</div>
-      <div class="case-card-title">AI 향 추천 서비스 기획 — 고객 언어 기반 데이터셋 설계</div>
+      <div class="case-card-title">기계가 읽을 수 있는 지식</div>
       <div class="case-card-field">
         <div class="case-card-field-label">Problem</div>
-        <div class="case-card-field-value">"비슷한 향 없나요?" — 추천할 구조도, 연결할 데이터도 없었다</div>
+        <div class="case-card-field-value">스크립트·정책이 여러 문서에 흩어져 같은 질문에 다른 답이 나갔고, AI가 참조할 수 있는 형태도 아니었다</div>
       </div>
       <div class="case-card-field">
         <div class="case-card-field-label">Solution</div>
-        <div class="case-card-field-value">8개 테이블 관계형 데이터셋 + 대화 시나리오 설계 + 가드레일</div>
+        <div class="case-card-field-value">마스터 DB 904행 통합 · 상담 발화 102건을 7개 패턴·6개 그룹으로 클러스터링해 지식 블록 재구성 · Databricks 기반 내부 챗봇</div>
       </div>
       <div class="case-card-field">
         <div class="case-card-field-label">Impact</div>
-        <div class="case-card-impact">8 tables 242 mappings 422 survey</div>
+        <div class="case-card-impact">마스터 DB 904행(v3.1), 기본 질의응답 동작 확인 — 배포 전</div>
       </div>
       <span class="case-card-link">Read Case</span>
     </a>
     <a href="/cx-portfolio/cases/case04.html" class="case-card">
       <div class="case-card-eyebrow">Case 04</div>
-      <div class="case-card-title">글로벌 CX 운영 체계 구축 — AI 기반 영문 CS 시스템 설계</div>
+      <div class="case-card-title">데이터로 타 조직을 움직이기</div>
       <div class="case-card-field">
         <div class="case-card-field-label">Problem</div>
-        <div class="case-card-field-value">글로벌 채널 런칭, 본사 운영 기준 부재. 영문 CS 품질이 개인 역량에 의존하는 구조</div>
+        <div class="case-card-field-value">타팀 소관 B2B 채널의 응대 공백이 CS 부하와 매출 손실로 전가되는 구조</div>
       </div>
       <div class="case-card-field">
         <div class="case-card-field-label">Solution</div>
-        <div class="case-card-field-value">정책 우선순위 정의 + AI 워크플로우 설계(해석→초안→최종) + CS Handling Guide 설계</div>
+        <div class="case-card-field-value">11개월 티켓 11,635건과 채널 매출 교차 분석 · 담당자 부재 기간을 비교 구간으로 삼아 인과를 논증 · 전담 인력 충원과 부재 시 대체 응대 체계 제안</div>
       </div>
       <div class="case-card-field">
         <div class="case-card-field-label">Impact</div>
-        <div class="case-card-impact">100% 영문 채널 직접 운영, 6-Step AI 점검 시퀀스 설계</div>
+        <div class="case-card-impact">일평균 문의 1.9배, 재인입 9건 — 제안 반영 여부 확인 중</div>
       </div>
       <span class="case-card-link">Read Case</span>
     </a>
+  </div>
+
+  <!-- ════════════ ARCHIVE ════════════ -->
+  <div class="archive-section">
+    <div class="archive-label">Archive</div>
+    <div class="archive-desc">개인의 해석에서 출발했던 이전 케이스입니다. 기록으로 남겨둡니다.</div>
+    <div class="cases-row" style="grid-template-columns: repeat(3, 1fr);">
+      <a href="/cx-portfolio/cases/archive02.html" class="case-tag"><strong>교환 선출고 프로세스 설계</strong>리드타임 9.2일 → 2.3일</a>
+      <a href="/cx-portfolio/cases/archive01.html" class="case-tag"><strong>제품 불량 분류 체계 수립</strong>원인 기반 7·27·98</a>
+      <a href="/cx-portfolio/cases/archive03.html" class="case-tag"><strong>AI 향 추천 데이터셋 설계</strong>고객 표현–내부 용어 매핑</a>
+    </div>
   </div>
 </div>
 
@@ -285,7 +305,6 @@
   <div class="contact-card">
     <button class="contact-card-close" onclick="document.getElementById('contactOverlay').classList.remove('active')">✕</button>
     <div class="contact-card-name">김문주</div>
-    <div class="contact-card-item"><span class="material-symbols-outlined">call</span>+82 10 9961 1899</div>
     <div class="contact-card-item"><span class="material-symbols-outlined">mail</span>moonjukim2023@gmail.com</div>
   </div>
 </div>

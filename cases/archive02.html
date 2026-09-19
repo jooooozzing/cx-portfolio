@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Case 02 — 조건이 다른 조직에 하나의 정책을 적용하기 | 김문주 CX Portfolio</title>
+<title>Archive — 교환 선출고 프로세스 설계 | 김문주 CX Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..48,100..700,0..1&display=swap" rel="stylesheet">
 <style>
@@ -128,29 +128,6 @@
   .expand-block-dark .expand-num { font-family: var(--mono); font-size: 11px; color: var(--fg); }
   .expand-block-dark strong { color: var(--fg); }
   .expand-block-dark p { color: var(--gray-500); font-size: 13px; padding-left: 24px; }
-  /* Dual grid */
-  .dual-grid { margin: 20px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .dual-grid-item { background: var(--bg-card); border: 1px solid var(--gray-200); border-radius: 10px; padding: 16px 20px; font-size: 13px; line-height: 1.8; transition: all 0.3s; }
-  .dual-grid-item:hover { border-color: var(--gray-300); transform: translateY(-1px); }
-  .dual-grid-item strong { font-size: 14px; color: var(--fg); }
-  .dual-grid-item span { color: var(--gray-500); }
-  /* Structure diagram */
-  .er-diagram { background: var(--bg-deep); border: 1px solid var(--gray-200); border-radius: 16px; padding: 36px; margin: 36px 0; }
-  .er-diagram-title { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--fg); margin-bottom: 4px; }
-  .er-diagram-sub { font-size: 12px; color: var(--gray-400); margin-bottom: 28px; }
-  .er-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-  .er-table { background: var(--bg); border: 1.5px solid var(--gray-200); border-radius: 10px; padding: 14px; transition: all 0.3s; }
-  .er-table:hover { border-color: var(--accent-border); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
-  .er-table.primary { border-color: var(--accent); background: var(--accent-dim); grid-column: span 2; }
-  .er-table-name { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--fg); margin-bottom: 6px; letter-spacing: 0.02em; }
-  .er-table-desc { font-size: 11px; color: var(--gray-400); line-height: 1.5; margin-bottom: 8px; }
-  .er-table-count { font-family: var(--mono); font-size: 10px; color: var(--gray-300); }
-  .er-cols { list-style: none; padding: 0; }
-  .er-cols li { font-family: var(--mono); font-size: 10px; color: var(--gray-500); line-height: 1.8; padding-left: 10px; position: relative; }
-  .er-cols li::before { content: "\00b7"; position: absolute; left: 0; }
-  .wf-steps { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
-  .wf-split { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .principle-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
   /* Case Nav */
   .case-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--gray-200); }
   .case-nav a { font-family: var(--mono); font-size: 12px; color: var(--gray-400); text-decoration: none; letter-spacing: 0.05em; transition: color 0.3s; display: flex; align-items: center; gap: 8px; }
@@ -181,13 +158,6 @@
     .nav-links { display: none; }
     .top-nav { padding: 0 16px; }
     .stat-big { font-size: 36px; }
-    .dual-grid { grid-template-columns: 1fr; }
-    .er-grid { grid-template-columns: 1fr 1fr; }
-    .er-table.primary { grid-column: span 2; }
-    .wf-steps { grid-template-columns: 1fr; }
-    .wf-split { grid-template-columns: 1fr; }
-    .principle-grid { grid-template-columns: 1fr; }
-    .er-diagram { padding: 24px 18px; }
   }
 </style>
 </head>
@@ -197,7 +167,7 @@
     <a href="/cx-portfolio/" class="nav-logo">Portfolio — Kim Moonju</a>
     <div class="nav-links">
       <a href="/cx-portfolio/cases/case01.html">Case 01</a>
-      <a href="/cx-portfolio/cases/case02.html" class="active">Case 02</a>
+      <a href="/cx-portfolio/cases/case02.html">Case 02</a>
       <a href="/cx-portfolio/cases/case03.html">Case 03</a>
       <a href="/cx-portfolio/cases/case04.html">Case 04</a>
     </div>
@@ -205,8 +175,8 @@
 </nav>
 <div class="container">
   <div class="case-header">
-    <div class="case-eyebrow">Case 02</div>
-    <h1 class="case-title">조건이 다른 조직에 하나의 정책을 적용하기</h1>
+    <div class="case-eyebrow">Archive — Case 02</div>
+    <h1 class="case-title">교환 선출고(Pre-dispatch) 프로세스 설계</h1>
   </div>
 
   <!-- Summary Card -->
@@ -214,43 +184,35 @@
     <div class="summary-main">
       <div class="summary-field">
         <div class="summary-field-label">Problem</div>
-        <div class="summary-field-value">해외 거주 고객의 불량 교환을, <strong>규제·정산 조건이 서로 다른 복수 조직</strong>에 동일한 기준으로 적용해야 하는 상황</div>
+        <div class="summary-field-value">교환 리드타임 9.2일, 상담사가 "언제"에 답할 수 없는 구조</div>
       </div>
       <div class="summary-field">
         <div class="summary-field-label">Insight</div>
-        <div class="summary-field-value">기준을 하나로 만드는 것과 <strong>동시에 적용하는 것은 다른 문제</strong>. 적용 시점을 조건별로 나눠야 했습니다</div>
+        <div class="summary-field-value">속도가 아니라 불확실성. <strong>순서를 재정의해서 불확실성 자체를 해결하는 것</strong></div>
       </div>
       <div class="summary-field" style="grid-column: 1 / -1;">
         <div class="summary-field-label">Structure</div>
-        <div class="summary-field-value">조건별로 시행 · 유지 · 보류를 구분한 단계적 적용 설계 → KR/EN 이중 문서와 버전 관리 → 발생 건수 집계를 근거로 정산 주기 조정 협의</div>
+        <div class="summary-field-value">회수 후 출고 → 선출고(Pre-dispatch)로 순서 전환</div>
       </div>
     </div>
     <div class="summary-impact">
       <div class="impact-tile">
-        <div class="impact-num">11개월</div>
-        <div class="impact-label">운영 기간 (2025.10 — 2026.08)</div>
+        <div class="impact-num">2.3일</div>
+        <div class="impact-label">리드타임 (75%↓, 기존 9.2일)</div>
       </div>
       <div class="impact-tile">
-        <div class="impact-num">31건</div>
-        <div class="impact-label">같은 기간 집계된 발생 건수</div>
-      </div>
-      <div class="impact-tile">
-        <div class="impact-num">v1.2</div>
-        <div class="impact-label">정책 문서 버전 체계 적용</div>
-      </div>
-      <div class="impact-tile">
-        <div class="impact-num">KR / EN</div>
-        <div class="impact-label">이중 문서 운영</div>
+        <div class="impact-num">0%</div>
+        <div class="impact-label">Loss율 (미반품 0건)</div>
       </div>
     </div>
     <div class="summary-meta">
       <div class="meta-item">
         <div class="meta-label">Role</div>
-        <div class="meta-value">CX Manager — 정책 설계 · 문서 버전 관리 · 조직 간 협의</div>
+        <div class="meta-value">CX Manager — 프로세스 설계 및 파일럿 운영</div>
       </div>
       <div class="meta-item">
         <div class="meta-label">Stakeholders</div>
-        <div class="meta-value">조건이 서로 다른 복수 조직 · 정산 담당 부서</div>
+        <div class="meta-value">로지스틱스팀 (조율 대상)</div>
       </div>
     </div>
   </div>
@@ -258,27 +220,37 @@
   <!-- 읽기 -->
   <div class="phase">
     <div class="phase-label">읽기</div>
-    <p>해외에 거주하는 고객이 제품 불량으로 교환을 요청하는 건이 있었습니다.<br>
-    문의 자체는 단순합니다. 불량이면 교환한다 — 국내에서는 이미 정해진 기준입니다.</p>
+    <p>교환 관련 VOC에서 같은 표현이 반복되고 있었습니다.</p>
     <div class="voice-block">
       <div class="voice-label">고객이 말한 것</div>
-      <p>"<strong>제품에 문제가 있는데, 교환이 되나요?</strong>"</p>
+      <p>"<strong>언제 받을 수 있나요?</strong>"</p>
+      <p>"<strong>맞교환 되나요?</strong>"</p>
     </div>
-    <p>그런데 이 문의를 받는 조직이 하나가 아니었습니다.<br>
-    조직마다 적용받는 규제가 다르고, 비용을 정산하는 방식도 달랐습니다.<br>
-    같은 기준을 그대로 내려보내면, 어떤 조직에서는 실행이 불가능한 조항이 됩니다.</p>
+    <p>표면적으로는 속도에 대한 불만이었습니다.<br>
+    그러나 이 말 뒤에는 두 가지가 숨어 있었습니다.</p>
     <div class="hidden-block">
-      <div class="hidden-label">실제 문제</div>
-      <p><strong>① 같은 문의에 조직마다 다른 답이 나갑니다</strong><br>
-      <span>— 기준이 없어서가 아니라, 기준이 각 조직의 조건을 통과하지 못해서</span></p>
-      <p style="margin-top:10px;"><strong>② 예외 처리로 넘기면 근거가 남지 않습니다</strong><br>
-      <span>— 건건이 협의해 처리하면 다음 건에서 다시 처음부터 협의해야 함</span></p>
+      <div class="hidden-label">말하지 않은 것</div>
+      <p><strong>① 불량 제품에 대한 보상 심리</strong><br>
+      <span>— 내가 잘못한 게 아닌데, 왜 내가 기다려야 하나</span></p>
+      <p style="margin-top:10px;"><strong>② 끝이 보이지 않는 불확실성</strong><br>
+      <span>— 기다림의 길이가 아니라, 기다림의 끝을 모르는 것</span></p>
     </div>
-    <p>정책을 하나로 만드는 것은 어렵지 않았습니다.<br>
-    어려운 것은 <strong>조건이 다른 조직들이 그 하나를 실제로 실행할 수 있게 만드는 것</strong>이었습니다.</p>
+    <p>그리고 이 불만을 증폭시키는 <strong>구조적 문제</strong>가 있었습니다.</p>
+    <p>기존 교환은 <strong>회수 후 출고</strong> — 반품이 도착해야 새 제품이 나가는 순서였습니다.<br>
+    수거 일정도, 출고 일정도 확답할 수 없었기 때문에<br>
+    상담사는 고객의 "언제요?"에 <strong>답할 수 없는 구조</strong>였습니다.</p>
+    <div class="flow-block">
+<pre>고객 ─── "언제 받을 수 있나요?"
+            │
+상담사 ── 수거 일정 확답 불가 · 출고 일정 확답 불가
+            │
+고객 ─── 답을 받지 못함 → 불만 증폭 → 재문의</pre>
+    </div>
+    <p>답을 줄 수 없으니, 불만은 커질 수밖에 없었습니다.</p>
     <p class="insight">
-      그래서 정책을 하나로 쓰되, <strong>적용을 한 번에 하지 않는 방식</strong>으로 설계했습니다.<br>
-      조건이 충족된 곳은 시행, 이미 운영 중인 곳은 유지, 조건이 걸리는 곳은 보류로 구분했습니다.
+      문제를 재정의했습니다.<br>
+      <strong>순서를 바꿔서, 상담사가 답할 수 없었던 구조를 극복하고</strong><br>
+      기다림에 대한 <strong>불확실성 자체를 해결하는 것.</strong>
     </p>
   </div>
 
@@ -287,134 +259,148 @@
     <div class="phase-label">실행</div>
     <div class="exec-block">
       <span class="exec-step-num">01</span>
-      <div class="exec-block-title">조건 조사 — 조직별로 무엇이 다른지 항목화</div>
+      <div class="exec-block-title">VOC 패턴 분석 — 불만의 본질 도출</div>
       <ul class="exec-list">
-        <li>각 조직의 규제 조건과 정산 조건을 항목 단위로 정리해, 정책의 어느 조항이 어디서 걸리는지 확인</li>
-        <li>조직 이름이 아니라 조건으로 구분했습니다. 조건이 같으면 같은 그룹으로 묶이고, 조직이 늘어나도 분류가 유지됩니다</li>
+        <li>교환 지연 관련 VOC를 분석한 결과, 불만의 핵심이 처리 속도 자체가 아닌 "체감 리드타임"과 "불확실성"에 있음을 확인</li>
+        <li>"교환을 빠르게"가 아니라 "순서를 바꾼다"로 접근 방향 전환</li>
       </ul>
     </div>
     <div class="exec-block">
       <span class="exec-step-num">02</span>
-      <div class="exec-block-title">단계적 적용 설계 — 시행 · 유지 · 보류</div>
+      <div class="exec-block-title">선출고(Pre-dispatch) 프로세스 설계</div>
       <ul class="exec-list">
-        <li><strong>시행</strong> — 조건이 충족되어 새 기준을 바로 적용하는 구간</li>
-        <li><strong>유지</strong> — 이미 동등한 운영이 이뤄지고 있어 기존 방식을 그대로 두는 구간</li>
-        <li><strong>보류</strong> — 조건이 해소되기 전까지 적용하지 않고, 해소 조건을 명시해 두는 구간</li>
-        <li>보류를 "적용 실패"가 아니라 정책 문서 안의 한 상태로 정의한 것이 이 설계의 중심입니다. 보류 구간에도 근거가 남습니다</li>
+        <li>반품 도착 전에 새 제품을 먼저 출고하는 구조 설계</li>
+        <li>자사몰 한정으로 운영 범위를 제한하고, 대상 고객군·상품 카테고리를 통제하여 파일럿 리스크 최소화</li>
       </ul>
     </div>
     <div class="exec-block">
       <span class="exec-step-num">03</span>
-      <div class="exec-block-title">KR/EN 이중 문서와 버전 관리</div>
+      <div class="exec-block-title">리스크 관리 체계 수립</div>
       <ul class="exec-list">
-        <li>정책 문서를 국문과 영문 두 버전으로 작성하고, 두 문서가 같은 버전 번호를 공유하도록 운영</li>
-        <li>조항이 바뀌면 버전을 올리고 변경 지점을 남기는 방식으로 관리 (현재 v1.2)</li>
-        <li>번역본이 아니라 같은 정책의 두 실행본으로 다뤘습니다. 한쪽만 갱신되면 조직 간 답이 다시 갈라집니다</li>
+        <li>미반품 대응 가이드라인 수립, 예외 케이스별 판단 기준 정의</li>
+        <li>Loss율 0%를 목표로 설계</li>
       </ul>
     </div>
     <div class="exec-block">
       <span class="exec-step-num">04</span>
-      <div class="exec-block-title">발생 건수 집계 기반 정산 주기 조정 협의</div>
+      <div class="exec-block-title">파일럿 운영 및 효과 검증</div>
       <ul class="exec-list">
-        <li>11개월 동안 발생한 31건을 집계해, 실제 발생 규모를 근거로 정산 주기 조정을 협의</li>
-        <li>"자주 생기니 바꿔달라"가 아니라 집계된 건수를 제시하는 방식으로 논의를 진행했습니다</li>
+        <li>자사몰 대상 파일럿 운영</li>
+        <li>선출고 채널과 기존(회수 후 출고) 채널 간 리드타임·편차·체감을 비교하여 프로세스 효과 검증</li>
       </ul>
     </div>
   </div>
 
-  <!-- 적용 구조 -->
-  <div class="er-diagram">
-    <div class="er-diagram-title">하나의 정책, 세 가지 적용 상태</div>
-    <div class="er-diagram-sub">조직이 아니라 조건으로 구분 · 보류도 문서 안의 상태로 관리</div>
-    <div class="er-grid" style="grid-template-columns: repeat(3, 1fr);">
-      <div class="er-table">
-        <div class="er-table-name">시행</div>
-        <div class="er-table-desc">조건이 충족된 구간</div>
-        <ul class="er-cols">
-          <li>새 기준 즉시 적용</li>
-          <li>응대 문서 갱신</li>
-          <li>발생 건수 집계 대상</li>
-        </ul>
+  <!-- BA Diagram (Before/After serves as artifact) -->
+  <div class="ba-diagram">
+    <div class="ba-diagram-title">교환 구조: Before → After</div>
+    <div class="ba-grid">
+      <div class="ba-box">
+        <h4>Before</h4>
+        <span class="ba-tag">회수 후 출고</span>
+        <div class="ba-tree">
+          <div class="ba-node parent">교환 요청</div>
+          <div style="font-size:11px; color:var(--gray-300);">↓</div>
+          <div class="ba-node parent" style="border-color:var(--red); color:var(--red);">반품 수거 (일정 불확실)</div>
+          <div style="font-size:11px; color:var(--gray-300);">↓</div>
+          <div class="ba-node parent">반품 도착 확인</div>
+          <div style="font-size:11px; color:var(--gray-300);">↓</div>
+          <div class="ba-node parent">새 제품 출고</div>
+          <div style="font-size:11px; color:var(--gray-300);">↓</div>
+          <div class="ba-node parent">고객 수령</div>
+        </div>
+        <div class="ba-result" style="color:var(--red); margin-top:20px;">
+          ✕ 상담사가 "언제"에 답할 수 없음
+        </div>
       </div>
-      <div class="er-table">
-        <div class="er-table-name">유지</div>
-        <div class="er-table-desc">동등 운영이 이미 있는 구간</div>
-        <ul class="er-cols">
-          <li>기존 방식 유지</li>
-          <li>차이 항목만 문서에 명시</li>
-          <li>재검토 시점 기록</li>
-        </ul>
+      <div class="ba-arrow-col">→</div>
+      <div class="ba-box-dark">
+        <h4>After</h4>
+        <span class="ba-tag">선출고</span>
+        <div class="ba-tree">
+          <div class="ba-node" style="background:rgba(255,255,255,0.15); color:#fff; border:none; font-weight:700;">교환 요청</div>
+          <div style="font-size:11px; color:rgba(255,255,255,0.3);">↓</div>
+          <div class="ba-node" style="background:rgba(255,255,255,0.25); color:#fff; border:none; font-weight:900;">새 제품 즉시 출고 ← 순서 전환</div>
+          <div style="font-size:11px; color:rgba(255,255,255,0.3);">↓</div>
+          <div class="ba-node" style="background:rgba(255,255,255,0.15); color:#fff; border:none; font-weight:700;">고객 수령</div>
+          <div style="font-size:11px; color:rgba(255,255,255,0.3);">↓</div>
+          <div class="ba-node-ghost">반품 수거 (별도 진행)</div>
+        </div>
+        <div class="ba-result" style="color:#fff; margin-top:20px; font-weight:500;">
+          ○ "언제"라는 질문 자체가 사라짐
+        </div>
       </div>
-      <div class="er-table">
-        <div class="er-table-name">보류</div>
-        <div class="er-table-desc">조건이 걸리는 구간</div>
-        <ul class="er-cols">
-          <li>적용하지 않음</li>
-          <li>해소 조건을 문서에 명시</li>
-          <li>조건 변경 시 재판단</li>
-        </ul>
-      </div>
-    </div>
-    <div class="er-relations">
-      <div class="er-rel-row"><span class="er-rel-arrow">→</span> 조건이 바뀌면 상태가 바뀌고, 상태가 바뀌면 문서 버전이 올라갑니다</div>
-      <div class="er-rel-row"><span class="er-rel-arrow">→</span> KR/EN 두 문서가 같은 버전을 공유하므로, 조직이 보는 기준이 갈라지지 않습니다</div>
     </div>
   </div>
 
   <!-- 결과 -->
   <div class="phase">
     <div class="phase-label">결과</div>
-    <div class="result-grid">
+    <div class="result-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 24px;">
       <div class="result-box quant">
-        <h4>산출물</h4>
-        <p style="margin-bottom: 10px;"><strong>적용 설계</strong> — 조건별 시행 · 유지 · 보류 3상태 구분</p>
-        <p style="margin-bottom: 10px;"><strong>정책 문서</strong> — KR/EN 이중 문서, 버전 관리 체계 적용 (v1.2)</p>
-        <p style="margin-bottom: 10px;"><strong>운영 기록</strong> — 11개월(2025.10 — 2026.08) 동안 31건 집계</p>
-        <p><strong>협의</strong> — 집계된 발생 건수를 근거로 정산 주기 조정 협의</p>
-        <p style="font-size:12px; color:var(--gray-400); margin-top:12px;">조직·지역·규제 사유와 정산 조건의 구체 내용은 공개 범위에서 제외했습니다.</p>
+        <div class="stat-big">2.3일</div>
+        <div class="stat-label">평균 교환 리드타임</div>
+        <div style="font-size:12px; color:var(--gray-400); margin-top:4px;">기존 9.2일 대비 약 75% 단축</div>
       </div>
-      <div class="result-box qual">
-        <h4>정성</h4>
-        <p>조건이 다른 조직에 같은 기준을 적용하는 방법은<br>
-        <strong>기준을 느슨하게 만드는 것이 아니라, 적용 상태를 나누는 것</strong>이었습니다.</p>
-        <p style="margin-top:12px;">보류 구간을 예외로 흘려보내지 않고 문서 안에 남겨두면,<br>
-        조건이 바뀌었을 때 다시 협의를 시작하지 않아도 됩니다.</p>
-        <p style="margin-top:12px; opacity:0.5;">하나의 정책이 모든 곳에서 동시에 작동할 필요는 없습니다. 같은 근거를 참조하기만 하면 됩니다.</p>
+      <div class="result-box quant">
+        <div class="stat-big">0%</div>
+        <div class="stat-label">Loss율</div>
+        <div style="font-size:12px; color:var(--gray-400); margin-top:4px;">파일럿 전 기간 미반품 0건</div>
       </div>
+      <div class="result-box quant">
+        <div class="stat-big">↓</div>
+        <div class="stat-label">리드타임 편차·대기 체감</div>
+        <div style="font-size:12px; color:var(--gray-400); margin-top:4px;">기존 채널 대비 안정화</div>
+      </div>
+    </div>
+    <div class="result-box qual">
+      <h4>정성</h4>
+      <p>고객이 말한 <strong>"언제 받을 수 있나요?"</strong> 안에 있는<br>
+      <strong>"불량인데 왜 내가 기다려야 하나"</strong>를 읽고,<br>
+      순서를 재정의해서 불확실성을 해결하는 구조를 설계한 것입니다.</p>
+      <p style="margin-top:12px; opacity:0.5;">속도를 높인 것이 아니라, 순서를 바꿨습니다.</p>
     </div>
   </div>
 
   <!-- 확장 -->
   <details class="phase phase-expandable">
-    <summary class="phase-label">확장 — 다음 단계</summary>
+    <summary class="phase-label">확장 — 전 채널 적용 기획</summary>
+    <p>파일럿에서 검증된 선출고 프로세스를 전 채널로 확장하기 위해<br>
+    이커머스팀·개발팀과 협의를 진행했습니다.<br>
+    확인 결과, 세 가지 조건이 드러났습니다.</p>
     <div style="margin:24px 0; display:grid; gap:16px;">
       <div class="expand-block">
         <div style="display:flex; align-items:baseline; gap:8px; margin-bottom:6px;">
           <span class="expand-num">01</span>
-          <strong>보류 구간 재검토</strong>
+          <strong>물류 시스템 구조가 동일한 채널</strong>
         </div>
-        <p>→ 해소 조건을 명시해 둔 구간은 조건 변경 시점에 다시 판단합니다. 재검토 자체가 정책 운영의 일부입니다.</p>
+        <p>→ 현재 프로세스 그대로 즉시 적용 가능</p>
       </div>
       <div class="expand-block">
         <div style="display:flex; align-items:baseline; gap:8px; margin-bottom:6px;">
           <span class="expand-num">02</span>
-          <strong>정산 주기 협의 반영</strong>
+          <strong>수동 처리 중인 선출고 → 자동화 가능</strong>
         </div>
-        <p>→ 집계 데이터를 근거로 한 조정 협의가 진행 중입니다.</p>
+        <p>→ 이커머스팀·개발팀 확인 결과, 현재 수동으로 처리하는 선출고 로직은 시스템에 자동 반영 가능</p>
       </div>
       <div class="expand-block-dark">
         <div style="display:flex; align-items:baseline; gap:8px; margin-bottom:6px;">
           <span class="expand-num">03</span>
-          <strong>정책 문서의 지식화</strong>
+          <strong>기본 교환 시스템의 구조적 한계</strong>
         </div>
-        <p>→ 버전과 적용 상태를 가진 문서는 그대로 지식 블록의 재료가 됩니다. 사람이 읽는 정책을 기계가 읽는 형태로 옮기는 작업으로 이어집니다. (→ Case 03)</p>
+        <p>→ 기본 교환 플로우 자체에 선출고를 적용하려면 물류 시스템 로직 리뉴얼이 필요.<br>
+        　현재 물류/IT 구조상 전면 적용은 불가.</p>
       </div>
     </div>
+    <p class="insight">
+      전 채널 일괄 적용이 아닌,<br>
+      <strong>시스템 구조가 허용하는 채널부터 단계적으로 확장</strong>하는 방향으로 기획 중입니다.<br>
+      파일럿에서 검증된 효과(75% 단축, Loss 0%)가 확장의 근거입니다.
+    </p>
   </details>
 
   <div class="case-nav">
-    <a href="/cx-portfolio/cases/case01.html" class="prev">← Case 01 — 판단을 위임하는 구조</a>
-    <a href="/cx-portfolio/cases/case03.html" class="next">Case 03 — 기계가 읽을 수 있는 지식 →</a>
+    <a href="/cx-portfolio/" class="prev">← Overview</a>
   </div>
 </div>
 
